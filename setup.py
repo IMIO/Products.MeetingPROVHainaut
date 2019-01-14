@@ -3,9 +3,9 @@ import os
 
 version = '4.0-dev'
 
-setup(name='Products.MeetingCPASLiege',
+setup(name='Products.MeetingPROVHainaut',
       version=version,
-      description="PloneMeeting profile for CPAS of Liege",
+      description="PloneMeeting profile for province of Hainaut",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
