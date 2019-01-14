@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<object name="portal_skins"
+        meta_type="Plone Skins Tool"
+        allow_any="False"
+        cookie_persistence="False"
+        request_varname="plone_skin">
+
+ <object name="meetingcpaslalouviere_images"
+         meta_type="Filesystem Directory View"
+         directory="MeetingCPASLalouviere/skins/meetingcpaslalouviere_images"/>
+ <object name="meetingcpaslalouviere_styles"
+         meta_type="Filesystem Directory View"
+         directory="MeetingCPASLalouviere/skins/meetingcpaslalouviere_styles"/>
+ <object name="meetingcpaslalouviere_templates"
+         meta_type="Filesystem Directory View"
+         directory="MeetingCPASLalouviere/skins/meetingcpaslalouviere_templates"/>
+ 
+ <skin-path name="*">
+  <layer insert-after="custom" 
+         name="meetingcpaslalouviere_images"/>
+  <layer insert-after="custom" 
+         name="meetingcpaslalouviere_styles"/>
+  <layer insert-after="custom" 
+         name="meetingcpaslalouviere_templates"/>
+ </skin-path>
+
+</object>

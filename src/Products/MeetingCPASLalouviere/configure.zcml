@@ -1,0 +1,30 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:i18n="http://namespaces.zope.org/i18n"
+           i18n_domain="MeetingCPASLalouviere">
+
+  <i18n:registerTranslations directory="locales" />
+  <include file="profiles.zcml" />
+  <include package=".browser" />
+  <include package="Products.CMFPlacefulWorkflow"/>
+  <include package="Products.PloneMeeting"/>
+  <includeOverrides file="overrides.zcml" />
+
+  <adapter for="Products.PloneMeeting.interfaces.IMeeting"
+           factory="Products.MeetingCPASLalouviere.adapters.MeetingPBLalouviereWorkflowActions"
+           provides="Products.MeetingCPASLalouviere.interfaces.IMeetingPBLalouviereWorkflowActions"/>
+
+  <adapter for="Products.PloneMeeting.interfaces.IMeeting"
+           factory="Products.MeetingCPASLalouviere.adapters.MeetingPBLalouviereWorkflowConditions"
+           provides="Products.MeetingCPASLalouviere.interfaces.IMeetingPBLalouviereWorkflowConditions"/>
+
+  <adapter for="Products.PloneMeeting.interfaces.IMeetingItem"
+           factory="Products.MeetingCPASLalouviere.adapters.MeetingItemPBLalouviereWorkflowActions"
+           provides="Products.MeetingCPASLalouviere.interfaces.IMeetingItemPBLalouviereWorkflowActions"/>
+
+  <adapter for="Products.PloneMeeting.interfaces.IMeetingItem"
+           factory="Products.MeetingCPASLalouviere.adapters.MeetingItemPBLalouviereWorkflowConditions"
+           provides="Products.MeetingCPASLalouviere.interfaces.IMeetingItemPBLalouviereWorkflowConditions"/>
+
+</configure>

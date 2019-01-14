@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<import-steps>
+ <import-step id="initializetool-MeetingCPASLalouviere" version="20110215-01"
+              handler="Products.MeetingCPASLalouviere.setuphandlers.initializeTool"
+              title="Initialize MeetingCPASLalouviere with examples.">
+  Initialize portal_plonemeeting folders for La Louviere.
+ </import-step>
+
+</import-steps>

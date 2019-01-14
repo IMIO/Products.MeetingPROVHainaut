@@ -1,0 +1,111 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MeetingCommunes\n"
+"POT-Creation-Date: 2007-08-29 07:12-100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: \n"
+"Language-Name: \n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+
+#. Default: "Meeting BP"
+msgid "Meetingbp"
+msgstr ""
+
+#. Default: "Meeting item BP"
+msgid "MeetingItembp"
+msgstr ""
+
+#. Default: "Meeting CAS"
+msgid "Meetingcas"
+msgstr ""
+
+#. Default: "Meeting item CAS"
+msgid "MeetingItemcas"
+msgstr ""
+
+#types
+#. Default: "MeetingPb"
+msgid "MeetingPb"
+msgstr ""
+
+#. Default: "MeetingItemPb"
+msgid "MeetingItemPb"
+msgstr ""
+
+# Workflow states
+#. Default: "Waiting advices"
+msgid "itemcreated_waiting_advices"
+msgstr ""
+
+#. Default: "Proposed to N+1"
+msgid "proposed_to_n1"
+msgstr ""
+
+#. Default: "Proposed to budget impact reviewer"
+msgid "proposed_to_budgetimpact_reviewer"
+msgstr ""
+
+#. Default: "Proposed to N+2"
+msgid "proposed_to_n2"
+msgstr ""
+
+#. Default: "Proposed to secretaire"
+msgid "proposed_to_secretaire"
+msgstr ""
+
+#. Default: "Proposed to president"
+msgid "proposed_to_president"
+msgstr ""
+
+#. Default: "Removed from meeting"
+msgid "removed"
+msgstr ""
+
+# Workflow transitions
+#. Default: "Ask advices"
+msgid "ask_advices_by_itemcreator"
+msgstr ""
+
+msgid "proposeToN1"
+msgstr ""
+
+msgid "proposeToN2"
+msgstr ""
+
+msgid "proposeToBudgetImpactReviewer"
+msgstr ""
+
+msgid "backToProposedToN1"
+msgstr ""
+
+msgid "proposeToSecretaire"
+msgstr ""
+
+msgid "backToProposedToN2"
+msgstr ""
+
+msgid "proposeToPresident"
+msgstr ""
+
+msgid "backToProposedToSecretaire"
+msgstr ""
+
+msgid "backToProposedToPresident"
+msgstr ""
+
+msgid "validateByBudgetImpactReviewer"
+msgstr ""
+
+msgid "remove"
+msgstr ""
+
+msgid "removed"
+msgstr ""
+
+#. Default: "Description"
+msgid "meeting_item_description"
+msgstr ""
