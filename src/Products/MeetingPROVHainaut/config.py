@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# File: MeetingCPASLiege.py
+# File: MeetingPROVHainaut.py
 #
 # Copyright (c) 2018 by Imio.be
 # Generator: ArchGenXML Version 2.7
@@ -25,7 +25,7 @@ __docformat__ = 'plaintext'
 from collections import OrderedDict
 
 
-PROJECTNAME = "MeetingCPASLiege"
+PROJECTNAME = "MeetingPROVHainaut"
 
 product_globals = globals()
 
@@ -39,5 +39,5 @@ PRODUCT_DEPENDENCIES = []
 
 # see doc in Products.PloneMeeting.config.py
 
-STYLESHEETS = [{'id': 'meetingcpasliege.css',
-                'title': "MeetingCPASLiege CSS styles"}]
+STYLESHEETS = [{'id': 'MeetingPROVHainaut.css',
+                'title': "MeetingPROVHainaut CSS styles"}]

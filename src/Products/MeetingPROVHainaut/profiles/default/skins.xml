@@ -6,19 +6,19 @@
         cookie_persistence="False"
         request_varname="plone_skin">
 
- <object name="meetingcpasliege_styles"
+ <object name="meetingprovincehainaut_styles"
          meta_type="Filesystem Directory View"
-         directory="MeetingCPASLiege/skins/meetingcpasliege_styles"/>
+         directory="MeetingPROVHainaut/skins/meetingprovincehainaut_styles"/>
 
- <object name="meetingcpasliege_templates"
+ <object name="meetingprovincehainaut_templates"
          meta_type="Filesystem Directory View"
-         directory="MeetingCPASLiege/skins/meetingcpasliege_templates"/>
+         directory="MeetingPROVHainaut/skins/meetingprovincehainaut_templates"/>
  
  <skin-path name="*">
   <layer insert-after="custom"
-         name="meetingcpasliege_styles"/>
+         name="meetingprovincehainaut_styles"/>
   <layer insert-after="custom"
-         name="meetingcpasliege_templates"/>
+         name="meetingprovincehainaut_templates"/>
  </skin-path>
 
 </object>

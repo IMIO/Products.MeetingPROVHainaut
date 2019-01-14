@@ -26,11 +26,11 @@ from DateTime import DateTime
 
 from Products.PloneMeeting.model.adaptations import RETURN_TO_PROPOSING_GROUP_CUSTOM_PERMISSIONS
 
-from Products.MeetingCPASLiege.tests.MeetingCPASLiegeTestCase import MeetingCPASLiegeTestCase
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingCommunes.tests.testWFAdaptations import testWFAdaptations as mctwfa
 
 
-class testWFAdaptations(MeetingCPASLiegeTestCase, mctwfa):
+class testWFAdaptations(MeetingPROVHainautTestCase, mctwfa):
     '''Tests various aspects of votes management.'''
 
 

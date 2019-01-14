@@ -22,11 +22,11 @@
 # 02110-1301, USA.
 #
 
-from Products.MeetingCPASLiege.tests.MeetingCPASLiegeTestCase import MeetingCPASLiegeTestCase
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingCommunes.tests.testMeeting import testMeeting as mctm
 
 
-class testMeeting(MeetingCPASLiegeTestCase, mctm):
+class testMeeting(MeetingPROVHainautTestCase, mctm):
     """Tests the Meeting class methods."""
 
 

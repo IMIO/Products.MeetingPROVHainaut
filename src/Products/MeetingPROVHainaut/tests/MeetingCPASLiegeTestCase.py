@@ -21,15 +21,15 @@
 #
 
 from Products.PloneMeeting.tests.PloneMeetingTestCase import PloneMeetingTestCase
-from Products.MeetingCPASLiege.testing import ML_TESTING_PROFILE_FUNCTIONAL
-from Products.MeetingCPASLiege.tests.helpers import MeetingCPASLiegeTestingHelpers
+from Products.MeetingPROVHainaut.testing import ML_TESTING_PROFILE_FUNCTIONAL
+from Products.MeetingPROVHainaut.tests.helpers import MeetingPROVHainautTestingHelpers
 
 # monkey patch the MeetingConfig.wfAdaptations again because it is done in
 # adapters.py but overrided by Products.MeetingCommunes here in the tests...
 
 
-class MeetingCPASLiegeTestCase(PloneMeetingTestCase, MeetingCPASLiegeTestingHelpers):
-    """Base class for defining MeetingCPASLiege test cases."""
+class MeetingPROVHainautTestCase(PloneMeetingTestCase, MeetingPROVHainautTestingHelpers):
+    """Base class for defining MeetingPROVHainaut test cases."""
 
     layer = ML_TESTING_PROFILE_FUNCTIONAL
 

@@ -22,11 +22,11 @@
 # 02110-1301, USA.
 #
 
-from Products.MeetingCPASLiege.tests.MeetingCPASLiegeTestCase import MeetingCPASLiegeTestCase
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingCommunes.tests.testChangeItemOrderView import testChangeItemOrderView as mctciov
 
 
-class testChangeItemOrderView(MeetingCPASLiegeTestCase, mctciov):
+class testChangeItemOrderView(MeetingPROVHainautTestCase, mctciov):
     '''Tests the ChangeItemOrderView class methods.'''
 
 

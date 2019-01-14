@@ -14,8 +14,8 @@ __docformat__ = 'plaintext'
 
 
 import logging
-logger = logging.getLogger('MeetingCPASLiege: setuphandlers')
-from Products.MeetingCPASLiege.config import PROJECTNAME
+logger = logging.getLogger('MeetingPROVHainaut: setuphandlers')
+from Products.MeetingPROVHainaut.config import PROJECTNAME
 import os
 from Products.CMFCore.utils import getToolByName
 ##code-section HEAD
@@ -23,14 +23,14 @@ from Products.PloneMeeting.exportimport.content import ToolInitializer
 ##/code-section HEAD
 
 
-def isNotMeetingCPASLiegeProfile(context):
-    return context.readDataFile("MeetingCPASLiege_marker.txt") is None
+def isNotMeetingPROVHainautProfile(context):
+    return context.readDataFile("MeetingPROVHainaut_marker.txt") is None
 
 
 def updateRoleMappings(context):
     """after workflow changed update the roles mapping. this is like pressing
     the button 'Update Security Setting' and portal_workflow"""
-    if isNotMeetingCPASLiegeProfile(context):
+    if isNotMeetingPROVHainautProfile(context):
         return
     wft = getToolByName(context.getSite(), 'portal_workflow')
     wft.updateRoleMappings()
@@ -39,7 +39,7 @@ def updateRoleMappings(context):
 def postInstall(context):
     """Called as at the end of the setup process. """
     # the right place for your custom code
-    if isNotMeetingCPASLiegeProfile(context):
+    if isNotMeetingPROVHainautProfile(context):
         return
     logStep("postInstall", context)
     site = context.getSite()
@@ -57,18 +57,18 @@ def logStep(method, context):
 
 
 def isMeetingCPASllConfigureProfile(context):
-    return context.readDataFile("MeetingCPASLiege_examples_fr_marker.txt") or \
-           context.readDataFile("MeetingCPASLiege_testing_marker.txt")
+    return context.readDataFile("MeetingPROVHainaut_examples_fr_marker.txt") or \
+           context.readDataFile("MeetingPROVHainaut_testing_marker.txt")
 
 
-def installMeetingCPASLiege(context):
-    """ Run the default profile before bing able to run the CPAS liege profile"""
+def installMeetingPROVHainaut(context):
+    """ Run the default profile before bing able to run the Hainaut's province profile"""
     if not isMeetingCPASllConfigureProfile(context):
         return
 
-    logStep("installMeetingCPASLiege", context)
+    logStep("installMeetingPROVHainaut", context)
     portal = context.getSite()
-    portal.portal_setup.runAllImportStepsFromProfile('profile-Products.MeetingCPASLiege:default')
+    portal.portal_setup.runAllImportStepsFromProfile('profile-Products.MeetingPROVHainaut:default')
 
 
 def initializeTool(context):
@@ -89,7 +89,7 @@ def reinstallPloneMeeting(context, site):
     '''Reinstall PloneMeeting so after install methods are called and applied,
        like performWorkflowAdaptations for example.'''
 
-    if isNotMeetingCPASLiegeProfile(context):
+    if isNotMeetingPROVHainautProfile(context):
         return
 
     logStep("reinstallPloneMeeting", context)
@@ -106,7 +106,7 @@ def showHomeTab(context, site):
     """
        Make sure the 'home' tab is shown...
     """
-    if isNotMeetingCPASLiegeProfile(context):
+    if isNotMeetingPROVHainautProfile(context):
         return
 
     logStep("showHomeTab", context)
@@ -120,15 +120,15 @@ def showHomeTab(context, site):
 
 def reorderSkinsLayers(context, site):
     """
-       Re-apply MeetingCPASLiege skins.xml step
-       as the reinstallation of MeetingCPASLiege and PloneMeeting changes the portal_skins layers order
+       Re-apply MeetingPROVHainaut skins.xml step
+       as the reinstallation of MeetingPROVHainaut and PloneMeeting changes the portal_skins layers order
     """
-    if isNotMeetingCPASLiegeProfile(context) and not isMeetingCPASllConfigureProfile(context):
+    if isNotMeetingPROVHainautProfile(context) and not isMeetingCPASllConfigureProfile(context):
         return
 
     logStep("reorderSkinsLayers", context)
     try:
-        site.portal_setup.runImportStepFromProfile(u'profile-Products.MeetingCPASLiege:default', 'skins')
+        site.portal_setup.runImportStepFromProfile(u'profile-Products.MeetingPROVHainaut:default', 'skins')
         site.portal_setup.runAllImportStepsFromProfile(u'profile-plonetheme.imioapps:default')
         site.portal_setup.runAllImportStepsFromProfile(u'profile-plonetheme.imioapps:plonemeetingskin')
     except KeyError:
@@ -150,7 +150,7 @@ def reorderCss(context):
        Make sure CSS are correctly reordered in portal_css so things
        work as expected...
     """
-    if isNotMeetingCPASLiegeProfile(context) and not isMeetingCPASllConfigureProfile(context):
+    if isNotMeetingPROVHainautProfile(context) and not isMeetingCPASllConfigureProfile(context):
         return
 
     site = context.getSite()
@@ -160,7 +160,7 @@ def reorderCss(context):
     css = ['plonemeeting.css',
            'meeting.css',
            'meetingitem.css',
-           'MeetingCPASLiege.css',
+           'MeetingPROVHainaut.css',
            'imioapps.css',
            'plonemeetingskin.css',
            'imioapps_IEFixes.css',

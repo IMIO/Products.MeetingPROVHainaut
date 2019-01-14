@@ -22,10 +22,10 @@
 # 02110-1301, USA.
 #
 
-from Products.MeetingCPASLiege.tests.MeetingCPASLiegeTestCase import MeetingCPASLiegeTestCase
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 
 
-class testColumns(MeetingCPASLiegeTestCase):
+class testColumns(MeetingPROVHainautTestCase):
     ''' '''
 
 

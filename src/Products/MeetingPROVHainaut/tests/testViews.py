@@ -22,11 +22,11 @@
 # 02110-1301, USA.
 #
 
-from Products.MeetingCPASLiege.tests.MeetingCPASLiegeTestCase import MeetingCPASLiegeTestCase
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.PloneMeeting.tests.testViews import testViews as pmtv
 
 
-class testViews(MeetingCPASLiegeTestCase, pmtv):
+class testViews(MeetingPROVHainautTestCase, pmtv):
     ''' '''
 
 

@@ -23,45 +23,8 @@
 # 02110-1301, USA.
 #
 # ------------------------------------------------------------------------------
-from Products.Archetypes.atapi import Schema
-from Products.Archetypes.atapi import RichWidget
-from Products.Archetypes.atapi import TextField
-
 from Products.PloneMeeting.config import registerClasses
-from Products.PloneMeeting.MeetingItem import MeetingItem
 
-
-def update_item_schema(baseSchema):
-
-    specificSchema = Schema((
-        TextField(
-            name='decisionSuite',
-            widget=RichWidget(
-                rows=15,
-                condition="python: here.attributeIsUsed('decisionSuite')",
-                label='DecisionSuite',
-                label_msgid='MeetingLiege_label_decisionSuite',
-                description="Decision suite descr",
-                description_msgid="item_decision_suite_descr",
-                i18n_domain='PloneMeeting',
-            ),
-            read_permission="PloneMeeting: Read decision",
-            searchable=True,
-            allowable_content_types=('text/html',),
-            default_content_type="text/html",
-            default_output_type="text/x-html-safe",
-            write_permission="PloneMeeting: Write decision",
-            optional=True,
-        ),
-    ),)
-    
-    baseSchema['description'].widget.description_msgid = "MeetingCPASLiege_descr_motivation"
-
-    completeItemSchema = baseSchema + specificSchema.copy()
-    return completeItemSchema
-
-
-MeetingItem.schema = update_item_schema(MeetingItem.schema)
 
 # Classes have already been registered, but we register them again here
 # because we have potentially applied some schema adaptations (see above).

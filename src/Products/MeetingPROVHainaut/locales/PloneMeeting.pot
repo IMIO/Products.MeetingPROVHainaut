@@ -10,15 +10,3 @@ msgstr ""
 "Language-name: \n"
 "Preferred-encodings: utf-8 latin1\n"
 "Domain: PloneMeeting\n"
-
-#. Default: "Decision (suite)"
-msgid "MeetingLiege_label_decisionSuite"
-msgstr ""
-
-#. Default: " "
-msgid "item_decision_suite_descr"
-msgstr ""
-
-#. Default: "Item Description"
-msgid "MeetingCPASLiege_descr_motivation"
-msgstr ""

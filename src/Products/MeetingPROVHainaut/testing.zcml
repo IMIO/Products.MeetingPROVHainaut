@@ -7,8 +7,8 @@
 
     <genericsetup:registerProfile
         name="testing"
-        title="MeetingCPASLiege / Testing profile"
-        description="Testing profile for MeetingCPASLiege (PloneMeeting profile)"
+        title="MeetingPROVHainaut / Testing profile"
+        description="Testing profile for MeetingPROVHainaut (PloneMeeting profile)"
         directory="profiles/testing"
         provides="Products.GenericSetup.interfaces.EXTENSION"
         for="Products.CMFCore.interfaces.ISiteRoot"/>

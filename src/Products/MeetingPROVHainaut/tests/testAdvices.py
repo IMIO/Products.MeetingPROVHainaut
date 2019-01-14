@@ -22,11 +22,11 @@
 # 02110-1301, USA.
 #
 
-from Products.MeetingCPASLiege.tests.MeetingCPASLiegeTestCase import MeetingCPASLiegeTestCase
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingCommunes.tests.testAdvices import testAdvices as mcta
 
 
-class testAdvices(MeetingCPASLiegeTestCase, mcta):
+class testAdvices(MeetingPROVHainautTestCase, mcta):
     """Tests various aspects of advices management.
        Advices are enabled for PloneGov Assembly, not for PloneMeeting Assembly."""
 

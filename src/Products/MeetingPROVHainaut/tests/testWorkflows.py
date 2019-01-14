@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 #
 # File: testWorkflows.py
@@ -24,12 +25,12 @@
 
 from AccessControl import Unauthorized
 from DateTime import DateTime
-from Products.MeetingCPASLiege.tests.MeetingCPASLiegeTestCase import MeetingCPASLiegeTestCase
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingCommunes.tests.testWorkflows import testWorkflows as mctw
 
 
-class testWorkflows(MeetingCPASLiegeTestCase, mctw):
-    """Tests the default workflows implemented in MeetingCPASLiege.
+class testWorkflows(MeetingPROVHainautTestCase, mctw):
+    """Tests the default workflows implemented in MeetingPROVHainaut.
 
        WARNING:
        The Plone test system seems to be bugged: it does not seem to take into

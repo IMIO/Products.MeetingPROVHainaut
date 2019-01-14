@@ -23,6 +23,6 @@
 from Products.PloneMeeting.tests.helpers import PloneMeetingTestingHelpers
 
 
-class MeetingCPASLiegeTestingHelpers(PloneMeetingTestingHelpers):
+class MeetingPROVHainautTestingHelpers(PloneMeetingTestingHelpers):
     '''Override some values of PloneMeetingTestingHelpers.'''
 

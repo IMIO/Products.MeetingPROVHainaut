@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# File: MeetingCPASLiege.py
+# File: MeetingPROVHainaut.py
 #
 # Copyright (c) 2015 by Imio.be
 # Generator: ArchGenXML Version 2.7
@@ -37,7 +37,7 @@ __docformat__ = 'plaintext'
 #       use the protected code section at the bottom of initialize().
 
 import logging
-logger = logging.getLogger('MeetingCPASLiege')
+logger = logging.getLogger('MeetingPROVHainaut')
 logger.debug('Installing Product')
 
 from Products.CMFCore import DirectoryView

@@ -2,6 +2,6 @@
 <metadata>
  <version>testing</version>
  <dependencies>
-  <dependency>profile-Products.MeetingCPASLiege:default</dependency>
+  <dependency>profile-Products.MeetingPROVHainaut:default</dependency>
  </dependencies>
 </metadata>

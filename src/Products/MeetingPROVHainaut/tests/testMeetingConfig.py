@@ -22,12 +22,12 @@
 # 02110-1301, USA.
 #
 import logging
-from Products.MeetingCPASLiege.tests.MeetingCPASLiegeTestCase import MeetingCPASLiegeTestCase
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingCommunes.tests.testMeetingConfig import testMeetingConfig as mctmc
 from Products.PloneMeeting.model.adaptations import performWorkflowAdaptations
 
 
-class testMeetingConfig(MeetingCPASLiegeTestCase, mctmc):
+class testMeetingConfig(MeetingPROVHainautTestCase, mctmc):
     '''Call testMeetingConfig tests.'''
 
     def test_pm_call_searchItemsToPrevalidate(self):

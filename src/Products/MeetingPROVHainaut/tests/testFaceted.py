@@ -22,11 +22,11 @@
 # 02110-1301, USA.
 #
 
-from Products.MeetingCPASLiege.tests.MeetingCPASLiegeTestCase import MeetingCPASLiegeTestCase
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.PloneMeeting.tests.testFaceted import testFaceted as pmtf
 
 
-class testFaceted(MeetingCPASLiegeTestCase, pmtf):
+class testFaceted(MeetingPROVHainautTestCase, pmtf):
     '''Tests the faceted navigation.'''
 
 

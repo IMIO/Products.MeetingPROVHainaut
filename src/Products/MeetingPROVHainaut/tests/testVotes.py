@@ -22,11 +22,11 @@
 # 02110-1301, USA.
 #
 
-from Products.MeetingCPASLiege.tests.MeetingCPASLiegeTestCase import MeetingCPASLiegeTestCase
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingCommunes.tests.testVotes import testVotes as mctv
 
 
-class testVotes(MeetingCPASLiegeTestCase, mctv):
+class testVotes(MeetingPROVHainautTestCase, mctv):
     '''Tests various aspects of votes management.'''
     def setUp(self):
         """ """

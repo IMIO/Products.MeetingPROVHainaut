@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <import-steps>
- <import-step id="initializetool-MeetingCPASLiege" version="20110215-01"
-              handler="Products.MeetingCPASLiege.setuphandlers.initializeTool"
-              title="Initialize MeetingCPASLiege with examples.">
-  Initialize portal_plonemeeting folders for CPAS Liege.
+ <import-step id="initializetool-MeetingPROVHainaut" version="20110215-01"
+              handler="Products.MeetingPROVHainaut.setuphandlers.initializeTool"
+              title="Initialize MeetingPROVHainaut with examples.">
+  Initialize portal_plonemeeting folders for Province of Hainaut.
  </import-step>
 
 </import-steps>

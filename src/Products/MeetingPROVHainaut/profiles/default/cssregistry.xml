@@ -14,8 +14,8 @@
  -->
 
  <!-- ##code-section cssregistry.xml -->
- <stylesheet title="MeetingCPASLiege CSS styles" cacheable="True" compression="safe"
+ <stylesheet title="MeetingPROVHainaut CSS styles" cacheable="True" compression="safe"
              cookable="True" enabled="1" media="all" rel="stylesheet"
-             rendering="import" expression="" id="meetingcpasliege.css" insert-after="meetingcommunes.css"/>
+             rendering="import" expression="" id="meetingprovincehainaut.css" insert-after="meetingcommunes.css"/>
  <!-- ##/code-section cssregistry.xml -->
 </object>

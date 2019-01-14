@@ -1,7 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="MeetingCPASLiege">
+    i18n_domain="MeetingPROVHainaut">
 
   <include package="Products.GenericSetup" file="meta.zcml" />
 
@@ -10,16 +10,16 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="MeetingCPASLiege"
+      title="MeetingPROVHainaut"
       directory="profiles/default"
-      description="Extension profile for MeetingCPASLiege."
+      description="Extension profile for MeetingPROVHainaut."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
       
   <genericsetup:registerProfile
    name="testing"
-   title="PloneMeeting / Unit testing profile for CPAS Liege"
-   description="MeetingCPASLiege unit testing profile"
+   title="PloneMeeting / Unit testing profile for Province of Hainaut"
+   description="MeetingPROVHainaut unit testing profile"
    for="Products.CMFPlone.interfaces.IPloneSiteRoot"/>
 
 </configure>
