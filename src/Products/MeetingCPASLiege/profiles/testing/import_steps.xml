@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<import-steps>
+ <import-step id="initializetool-MeetingCPASLiege" version="20110215-01"
+              handler="Products.MeetingCPASLiege.setuphandlers.initializeTool"
+              title="Initialize MeetingCPASLiege with examples.">
+  Initialize portal_plonemeeting folders for CPAS Liege.
+ </import-step>
+
+</import-steps>

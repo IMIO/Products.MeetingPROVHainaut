@@ -1,0 +1,8 @@
+Products.MeetingCPASLiege Changelog
+====================================
+
+4.0 (2018-10-25)
+----------------
+- Create Addon for CPAS Liege
+- New translations
+

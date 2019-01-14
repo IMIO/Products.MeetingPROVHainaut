@@ -1,0 +1,25 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="MeetingCPASLiege">
+
+  <include package="Products.GenericSetup" file="meta.zcml" />
+
+  <!-- ##code-section profiles.zcml-top #fill in your manual code here -->
+  <!-- ##/code-section profiles.zcml-top -->
+
+  <genericsetup:registerProfile
+      name="default"
+      title="MeetingCPASLiege"
+      directory="profiles/default"
+      description="Extension profile for MeetingCPASLiege."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+      
+  <genericsetup:registerProfile
+   name="testing"
+   title="PloneMeeting / Unit testing profile for CPAS Liege"
+   description="MeetingCPASLiege unit testing profile"
+   for="Products.CMFPlone.interfaces.IPloneSiteRoot"/>
+
+</configure>

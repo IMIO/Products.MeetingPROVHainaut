@@ -1,0 +1,20 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:i18n="http://namespaces.zope.org/i18n"
+           i18n_domain="MeetingCPASLiege">
+
+  <!-- registerTranslations before including package Products.PloneMeeting
+       so Products.MeetingCPASLiege can overrides Products.PloneMeeting translations -->
+  <i18n:registerTranslations directory="locales" />
+
+  <include file="profiles.zcml" />
+  <include package="Products.MeetingCommunes"/>
+  <include package="Products.PloneMeeting"/>
+
+  <configure package="Products.MeetingCommunes">
+    <adapter for="Products.PloneMeeting.interfaces.IMeetingItem"
+             factory="Products.MeetingCPASLiege.adapters.CustomCPASLiegeMeetingItem"
+             provides="Products.PloneMeeting.interfaces.IMeetingItemCustom"/>
+    </configure>
+</configure>
