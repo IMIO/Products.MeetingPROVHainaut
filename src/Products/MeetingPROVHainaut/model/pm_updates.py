@@ -23,8 +23,35 @@
 # 02110-1301, USA.
 #
 # ------------------------------------------------------------------------------
+from Products.Archetypes.atapi import Schema
+from Products.Archetypes.atapi import StringField
+from Products.Archetypes.atapi import StringWidget
+
+from Products.PloneMeeting.MeetingItem import MeetingItem
 from Products.PloneMeeting.config import registerClasses
 
+def update_item_schema(baseSchema):
+
+    specificSchema = Schema((
+        StringField(
+            name='groupedItemsNum',
+            widget=StringField._properties['widget'](
+                visible=True,
+                label='GroupedItemsNum',
+                label_msgid='MeetingPROVHainaut_label_groupedItemsNum',
+                i18n_domain='PloneMeeting',
+            ),
+            optional=True,
+            searchable=True,
+            write_permission="Manage portal",
+        ),
+    ),)
+
+    completeItemSchema = baseSchema + specificSchema.copy()
+    return completeItemSchema
+
+
+MeetingItem.schema = update_item_schema(MeetingItem.schema)
 
 # Classes have already been registered, but we register them again here
 # because we have potentially applied some schema adaptations (see above).
