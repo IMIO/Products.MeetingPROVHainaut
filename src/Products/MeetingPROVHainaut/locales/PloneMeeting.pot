@@ -10,3 +10,7 @@ msgstr ""
 "Language-name: \n"
 "Preferred-encodings: utf-8 latin1\n"
 "Domain: PloneMeeting\n"
+
+#. Default: "Slip number"
+msgid "MeetingPROVHainaut_label_groupedItemsNum"
+msgstr ""
