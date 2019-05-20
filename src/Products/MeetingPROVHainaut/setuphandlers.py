@@ -33,29 +33,6 @@ def postInstall(context):
     addOrUpdateIndexes(site, {'groupedItemsNum': ('FieldIndex', {})})
 
 
-##code-section FOOT
-
-def logStep(method, context):
-    logger.info("Applying '%s' in profile '%s'" %
-                (method, '/'.join(context._profile_path.split(os.sep)[-3:])))
-
-
-def isMeetingCPASllConfigureProfile(context):
-    return context.readDataFile("MeetingPROVHainaut_examples_fr_marker.txt") or \
-           context.readDataFile("MeetingPROVHainaut_testing_marker.txt")
-
-
-def installMeetingPROVHainaut(context):
-    """ Run the default profile before bing able to run the Hainaut's province profile"""
-    if not isMeetingCPASllConfigureProfile(context):
-        return
-
-    logStep("installMeetingPROVHainaut", context)
-    portal = context.getSite()
-    portal.portal_setup.runAllImportStepsFromProfile('profile-Products.MeetingPROVHainaut:default')
->>>>>>> add indexe
-
-
 def initializeTool(context):
     '''Initialises the PloneMeeting tool based on information from the current
        profile.'''
