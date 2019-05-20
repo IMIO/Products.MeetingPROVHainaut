@@ -34,8 +34,9 @@ def initializeTool(context):
     if not isMeetingPROVHainautProfile(context):
         return
 
+    site = context.getSite()
     logStep("initializeTool", context)
-    _installPloneMeeting(context)
+    _installPloneMeeting(context, site)
     return ToolInitializer(context, PROJECTNAME).run()
 
 
