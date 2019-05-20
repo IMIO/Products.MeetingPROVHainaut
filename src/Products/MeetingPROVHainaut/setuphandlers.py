@@ -20,6 +20,7 @@ import os
 from Products.CMFCore.utils import getToolByName
 ##code-section HEAD
 from Products.PloneMeeting.exportimport.content import ToolInitializer
+from Products.PloneMeeting.setuphandlers import addOrUpdateIndexes
 ##/code-section HEAD
 
 
@@ -43,6 +44,8 @@ def postInstall(context):
         return
     logStep("postInstall", context)
     site = context.getSite()
+    # Create or update indexes
+    addOrUpdateIndexes(site, {'groupedItemsNum': ('FieldIndex', {})})
     #need to reinstall PloneMeeting after reinstalling MC workflows to re-apply wfAdaptations
     reinstallPloneMeeting(context, site)
     showHomeTab(context, site)
