@@ -5,6 +5,7 @@ from Products.MeetingCommunes.setuphandlers import _installPloneMeeting
 from Products.MeetingCommunes.setuphandlers import logStep
 from Products.MeetingPROVHainaut.config import PROJECTNAME
 from Products.PloneMeeting.exportimport.content import ToolInitializer
+from Products.PloneMeeting.setuphandlers import addOrUpdateIndexes
 
 
 def isMeetingPROVHainautProfile(context):
@@ -21,6 +22,8 @@ def postInstall(context):
 
     logStep("postInstall", context)
     site = context.getSite()
+    # Create or update indexes
+    addOrUpdateIndexes(site, {'groupedItemsNum': ('FieldIndex', {})})
     # need to reinstall PloneMeeting after reinstalling MC workflows to re-apply wfAdaptations
     logStep("reinstallPloneMeeting", context)
     _installPloneMeeting(context, site)
