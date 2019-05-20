@@ -5,6 +5,7 @@ from Products.MeetingCommunes.setuphandlers import _showHomeTab
 from Products.MeetingCommunes.setuphandlers import logStep
 from Products.MeetingPROVHainaut.config import PROJECTNAME
 from Products.PloneMeeting.exportimport.content import ToolInitializer
+from Products.PloneMeeting.setuphandlers import addOrUpdateIndexes
 
 
 def isMeetingPROVHainautProfile(context):
@@ -26,6 +27,8 @@ def postInstall(context):
     _installPloneMeeting(context, site)
     _showHomeTab(context, site)
     _reorderSkinsLayers(context, site)
+    # Create or update indexes
+    addOrUpdateIndexes(site, {'groupedItemsNum': ('FieldIndex', {})})
 
 
 def initializeTool(context):
