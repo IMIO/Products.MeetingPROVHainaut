@@ -12,7 +12,4 @@
   <include package="Products.MeetingCommunes"/>
   <include package="Products.PloneMeeting"/>
 
-  <!-- Indexes -->
-  <adapter name="groupedItemsNum" factory=".indexes.groupedItemsNum" />
-
 </configure>
