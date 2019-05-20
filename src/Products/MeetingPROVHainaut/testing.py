@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 from plone.testing import z2, zca
-from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import FunctionalTesting
+from Products.MeetingCommunes.testing import MCLayer
 import Products.MeetingPROVHainaut
 
 
-ML_ZCML = zca.ZCMLSandbox(filename="testing.zcml",
+MPH_ZCML = zca.ZCMLSandbox(filename="testing.zcml",
                            package=Products.MeetingPROVHainaut,
-                           name='ML_ZCML')
+                           name='MPH_ZCML')
 
-ML_Z2 = z2.IntegrationTesting(bases=(z2.STARTUP, ML_ZCML),
-                               name='ML_Z2')
+MPH_Z2 = z2.IntegrationTesting(bases=(z2.STARTUP, MPH_ZCML),
+                               name='MPH_Z2')
 
-ML_TESTING_PROFILE = PloneWithPackageLayer(
+MPH_TESTING_PROFILE = MCLayer(
     zcml_filename="testing.zcml",
     zcml_package=Products.MeetingPROVHainaut,
     additional_z2_products=('imio.dashboard',
@@ -22,7 +22,7 @@ ML_TESTING_PROFILE = PloneWithPackageLayer(
                             'Products.CMFPlacefulWorkflow',
                             'Products.PasswordStrength'),
     gs_profile_id='Products.MeetingPROVHainaut:testing',
-    name="ML_TESTING_PROFILE")
+    name="MPH_TESTING_PROFILE")
 
-ML_TESTING_PROFILE_FUNCTIONAL = FunctionalTesting(
-    bases=(ML_TESTING_PROFILE,), name="ML_TESTING_PROFILE_FUNCTIONAL")
+MPH_TESTING_PROFILE_FUNCTIONAL = FunctionalTesting(
+    bases=(MPH_TESTING_PROFILE,), name="MPH_TESTING_PROFILE_FUNCTIONAL")

@@ -5,21 +5,19 @@
 
   <include package="Products.GenericSetup" file="meta.zcml" />
 
-  <!-- ##code-section profiles.zcml-top #fill in your manual code here -->
-  <!-- ##/code-section profiles.zcml-top -->
-
   <genericsetup:registerProfile
       name="default"
       title="MeetingPROVHainaut"
       directory="profiles/default"
       description="Extension profile for MeetingPROVHainaut."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
-      
+      provides="Products.GenericSetup.interfaces.EXTENSION" />
+
   <genericsetup:registerProfile
-   name="testing"
-   title="PloneMeeting / Unit testing profile for Province of Hainaut"
-   description="MeetingPROVHainaut unit testing profile"
-   for="Products.CMFPlone.interfaces.IPloneSiteRoot"/>
+      name="testing"
+      title="PloneMeeting / Unit testing profile for Province of Hainaut"
+      directory="profiles/testing"
+      description="MeetingPROVHainaut testing profile"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot" />
 
 </configure>
