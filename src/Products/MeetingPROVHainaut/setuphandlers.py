@@ -22,6 +22,8 @@ def postInstall(context):
 
     logStep("postInstall", context)
     site = context.getSite()
+    # Create or update indexes
+    addOrUpdateIndexes(site, {'groupedItemsNum': ('FieldIndex', {})})
     # need to reinstall PloneMeeting after reinstalling MC workflows to re-apply wfAdaptations
     logStep("reinstallPloneMeeting", context)
     _installPloneMeeting(context, site)
