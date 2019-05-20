@@ -13,6 +13,14 @@
       provides="Products.GenericSetup.interfaces.EXTENSION" />
 
   <genericsetup:registerProfile
+   name="zprovhainaut"
+   title="PloneMeeting / Province de Hainaut"
+   directory="profiles/zprovhainaut"
+   description="PloneMeeting for Province de Hainaut (Belgium)"
+   provides="Products.GenericSetup.interfaces.EXTENSION"
+   for="Products.CMFPlone.interfaces.IPloneSiteRoot" />
+
+  <genericsetup:registerProfile
       name="testing"
       title="PloneMeeting / Unit testing profile for Province of Hainaut"
       directory="profiles/testing"

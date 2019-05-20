@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<import-steps>
+
+ <import-step 
+    id="MeetingPROVHainaut-postInstall" 
+    handler="Products.MeetingPROVHainaut.setuphandlers.postInstall"
+    title="manual coded post-install for MeetingPROVHainaut"
+    version="2018-03-12T09:00:00.000000">
+   <dependency step="MeetingPROVHainaut-QI-dependencies"/>
+   manual coded post-install for MeetingPROVHainaut
+ </import-step>
+
+</import-steps>
+ 
