@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from collective.eeafaceted.dashboard.utils import addFacetedCriteria
 from plone import api
 from Products.MeetingCommunes.setuphandlers import _installPloneMeeting
 from Products.MeetingCommunes.setuphandlers import _showHomeTab
@@ -32,7 +33,7 @@ def postInstall(context):
     _showHomeTab(context, site)
     _reorderSkinsLayers(context, site)
     # add our own faceted criteria
-    addFacetedCriteria(context, site)
+    _addFacetedCriteria(context)
 
 
 def initializeTool(context):
@@ -95,17 +96,11 @@ def _reorderCss(context):
         portal_css.moveResourceToBottom(resource)
 
 
-def addFacetedCriteria(context, site):
+def _addFacetedCriteria(context):
     """ """
     logStep("addFacetedCriteria", context)
     tool = api.portal.get_tool('portal_plonemeeting')
-    response_status = site.REQUEST.RESPONSE.getStatus()
-    response_location = site.REQUEST.RESPONSE.getHeader('location')
     for cfg in tool.objectValues('MeetingConfig'):
         # add new faceted filters for searches_items
-        obj = cfg.searches.searches_items
-        obj.unrestrictedTraverse('@@faceted_exportimport').import_xml(
-            import_file=open(os.path.dirname(__file__) +
-                             '/faceted_conf/meetingprovhainaut_dashboard_items_widgets.xml'))
-    site.REQUEST.RESPONSE.status = response_status
-    site.REQUEST.RESPONSE.setHeader('location', response_location or '')
+        addFacetedCriteria(cfg.searches.searches_items, os.path.dirname(__file__) +
+                             '/faceted_conf/meetingprovhainaut_dashboard_items_widgets.xml')
