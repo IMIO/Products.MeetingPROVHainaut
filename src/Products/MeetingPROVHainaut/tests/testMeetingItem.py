@@ -32,8 +32,13 @@ class testMeetingItem(MeetingPROVHainautTestCase, mctmi):
     """
 
     def test_pm_call_PowerObserversLocalRoles(self):
-        '''See doc string in PloneMeeting.'''
+        """See doc string in PloneMeeting."""
         self.test_pm_PowerObserversLocalRoles()
+
+    def _extraNeutralFields(self):
+        """This method is made to be overrided by subplugins that added
+           neutral fields to the MeetingItem schema."""
+        return ['groupedItemsNum', ]
 
 
 def test_suite():
