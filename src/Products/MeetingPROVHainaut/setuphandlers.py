@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from collective.eeafaceted.dashboard.utils import enableFacetedDashboardFor
+from plone import api
 from Products.MeetingCommunes.setuphandlers import _installPloneMeeting
 from Products.MeetingCommunes.setuphandlers import _showHomeTab
 from Products.MeetingCommunes.setuphandlers import logStep
@@ -7,6 +9,7 @@ from Products.MeetingPROVHainaut.config import PROJECTNAME
 from Products.PloneMeeting.exportimport.content import ToolInitializer
 from Products.PloneMeeting.setuphandlers import addOrUpdateIndexes
 
+import os
 
 def isMeetingPROVHainautProfile(context):
     return context.readDataFile("MeetingPROVHainaut_marker.txt") or \
@@ -29,8 +32,8 @@ def postInstall(context):
     _installPloneMeeting(context, site)
     _showHomeTab(context, site)
     _reorderSkinsLayers(context, site)
-    # Create or update indexes
-    addOrUpdateIndexes(site, {'groupedItemsNum': ('FieldIndex', {})})
+    # add our own faceted criteria
+    addFacetedCriteria(context, site)
 
 
 def initializeTool(context):
@@ -91,3 +94,13 @@ def _reorderCss(context):
            'ploneCustom.css']
     for resource in css:
         portal_css.moveResourceToBottom(resource)
+
+
+def addFacetedCriteria(context, site):
+    """ """
+    logStep("addFacetedCriteria", context)
+    tool = api.portal.get_tool('portal_plonemeeting')
+    for cfg in tool.objectValues('MeetingConfig'):
+        enableFacetedDashboardFor(cfg.searches.searches_items,
+                                  os.path.dirname(__file__) +
+                                  '/faceted_conf/meetingprovhainaut_dashboard_items_widgets.xml')

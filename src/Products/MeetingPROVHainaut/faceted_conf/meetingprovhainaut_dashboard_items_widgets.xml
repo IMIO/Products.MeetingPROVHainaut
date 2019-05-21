@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object name="searches" meta_type="ATFolder"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        i18n:domain="eea">
+ <criteria purge="False">
+
+  <!-- advanced widgets -->
+  <criterion name="c50" i18n:attributes="title">
+   <property name="widget">text</property>
+   <property name="title">slip number</property>
+   <property name="position">center</property>
+   <property name="section">advanced</property>
+   <property name="hidden">False</property>
+   <property name="index">getGroupedItemsNum</property>
+   <property name="default"/>
+   <property name="onlyallelements">True</property>
+   <property name="wildcard">True</property>
+  </criterion>
+
+
+ </criteria>
+</object>
