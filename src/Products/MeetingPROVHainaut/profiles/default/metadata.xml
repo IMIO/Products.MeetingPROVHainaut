@@ -1,10 +1,7 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>4.0.dev0</version>
-  <!-- ##code-section METADATA -->
+  <version>4.2.dev0</version>
   <dependencies>
-    <dependency>profile-Products.MeetingCommunes:default</dependency>
     <dependency>profile-Products.MeetingCommunes:financesadvice</dependency>
   </dependencies>
-  <!-- ##/code-section METADATA -->
 </metadata>

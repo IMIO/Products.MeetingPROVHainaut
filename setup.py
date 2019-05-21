@@ -1,16 +1,14 @@
-from setuptools import setup, find_packages
-import os
+# -*- coding: utf-8 -*-
 
-version = '4.0-dev'
+from setuptools import setup, find_packages
+
+version = '4.2b1.dev0'
 
 setup(name='Products.MeetingPROVHainaut',
       version=version,
-      description="PloneMeeting profile for province of Hainaut",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
-      classifiers=[
-        "Programming Language :: Python",
-        ],
+      description="PloneMeeting profile for Province de Hainaut",
+      long_description=open("README.rst").read() + "\n\n" + open("CHANGES.rst").read(),
+      classifiers=["Programming Language :: Python"],
       keywords='',
       author='',
       author_email='',
@@ -22,21 +20,8 @@ setup(name='Products.MeetingPROVHainaut',
       include_package_data=True,
       zip_safe=False,
       extras_require=dict(
-            test=['unittest2',
-                  'zope.testing',
-                  'plone.testing',
-                  'plone.app.testing',
-                  'plone.app.robotframework',
-                  'Products.CMFPlacefulWorkflow',
-                  'zope.testing',
-                  'Products.PloneTestCase'],
-              templates=['Genshi',
-                         ]),
+          test=['Products.PloneMeeting[test]']),
       install_requires=[
-          'setuptools',
-          'Products.CMFPlone',
-          'Pillow',
-          'Products.PloneMeeting',
           'Products.MeetingCommunes'],
       entry_points={},
       )

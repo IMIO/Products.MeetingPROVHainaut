@@ -1,43 +1,36 @@
 # -*- coding: utf-8 -*-
-#
-# File: MeetingPROVHainaut.py
-#
-# Copyright (c) 2018 by Imio.be
-# Generator: ArchGenXML Version 2.7
-#            http://plone.org/products/archgenxml
-#
-# GNU General Public License (GPL)
-#
 
-__author__ = """Andre NUYENS <andre.nuyens@imio.be>"""
-__docformat__ = 'plaintext'
+from Products.PloneMeeting import config as PMconfig
 
-
-# Product configuration.
-#
-# The contents of this module will be imported into __init__.py, the
-# workflow configuration and every content type module.
-#
-# If you wish to perform custom configuration, you may put a file
-# AppConfig.py in your product's root directory. The items in there
-# will be included (by importing) in this file if found.
-
-from collections import OrderedDict
-
-
-PROJECTNAME = "MeetingPROVHainaut"
 
 product_globals = globals()
 
-# Dependencies of Products to be installed by quick-installer
-# override in custom configuration
-DEPENDENCIES = []
+PROJECTNAME = "MeetingPROVHainaut"
+COMPTA_GROUP_ID = 'comptabilite'
+FINANCE_GROUP_ID = 'dirfin'
 
-# Dependend products - not quick-installed - used in testcase
-# override in custom configuration
-PRODUCT_DEPENDENCIES = []
+ADVICE_STATES_ALIVE = ('advice_under_edit',
+                       'proposed_to_financial_controller',
+                       'proposed_to_financial_editor',
+                       'proposed_to_financial_reviewer',
+                       'proposed_to_financial_manager',
+                       'financial_advice_signed', )
+PMconfig.ADVICE_STATES_ALIVE = ADVICE_STATES_ALIVE
 
-# see doc in Products.PloneMeeting.config.py
-
-STYLESHEETS = [{'id': 'MeetingPROVHainaut.css',
-                'title': "MeetingPROVHainaut CSS styles"}]
+PMconfig.EXTRA_GROUP_SUFFIXES = [
+    {'fct_title': u'financialprecontrollers',
+     'fct_id': u'financialprecontrollers',
+     'fct_orgs': [FINANCE_GROUP_ID, COMPTA_GROUP_ID]},
+    {'fct_title': u'financialcontrollers',
+     'fct_id': u'financialcontrollers',
+     'fct_orgs': [FINANCE_GROUP_ID, COMPTA_GROUP_ID]},
+    {'fct_title': u'financialeditors',
+     'fct_id': u'financialeditors',
+     'fct_orgs': [FINANCE_GROUP_ID]},
+    {'fct_title': u'financialreviewers',
+     'fct_id': u'financialreviewers',
+     'fct_orgs': [FINANCE_GROUP_ID]},
+    {'fct_title': u'financialmanagers',
+     'fct_id': u'financialmanagers',
+     'fct_orgs': [FINANCE_GROUP_ID, COMPTA_GROUP_ID]},
+]

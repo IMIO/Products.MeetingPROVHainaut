@@ -10,3 +10,16 @@ msgstr ""
 "Language-name: \n"
 "Preferred-encodings: utf-8 latin1\n"
 "Domain: PloneMeeting\n"
+
+
+#. Default: "Accounting advice"
+msgid "MeetingAdviceComptabilite"
+msgstr ""
+
+#. Default: "Add an accounting advice"
+msgid "add_new_meetingadvicecompta"
+msgstr ""
+
+#. Default: "Financial pre-controllers"
+msgid "financialprecontrollers"
+msgstr ""

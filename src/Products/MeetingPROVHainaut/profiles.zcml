@@ -20,12 +20,4 @@
    provides="Products.GenericSetup.interfaces.EXTENSION"
    for="Products.CMFPlone.interfaces.IPloneSiteRoot" />
 
-  <genericsetup:registerProfile
-      name="testing"
-      title="PloneMeeting / Unit testing profile for Province of Hainaut"
-      directory="profiles/testing"
-      description="MeetingPROVHainaut testing profile"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot" />
-
 </configure>

@@ -1,5 +1,5 @@
 files="PloneMeeting plone"
-languages="fr"
+languages="fr en"
 
 for file in $files; do
     for language in $languages; do

@@ -52,9 +52,23 @@ noteTemplate.style_template = ['styles1']
 templates = [agendaTemplate, decisionsTemplate, noteTemplate]
 
 # Meeting configurations -------------------------------------------------------
+# College
 collegeMeeting = deepcopy(zones_import_data.collegeMeeting)
 collegeMeeting.podTemplates = templates
-
+collegeMeeting.workflowAdaptations = ('no_global_observation',
+                                      'only_creator_may_delete',
+                                      'pre_validation',
+                                      'no_publication',
+                                      'presented_item_back_to_itemcreated',
+                                      'presented_item_back_to_proposed',
+                                      'return_to_proposing_group',
+                                      'waiting_advices',
+                                      'refused')
+collegeMeeting.transitionsForPresentingAnItem = ('propose',
+                                                 'prevalidate',
+                                                 'validate',
+                                                 'present')
+# Council
 councilMeeting = deepcopy(zones_import_data.councilMeeting)
 councilMeeting.podTemplates = []
 
