@@ -6,8 +6,7 @@ version = '4.0-dev'
 setup(name='Products.MeetingPROVHainaut',
       version=version,
       description="PloneMeeting profile for province of Hainaut",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      long_description=open("README.rst").read() + "\n" + open("CHANGES.rst").read(),
       classifiers=[
         "Programming Language :: Python",
         ],
