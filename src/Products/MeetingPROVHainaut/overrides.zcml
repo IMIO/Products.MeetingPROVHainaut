@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone">
+    
+    <adapter for="Products.PloneMeeting.interfaces.IMeetingConfig"
+             factory="Products.MeetingPROVHainaut.adapters.CustomPROVHainautMeetingConfig"
+             provides="Products.PloneMeeting.interfaces.IMeetingConfigCustom"/>
+
+    <adapter for="Products.PloneMeeting.interfaces.IMeetingItem"
+             factory="Products.MeetingPROVHainaut.adapters.CustomPROVHainautMeetingItem"
+             provides="Products.PloneMeeting.interfaces.IMeetingItemCustom"/>
+
+</configure>

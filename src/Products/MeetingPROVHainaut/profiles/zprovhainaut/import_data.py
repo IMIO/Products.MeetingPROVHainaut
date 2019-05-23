@@ -8,6 +8,8 @@ from Products.PloneMeeting.profiles import ItemAnnexTypeDescriptor
 from Products.PloneMeeting.profiles import PloneMeetingConfiguration
 from Products.PloneMeeting.profiles import PodTemplateDescriptor
 from Products.MeetingCommunes.profiles.zones import import_data as zones_import_data
+from Products.MeetingPROVHainaut.config import COMPTA_GROUP_ID
+from Products.MeetingPROVHainaut.config import FINANCE_GROUP_ID
 
 # File types -------------------------------------------------------------------
 annexe = ItemAnnexTypeDescriptor('annexe', 'Annexe', u'attach.png')
@@ -52,20 +54,40 @@ noteTemplate.style_template = ['styles1']
 templates = [agendaTemplate, decisionsTemplate, noteTemplate]
 
 # Meeting configurations -------------------------------------------------------
+# College
 collegeMeeting = deepcopy(zones_import_data.collegeMeeting)
 collegeMeeting.podTemplates = templates
+collegeMeeting.usedItemAttributes = collegeMeeting.usedItemAttributes + ['completeness']
+collegeMeeting.workflowAdaptations = ('no_global_observation',
+                                      'only_creator_may_delete',
+                                      'pre_validation',
+                                      'no_publication',
+                                      'presented_item_back_to_itemcreated',
+                                      'presented_item_back_to_proposed',
+                                      'return_to_proposing_group',
+                                      'waiting_advices',
+                                      'refused')
+collegeMeeting.transitionsForPresentingAnItem = ('propose',
+                                                 'prevalidate',
+                                                 'validate',
+                                                 'present')
+collegeMeeting.usedAdviceTypes = collegeMeeting.usedAdviceTypes + [u'asked_again']
 
+# Council
 councilMeeting = deepcopy(zones_import_data.councilMeeting)
 councilMeeting.podTemplates = []
+
+orgs = deepcopy(zones_import_data.data.orgs)
+dirfin = [org for org in orgs if org.id == FINANCE_GROUP_ID][0]
+dirfin.item_advice_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
+dirfin.item_advice_edit_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
+dirfin.item_advice_view_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
+compta = [org for org in orgs if org.id == COMPTA_GROUP_ID][0]
+compta.item_advice_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
+compta.item_advice_edit_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
+compta.item_advice_view_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
 
 data = PloneMeetingConfiguration(
     meetingFolderTitle='Mes séances',
     meetingConfigs=[collegeMeeting, councilMeeting],
     orgs=zones_import_data.data.orgs)
-data.configGroups = (
-    {'row_id': 'bep', 'label': 'BEP'},
-    {'row_id': 'expa', 'label': 'EXPA'},
-    {'row_id': 'enviro', 'label': 'ENVIRO'},
-    {'row_id': 'crema', 'label': 'CREMA'},
-    {'row_id': 'idefin', 'label': 'IDEFIN'},
-)

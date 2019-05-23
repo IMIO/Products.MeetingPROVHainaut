@@ -2,7 +2,6 @@
 
 from collective.eeafaceted.dashboard.utils import addFacetedCriteria
 from plone import api
-from Products.MeetingCommunes.setuphandlers import _installPloneMeeting
 from Products.MeetingCommunes.setuphandlers import _showHomeTab
 from Products.MeetingCommunes.setuphandlers import logStep
 from Products.MeetingPROVHainaut.config import PROJECTNAME
@@ -25,36 +24,27 @@ def postInstall(context):
 
     logStep("postInstall", context)
     site = context.getSite()
-    # Create or update indexes
-    addOrUpdateIndexes(site, {'getGroupedItemsNum': ('FieldIndex', {})})
-    # need to reinstall PloneMeeting after reinstalling MC workflows to re-apply wfAdaptations
-    logStep("reinstallPloneMeeting", context)
-    _installPloneMeeting(context, site)
     _showHomeTab(context, site)
+    logStep("reorderSkinsLayers", context)
     _reorderSkinsLayers(context, site)
-    # add our own faceted criteria
+    logStep("_addFacetedCriteria", context)
     _addFacetedCriteria(context)
 
 
 def initializeTool(context):
-    '''Initialises the PloneMeeting tool based on information from the current
-       profile.'''
+    """Initialises the PloneMeeting tool based on information from the current profile."""
     if not isMeetingPROVHainautProfile(context):
         return
 
-    site = context.getSite()
     logStep("initializeTool", context)
-    _installPloneMeeting(context, site)
     return ToolInitializer(context, PROJECTNAME).run()
 
 
 def _reorderSkinsLayers(context, site):
-    """
-       Re-apply MeetingPROVHainaut skins.xml step
-       as the reinstallation of MeetingPROVHainaut and PloneMeeting changes the portal_skins layers order
-    """
-    logStep("reorderSkinsLayers", context)
+    """Re-apply MeetingPROVHainaut skins.xml step to be sure the order is correct."""
     try:
+        site.portal_setup.runImportStepFromProfile(u'profile-Products.PloneMeeting:default', 'skins')
+        site.portal_setup.runImportStepFromProfile(u'profile-Products.MeetingCommunes:default', 'skins')
         site.portal_setup.runImportStepFromProfile(u'profile-Products.MeetingPROVHainaut:default', 'skins')
         site.portal_setup.runAllImportStepsFromProfile(u'profile-plonetheme.imioapps:default')
         site.portal_setup.runAllImportStepsFromProfile(u'profile-plonetheme.imioapps:plonemeetingskin')
@@ -65,9 +55,7 @@ def _reorderSkinsLayers(context, site):
 
 
 def finalizeInstance(context):
-    """
-      Called at the very end of the installation process (after PloneMeeting).
-    """
+    """Called at the very end of the installation process (after PloneMeeting)."""
     if not isMeetingPROVHainautProfile(context):
         return
 
@@ -76,10 +64,7 @@ def finalizeInstance(context):
 
 
 def _reorderCss(context):
-    """
-       Make sure CSS are correctly reordered in portal_css so things
-       work as expected...
-    """
+    """Make sure CSS are correctly reordered in portal_css so things work as expected..."""
     site = context.getSite()
 
     logStep("reorderCss", context)
@@ -97,10 +82,10 @@ def _reorderCss(context):
 
 
 def _addFacetedCriteria(context):
-    """ """
-    logStep("addFacetedCriteria", context)
+    """Add our own faceted criteria."""
     tool = api.portal.get_tool('portal_plonemeeting')
     for cfg in tool.objectValues('MeetingConfig'):
         # add new faceted filters for searches_items
         addFacetedCriteria(cfg.searches.searches_items, os.path.dirname(__file__) +
-                             '/faceted_conf/meetingprovhainaut_dashboard_items_widgets.xml')
+                           '/faceted_conf/meetingprovhainaut_dashboard_items_widgets.xml')
+

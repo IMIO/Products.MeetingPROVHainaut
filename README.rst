@@ -1,5 +1,2 @@
-===========================
-Products.MeetingPROVHainaut
-===========================
-
-``Products.MeetingPROVHainaut`` is a custom profile for ``Products.MeetingCommunes``.
+Products.PloneMeeting profile for Provice de Hainaut (Belgium)
+==============================================================

@@ -6,19 +6,23 @@
         cookie_persistence="False"
         request_varname="plone_skin">
 
- <object name="meetingprovincehainaut_styles"
+ <object name="meetingprovhainaut_images"
          meta_type="Filesystem Directory View"
-         directory="MeetingPROVHainaut/skins/meetingprovincehainaut_styles"/>
-
- <object name="meetingprovincehainaut_templates"
+         directory="MeetingPROVHainaut/skins/meetingprovhainaut_images"/>
+ <object name="meetingprovhainaut_styles"
          meta_type="Filesystem Directory View"
-         directory="MeetingPROVHainaut/skins/meetingprovincehainaut_templates"/>
+         directory="MeetingPROVHainaut/skins/meetingprovhainaut_styles"/>
+ <object name="meetingprovhainaut_templates"
+         meta_type="Filesystem Directory View"
+         directory="MeetingPROVHainaut/skins/meetingprovhainaut_templates"/>
  
  <skin-path name="*">
   <layer insert-after="custom"
-         name="meetingprovincehainaut_styles"/>
+         name="meetingprovhainaut_images"/>
   <layer insert-after="custom"
-         name="meetingprovincehainaut_templates"/>
+         name="meetingprovhainaut_styles"/>
+  <layer insert-after="custom"
+         name="meetingprovhainaut_templates"/>
  </skin-path>
 
 </object>

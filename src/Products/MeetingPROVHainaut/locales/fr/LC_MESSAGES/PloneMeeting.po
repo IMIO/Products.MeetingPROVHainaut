@@ -18,6 +18,18 @@ msgstr ""
 "Preferred-encodings: utf-8 latin1\n"
 "X-is-fallback-for: fr-be fr-ca fr-lu fr-mc fr-ch fr-fr\n"
 
+#. Default: "Accounting advice"
+msgid "MeetingAdviceComptabilite"
+msgstr "Avis comptabilité"
+
+#. Default: "Add an accounting advice"
+msgid "add_new_meetingadvicecompta"
+msgstr "Ajouter un avis Comptabilité"
+
+#. Default: "Financial pre-controllers"
+msgid "financialprecontrollers"
+msgstr "Pré-contrôleurs financiers"
+
 #. Default: "Slip number"
 msgid "MeetingPROVHainaut_label_groupedItemsNum"
 msgstr "Numéro de bordereau"
