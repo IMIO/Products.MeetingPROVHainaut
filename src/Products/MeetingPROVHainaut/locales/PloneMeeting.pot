@@ -11,7 +11,6 @@ msgstr ""
 "Preferred-encodings: utf-8 latin1\n"
 "Domain: PloneMeeting\n"
 
-
 #. Default: "Accounting advice"
 msgid "MeetingAdviceComptabilite"
 msgstr ""
@@ -23,3 +22,8 @@ msgstr ""
 #. Default: "Financial pre-controllers"
 msgid "financialprecontrollers"
 msgstr ""
+
+#. Default: "Slip number"
+msgid "MeetingPROVHainaut_label_groupedItemsNum"
+msgstr ""
+

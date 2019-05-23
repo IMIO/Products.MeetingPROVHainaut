@@ -29,3 +29,7 @@ msgstr "Ajouter un avis Comptabilité"
 #. Default: "Financial pre-controllers"
 msgid "financialprecontrollers"
 msgstr "Pré-contrôleurs financiers"
+
+#. Default: "Slip number"
+msgid "MeetingPROVHainaut_label_groupedItemsNum"
+msgstr "Numéro de bordereau"
