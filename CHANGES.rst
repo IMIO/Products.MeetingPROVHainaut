@@ -6,6 +6,8 @@ Products.MeetingPROVHainaut Changelog
 ----------------
 - Manage zprovhainaut install profile
 - Create and configure finances and compta advices
+- Adapt comptabilite Workflow to remove relevant states
+- Override MeetingItem.mayEvaluateCompleteness as only finances/comptabilite precontrollers may evaluate it
 
 4.0 (2018-10-25)
 ----------------

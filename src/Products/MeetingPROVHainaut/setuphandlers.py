@@ -21,6 +21,7 @@ def postInstall(context):
     logStep("postInstall", context)
     site = context.getSite()
     _showHomeTab(context, site)
+    logStep("reorderSkinsLayers", context)
     _reorderSkinsLayers(context, site)
 
 
@@ -35,7 +36,6 @@ def initializeTool(context):
 
 def _reorderSkinsLayers(context, site):
     """Re-apply MeetingPROVHainaut skins.xml step to be sure the order is correct."""
-    logStep("reorderSkinsLayers", context)
     try:
         site.portal_setup.runImportStepFromProfile(u'profile-Products.PloneMeeting:default', 'skins')
         site.portal_setup.runImportStepFromProfile(u'profile-Products.MeetingCommunes:default', 'skins')
