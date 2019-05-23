@@ -36,9 +36,8 @@ class testMeetingItem(MeetingPROVHainautTestCase, mctmi):
         self.test_pm_PowerObserversLocalRoles()
 
     def _extraNeutralFields(self):
-        """This method is made to be overrided by subplugins that added
-           neutral fields to the MeetingItem schema."""
-        return ['groupedItemsNum', ]
+        """Field 'groupedItemsNum' is not kept."""
+        return ['groupedItemsNum']
 
 
 def test_suite():

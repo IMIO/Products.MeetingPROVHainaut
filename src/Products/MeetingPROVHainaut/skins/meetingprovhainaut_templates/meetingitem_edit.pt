@@ -46,7 +46,7 @@
       </tr>
       <tr>
         <td>
-            <tal:comment replace="nothing">xxx specific for PROVHainaut</tal:comment>
+            <tal:comment replace="nothing">XXX added by MeetingPROVHainaut</tal:comment>
             <metal:field use-macro="python:here.widget('groupedItemsNum', mode='edit')"/>
         </td>
       </tr>

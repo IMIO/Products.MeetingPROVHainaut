@@ -6,9 +6,9 @@ from Products.MeetingCommunes.setuphandlers import _showHomeTab
 from Products.MeetingCommunes.setuphandlers import logStep
 from Products.MeetingPROVHainaut.config import PROJECTNAME
 from Products.PloneMeeting.exportimport.content import ToolInitializer
-from Products.PloneMeeting.setuphandlers import addOrUpdateIndexes
 
 import os
+
 
 def isMeetingPROVHainautProfile(context):
     return context.readDataFile("MeetingPROVHainaut_marker.txt") or \
@@ -28,7 +28,7 @@ def postInstall(context):
     logStep("reorderSkinsLayers", context)
     _reorderSkinsLayers(context, site)
     logStep("_addFacetedCriteria", context)
-    _addFacetedCriteria(context)
+    _addFacetedCriteria()
 
 
 def initializeTool(context):
@@ -81,11 +81,10 @@ def _reorderCss(context):
         portal_css.moveResourceToBottom(resource)
 
 
-def _addFacetedCriteria(context):
+def _addFacetedCriteria():
     """Add our own faceted criteria."""
     tool = api.portal.get_tool('portal_plonemeeting')
     for cfg in tool.objectValues('MeetingConfig'):
         # add new faceted filters for searches_items
         addFacetedCriteria(cfg.searches.searches_items, os.path.dirname(__file__) +
                            '/faceted_conf/meetingprovhainaut_dashboard_items_widgets.xml')
-
