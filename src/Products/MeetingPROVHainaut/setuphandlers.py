@@ -43,11 +43,11 @@ def initializeTool(context):
 def _reorderSkinsLayers(context, site):
     """Re-apply MeetingPROVHainaut skins.xml step to be sure the order is correct."""
     try:
+        site.portal_setup.runAllImportStepsFromProfile(u'profile-plonetheme.imioapps:default')
+        site.portal_setup.runAllImportStepsFromProfile(u'profile-plonetheme.imioapps:plonemeetingskin')
         site.portal_setup.runImportStepFromProfile(u'profile-Products.PloneMeeting:default', 'skins')
         site.portal_setup.runImportStepFromProfile(u'profile-Products.MeetingCommunes:default', 'skins')
         site.portal_setup.runImportStepFromProfile(u'profile-Products.MeetingPROVHainaut:default', 'skins')
-        site.portal_setup.runAllImportStepsFromProfile(u'profile-plonetheme.imioapps:default')
-        site.portal_setup.runAllImportStepsFromProfile(u'profile-plonetheme.imioapps:plonemeetingskin')
     except KeyError:
         # if the plonemeetingskin or imioapps profile is not available
         # (not using plonemeetingskin, imioapps or in testing?) we pass...
