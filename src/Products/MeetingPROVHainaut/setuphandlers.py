@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from collective.eeafaceted.dashboard.utils import addFacetedCriteria
+from imio.helpers.catalog import addOrUpdateIndexes
 from plone import api
 from Products.MeetingCommunes.setuphandlers import _showHomeTab
 from Products.MeetingCommunes.setuphandlers import logStep
@@ -24,6 +25,7 @@ def postInstall(context):
 
     logStep("postInstall", context)
     site = context.getSite()
+    addOrUpdateIndexes(site, {'getGroupedItemsNum': ('FieldIndex', {})})
     _showHomeTab(context, site)
     logStep("reorderSkinsLayers", context)
     _reorderSkinsLayers(context, site)
