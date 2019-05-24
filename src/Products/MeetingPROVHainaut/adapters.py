@@ -6,9 +6,6 @@ from Products.MeetingCommunes.adapters import CustomMeetingConfig
 from Products.MeetingCommunes.adapters import CustomMeetingItem
 from Products.MeetingPROVHainaut.utils import compta_group_uid
 from Products.MeetingPROVHainaut.utils import finance_group_uid
-from Products.PloneMeeting.model.adaptations import change_transition_new_state_id
-from Products.PloneMeeting.model.adaptations import removeState
-from Products.PloneMeeting.utils import duplicate_workflow
 
 
 class CustomPROVHainautMeetingConfig(CustomMeetingConfig):
@@ -22,31 +19,34 @@ class CustomPROVHainautMeetingConfig(CustomMeetingConfig):
            - create 'meetingadvicecompta_workflow' from 'meetingadvicefinances_workflow';
            - create 'patched_meetingadvicecompta_workflow' from 'meetingadvicecompta_workflow'
              on which we applied relevant workflowAdaptations."""
-        if self.context.getId() == 'meeting-config-zcollege':
-            fin_wf = 'meetingadvicefinances_workflow'
-            patched_fin_wf = 'patched_meetingadvicefinances_workflow'
-            compta_wf = 'meetingadvicecompta_workflow'
-            patched_compta_wf = 'patched_meetingadvicecompta_workflow'
-            # WFs
-            # duplicate and associate
-            # patched_meetingadvicefinances_workflow
-            duplicate_workflow(fin_wf, patched_fin_wf, portalTypeNames=['meetingadvicefinances'])
-            # meetingadvicecompta_workflow
-            duplicate_workflow(fin_wf, compta_wf)
-            # patched_meetingadvicecompta_workflow
-            duplicate_workflow(compta_wf, patched_compta_wf, portalTypeNames=['meetingadvicecompta'])
-            # adapt WF, change initial_state (and leading trnsition)
-            # and remove states proposed_to_financial_controller/proposed_to_financial_editor
-            change_transition_new_state_id(wf_id=patched_compta_wf,
-                                           transition_id='backToAdviceInitialState',
-                                           new_state_id='proposed_to_financial_reviewer')
-            removeState(wf_id=patched_compta_wf,
-                        state_id='proposed_to_financial_controller',
-                        remove_leading_transitions=True,
-                        new_initial_state='proposed_to_financial_reviewer')
-            removeState(wf_id=patched_compta_wf,
-                        state_id='proposed_to_financial_editor',
-                        remove_leading_transitions=True)
+        # XXX not needed, kept for now, until...
+        return
+
+        # if self.context.getId() == 'meeting-config-zcollege':
+        #     fin_wf = 'meetingadvicefinances_workflow'
+        #     patched_fin_wf = 'patched_meetingadvicefinances_workflow'
+        #     compta_wf = 'meetingadvicecompta_workflow'
+        #     patched_compta_wf = 'patched_meetingadvicecompta_workflow'
+        #     # WFs
+        #     # duplicate and associate
+        #     # patched_meetingadvicefinances_workflow
+        #     duplicate_workflow(fin_wf, patched_fin_wf, portalTypeNames=['meetingadvicefinances'])
+        #     # meetingadvicecompta_workflow
+        #     duplicate_workflow(fin_wf, compta_wf)
+        #     # patched_meetingadvicecompta_workflow
+        #     duplicate_workflow(compta_wf, patched_compta_wf, portalTypeNames=['meetingadvicecompta'])
+        #     # adapt WF, change initial_state (and leading trnsition)
+        #     # and remove states proposed_to_financial_controller/proposed_to_financial_editor
+        #     change_transition_new_state_id(wf_id=patched_compta_wf,
+        #                                    transition_id='backToAdviceInitialState',
+        #                                    new_state_id='proposed_to_financial_reviewer')
+        #     removeState(wf_id=patched_compta_wf,
+        #                 state_id='proposed_to_financial_controller',
+        #                 remove_leading_transitions=True,
+        #                 new_initial_state='proposed_to_financial_reviewer')
+        #     removeState(wf_id=patched_compta_wf,
+        #                 state_id='proposed_to_financial_editor',
+        #                 remove_leading_transitions=True)
 
     def mayEvaluateCompleteness(self):
         '''Completeness can be evaluated by the finance precontroller.'''
