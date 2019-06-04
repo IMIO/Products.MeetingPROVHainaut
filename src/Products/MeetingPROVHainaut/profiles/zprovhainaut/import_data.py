@@ -66,7 +66,8 @@ collegeMeeting.workflowAdaptations = ('no_global_observation',
                                       'presented_item_back_to_proposed',
                                       'return_to_proposing_group',
                                       'waiting_advices',
-                                      'refused')
+                                      'refused',
+                                      'add_advicecreated_state')
 collegeMeeting.transitionsForPresentingAnItem = ('propose',
                                                  'prevalidate',
                                                  'validate',
