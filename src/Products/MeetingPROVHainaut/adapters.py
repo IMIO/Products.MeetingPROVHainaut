@@ -4,7 +4,6 @@ from Globals import InitializeClass
 from plone import api
 from Products.MeetingCommunes.adapters import CustomMeetingConfig
 from Products.MeetingCommunes.adapters import CustomMeetingItem
-from Products.MeetingPROVHainaut.utils import compta_group_uid
 from Products.MeetingPROVHainaut.utils import finance_group_uid
 
 
@@ -26,19 +25,16 @@ class CustomPROVHainautMeetingConfig(CustomMeetingConfig):
         if not item.queryState() == 'proposed__or__prevalidated_waiting_advices':
             return False
 
-        # finance/compta advice asked?
+        # finances advice asked?
         finance_group = finance_group_uid()
         finance_asked = finance_group not in item.adviceIndex
-        compta_group = compta_group_uid()
-        compta_asked = compta_group not in item.adviceIndex
-        if not finance_asked and not compta_asked:
+        if not finance_asked:
             return False
 
         # current user is pre-controller for asked advice?
         tool = api.portal.get_tool('portal_plonemeeting')
         userGroups = tool.get_plone_groups_for_user()
-        if (finance_asked and '%s_financialcontrollers' % finance_group not in userGroups) or \
-           (compta_asked and '%s_financialcontrollers' % compta_group not in userGroups):
+        if '%s_financialcontrollers' % finance_group not in userGroups:
             return False
 
         return True
