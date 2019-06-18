@@ -4,11 +4,11 @@
     xmlns:plone="http://namespaces.plone.org/plone">
     
     <adapter for="Products.PloneMeeting.interfaces.IMeetingConfig"
-             factory="Products.MeetingPROVHainaut.adapters.CustomPROVHainautMeetingConfig"
+             factory="Products.MeetingPROVHainaut.adapters.CustomMeetingConfig"
              provides="Products.PloneMeeting.interfaces.IMeetingConfigCustom"/>
 
     <adapter for="Products.PloneMeeting.interfaces.IMeetingItem"
-             factory="Products.MeetingPROVHainaut.adapters.CustomPROVHainautMeetingItem"
+             factory="Products.MeetingPROVHainaut.adapters.CustomMeetingItem"
              provides="Products.PloneMeeting.interfaces.IMeetingItemCustom"/>
 
 </configure>

@@ -17,6 +17,11 @@ def isMeetingPROVHainautProfile(context):
         context.readDataFile("MeetingPROVHainaut_testing_marker.txt")
 
 
+def isMeetingPROVHainautConfigureProfile(context):
+    return context.readDataFile("MeetingPROVHainaut_zprovhainaut_marker.txt") or \
+        context.readDataFile("MeetingPROVHainaut_testing_marker.txt")
+
+
 def postInstall(context):
     """Called as at the end of the setup process. """
     # the right place for your custom code
@@ -35,7 +40,7 @@ def postInstall(context):
 
 def initializeTool(context):
     """Initialises the PloneMeeting tool based on information from the current profile."""
-    if not isMeetingPROVHainautProfile(context):
+    if not isMeetingPROVHainautConfigureProfile(context):
         return
 
     logStep("initializeTool", context)

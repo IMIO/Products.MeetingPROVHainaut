@@ -9,12 +9,22 @@ PROJECTNAME = "MeetingPROVHainaut"
 COMPTA_GROUP_ID = 'comptabilite'
 FINANCE_GROUP_ID = 'dirfin'
 
+FINANCE_GIVEABLE_ADVICE_STATES = ('prevalidated_waiting_advices',
+                                  'proposed__or__prevalidated_waiting_advices')
+
+ADVICE_CATEGORIES = (
+    ('comptabilite', u'Comptabilité'),
+    ('df', u'Directeur financier'),
+)
+
 ADVICE_STATES_ALIVE = ('advice_under_edit',
                        'proposed_to_financial_controller',
                        'proposed_to_financial_editor',
                        'proposed_to_financial_reviewer',
                        'proposed_to_financial_manager',
                        'financial_advice_signed', )
+
+
 PMconfig.ADVICE_STATES_ALIVE = ADVICE_STATES_ALIVE
 
 PMconfig.EXTRA_GROUP_SUFFIXES = [

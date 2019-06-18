@@ -7,8 +7,16 @@
        so Products.MeetingPROVHainaut can overrides Products.PloneMeeting translations -->
   <i18n:registerTranslations directory="locales" />
 
+  <include file="events.zcml" />
   <include file="profiles.zcml" />
   <include package="Products.MeetingCommunes"/>
   <include package="Products.PloneMeeting"/>
+
+  <adapter for="Products.PloneMeeting.content.advice.IMeetingAdvice"
+           factory="Products.MeetingPROVHainaut.adapters.MeetingAdvicePROVHainautWorkflowConditions"
+           provides="Products.MeetingPROVHainaut.interfaces.IMeetingAdvicePROVHainautWorkflowConditions"/>
+
+  <utility component=".vocabularies.AdviceCategoriesVocabularyFactory"
+           name="Products.MeetingPROVHainaut.vocabularies.advicecategoriesvocabulary" />
 
 </configure>
