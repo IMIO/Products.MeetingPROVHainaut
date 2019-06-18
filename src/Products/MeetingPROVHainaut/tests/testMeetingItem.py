@@ -31,9 +31,9 @@ class testMeetingItem(MeetingPROVHainautTestCase, mctmi):
         Tests the MeetingItem class methods.
     """
 
-    def test_pm_call_PowerObserversLocalRoles(self):
-        """See doc string in PloneMeeting."""
-        self.test_pm_PowerObserversLocalRoles()
+    def test_pm_Completeness(self):
+        """Already tested in testWorkflows."""
+        pass
 
     def _extraNeutralFields(self):
         """Field 'groupedItemsNum' is not kept."""

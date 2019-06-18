@@ -67,7 +67,8 @@ collegeMeeting.workflowAdaptations = ('no_global_observation',
                                       'return_to_proposing_group',
                                       'waiting_advices',
                                       'refused',
-                                      'add_advicecreated_state')
+                                      'meetingadvicefinances_add_advicecreated_state',
+                                      'meetingadvicefinances_controller_propose_to_manager')
 collegeMeeting.transitionsForPresentingAnItem = ('propose',
                                                  'prevalidate',
                                                  'validate',
