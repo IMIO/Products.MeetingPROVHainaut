@@ -18,6 +18,18 @@ msgstr ""
 msgid "MeetingAdviceComptabilite"
 msgstr ""
 
+#. Default: "Accounting commitment"
+msgid "MeetingPROVHainaut_label_advice_accounting_commitment"
+msgstr ""
+
+#. Default: "Category"
+msgid "MeetingPROVHainaut_label_advice_category"
+msgstr ""
+
+#. Default: "Slip number"
+msgid "MeetingPROVHainaut_label_groupedItemsNum"
+msgstr ""
+
 #. Default: "Add an accounting advice"
 msgid "add_new_meetingadvicecompta"
 msgstr ""

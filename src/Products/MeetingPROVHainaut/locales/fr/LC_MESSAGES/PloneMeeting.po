@@ -22,6 +22,18 @@ msgstr ""
 msgid "MeetingAdviceComptabilite"
 msgstr "Avis comptabilité"
 
+#. Default: "Accounting commitment"
+msgid "MeetingPROVHainaut_label_advice_accounting_commitment"
+msgstr "Numéro d'engagement"
+
+#. Default: "Category"
+msgid "MeetingPROVHainaut_label_advice_category"
+msgstr "Catégorie"
+
+#. Default: "Slip number"
+msgid "MeetingPROVHainaut_label_groupedItemsNum"
+msgstr "Numéro de bordereau"
+
 #. Default: "Add an accounting advice"
 msgid "add_new_meetingadvicecompta"
 msgstr "Ajouter un avis Comptabilité"
@@ -29,7 +41,3 @@ msgstr "Ajouter un avis Comptabilité"
 #. Default: "Financial pre-controllers"
 msgid "financialprecontrollers"
 msgstr "Pré-contrôleurs financiers"
-
-#. Default: "Slip number"
-msgid "MeetingPROVHainaut_label_groupedItemsNum"
-msgstr "Numéro de bordereau"

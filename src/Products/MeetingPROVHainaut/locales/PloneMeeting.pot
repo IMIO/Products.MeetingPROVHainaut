@@ -27,3 +27,10 @@ msgstr ""
 msgid "MeetingPROVHainaut_label_groupedItemsNum"
 msgstr ""
 
+#. Default: "Category"
+msgid "MeetingPROVHainaut_label_advice_category"
+msgstr ""
+
+#. Default: "Accounting commitment"
+msgid "MeetingPROVHainaut_label_advice_accounting_commitment"
+msgstr ""

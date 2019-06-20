@@ -36,3 +36,10 @@ def onAdviceAfterTransition(advice, event):
     # also bypass if we are creating the advice as onAdviceAdded is called after onAdviceTransition
     if event.transition and not item.REQUEST.get('currentlyUpdatingAdvice', False):
         item.updateLocalRoles()
+
+
+def onItemLocalRolesUpdated(item, event):
+    """Called after localRoles have been updated on the item.
+       Update local_roles regarding :
+       - finances adviser able to change item's state."""
+    pass

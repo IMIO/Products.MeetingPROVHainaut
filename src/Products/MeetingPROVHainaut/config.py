@@ -13,7 +13,7 @@ FINANCE_GIVEABLE_ADVICE_STATES = ('prevalidated_waiting_advices',
                                   'proposed__or__prevalidated_waiting_advices')
 
 ADVICE_CATEGORIES = (
-    ('comptabilite', u'Comptabilité'),
+    ('comptabilite', u'Passage à la CEC'),
     ('df', u'Directeur financier'),
 )
 
