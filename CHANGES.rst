@@ -8,6 +8,7 @@ Products.MeetingPROVHainaut Changelog
 - Adapt comptabilite Workflow to remove relevant states
 - Override MeetingItem.mayEvaluateCompleteness as only finances/comptabilite precontrollers may evaluate it
 - Added new field for grouped items on a slip number
+- When item sent to finances again, set completeness to 'completeness_evaluation_asked_again' automatically
 
 4.0 (2018-10-25)
 ----------------

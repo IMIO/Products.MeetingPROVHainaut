@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.MeetingPROVHainaut.utils import finance_group_uid
+from zope.i18n import translate
 
 
 def onAdviceAfterTransition(advice, event):
@@ -23,7 +24,16 @@ def onAdviceAfterTransition(advice, event):
     # advice_hide_during_redaction to True
     if not event.transition or \
        (newStateId == 'advicecreated' and oldStateId == 'advice_given'):
-        advice.advice_hide_during_redaction = True
+        # if completeness was already evaluated, we will eval it again
+        if item.getCompleteness() not in ('completeness_not_yet_evaluated',
+                                          'completeness_evaluation_asked_again'):
+            changeCompleteness = item.restrictedTraverse('@@change-item-completeness')
+            comment = translate('completeness_asked_again_by_app',
+                                domain='PloneMeeting',
+                                context=item.REQUEST)
+            changeCompleteness._changeCompleteness('completeness_evaluation_asked_again',
+                                                   bypassSecurityCheck=True,
+                                                   comment=comment)
 
     if newStateId == 'financial_advice_signed':
         # final state of the wf, make sure advice is no more hidden during redaction
