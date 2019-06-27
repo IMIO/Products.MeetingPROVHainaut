@@ -128,21 +128,22 @@ class CustomMeetingItem(MCCustomMeetingItem):
            advice['delay'] and \
            not advice['delay_started_on']:
             # item in state giveable but item not complete
-            if item.queryState() in FINANCE_GIVEABLE_ADVICE_STATES and not self._is_complete():
-                return {'displayDefaultComplementaryMessage': False,
-                        'customAdviceMessage':
-                        translate('finance_advice_not_giveable_because_item_not_complete',
-                                  domain="PloneMeeting",
-                                  context=item.REQUEST,
-                                  default="Advice is still not giveable because item is not considered complete.")}
-            # delay still not started when advice created/proposed_to_controller
-            if not item.adapted()._adviceDelayMayBeStarted(advice['id']):
-                return {'displayDefaultComplementaryMessage': False,
-                        'customAdviceMessage': translate(
-                            'finance_advice_delay_still_not_started',
-                            domain="PloneMeeting",
-                            context=item.REQUEST,
-                            default="Advice delay is still not started.")}
+            if item.queryState() in FINANCE_GIVEABLE_ADVICE_STATES:
+                if not self._is_complete():
+                    return {'displayDefaultComplementaryMessage': False,
+                            'customAdviceMessage':
+                            translate('finance_advice_not_giveable_because_item_not_complete',
+                                      domain="PloneMeeting",
+                                      context=item.REQUEST,
+                                      default="Advice is still not giveable because item is not considered complete.")}
+                # delay still not started when advice created/proposed_to_controller
+                if not item.adapted()._adviceDelayMayBeStarted(advice['id']):
+                    return {'displayDefaultComplementaryMessage': False,
+                            'customAdviceMessage': translate(
+                                'finance_advice_delay_still_not_started',
+                                domain="PloneMeeting",
+                                context=item.REQUEST,
+                                default="Advice delay is still not started.")}
         return {'displayDefaultComplementaryMessage': True,
                 'customAdviceMessage': None}
 
