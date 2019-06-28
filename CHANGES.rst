@@ -1,8 +1,8 @@
 Products.MeetingPROVHainaut Changelog
 =====================================
 
-4.1 (unreleased)
-----------------
+4.1rc1 (unreleased)
+-------------------
 - Manage zprovhainaut install profile
 - Create and configure finances and compta advices
 - Adapt comptabilite Workflow to remove relevant states
