@@ -2,7 +2,7 @@
 
 from setuptools import setup, find_packages
 
-version = '4.1rc1.dev0'
+version = '4.1rc1'
 
 setup(name='Products.MeetingPROVHainaut',
       version=version,
