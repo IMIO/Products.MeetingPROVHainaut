@@ -23,9 +23,12 @@ annexeSeance = AnnexTypeDescriptor('annexe', 'Annexe', u'attach.png', relatedTo=
 
 # Categories -------------------------------------------------------------------
 categories = [
-    CategoryDescriptor(u'category1', u"Catégorie1", categoryId='1'),
-    CategoryDescriptor(u'category2', u"Catégorie2", categoryId='2'),
-    CategoryDescriptor(u'category3', u"Catégorie3", categoryId='3'),
+    CategoryDescriptor(u'assurances', u"Assurances"),
+    CategoryDescriptor(u'autorites-provinciales', u"Autorités provinciales"),
+    CategoryDescriptor(u'contentieux', u"Contentieux"),
+    CategoryDescriptor(u'elections', u"Élections"),
+    CategoryDescriptor(u'intercommunales', u"Intercommunales"),
+    CategoryDescriptor(u'missions-et-deplacements', u"Missions et déplacements"),
 ]
 
 # Pod templates ----------------------------------------------------------------
@@ -71,11 +74,11 @@ ag2 = OrgDescriptor('ag2', 'Associated group 2', u'AG2', active=False)
 ag3 = OrgDescriptor('ag3', 'Associated group 3', u'AG3', active=False)
 ag4 = OrgDescriptor('ag4', 'Associated group 4', u'AG4', active=False)
 ag5 = OrgDescriptor('ag5', 'Associated group 5', u'AG5', active=False)
-gic1 = OrgDescriptor('gic1', 'Group in charge 1', u'GIC1')
-gic2 = OrgDescriptor('gic2', 'Group in charge 2', u'GIC2')
-gic3 = OrgDescriptor('gic3', 'Group in charge 3', u'GIC3')
-gic4 = OrgDescriptor('gic4', 'Group in charge 4', u'GIC4')
-gic5 = OrgDescriptor('gic5', 'Group in charge 5', u'GIC5')
+gic1 = OrgDescriptor('dp-eric-massin', 'DP Éric Massin', u'DPEM')
+gic2 = OrgDescriptor('dp-fabienne-capot', 'DP Fabienne Capot', u'DPFC')
+gic3 = OrgDescriptor('dp-fabienne-devilers', 'DP Fabienne Devilers', u'DPFD')
+gic4 = OrgDescriptor('dp-pascal-lafosse', 'DP Pascal Lafosse', u'DPPL')
+gic5 = OrgDescriptor('dp-serge-hustache', 'DP Serge Hustache', u'DPSH')
 
 orgs += [ag1, ag2, ag3, ag4, ag5, gic1, gic2, gic3, gic4, gic5]
 
@@ -114,6 +117,13 @@ collegeMeeting.orderedGroupsInCharge = [
     PLONEGROUP_ORG + '/gic3',
     PLONEGROUP_ORG + '/gic4',
     PLONEGROUP_ORG + '/gic5']
+collegeMeeting.categories = categories
+collegeMeeting.useGroupsAsCategories = False
+collegeMeeting.insertingMethodsOnAddItem = (
+    {'insertingMethod': 'on_groups_in_charge', 'reverse': '0'},
+    {'insertingMethod': 'on_categories', 'reverse': '0'},
+    {'insertingMethod': 'on_all_associated_groups', 'reverse': '0'},
+    {'insertingMethod': 'on_proposing_groups', 'reverse': '0'})
 
 # Council
 councilMeeting = deepcopy(zones_import_data.councilMeeting)
