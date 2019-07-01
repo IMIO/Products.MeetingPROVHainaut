@@ -96,7 +96,7 @@
                 <span class="item_attribute_label"
                       tal:condition="not: meetingConfig/getUseGroupsAsCategories"
                       i18n:translate="MeetingCategory"></span>:&nbsp;&nbsp;
-                <span metal:use-macro="python: here.widget('getUseGroupsAsCategories', mode='view')" />
+                <span tal:condition="nocall:cat" tal:content="cat/Title"></span>
             </div>
             </tal:category>
 

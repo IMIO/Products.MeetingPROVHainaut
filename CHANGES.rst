@@ -4,8 +4,12 @@ Products.MeetingPROVHainaut Changelog
 4.1rc2 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Use already existing Products.MeetingCommunes.config.FINANCE_WAITING_ADVICES_STATES constant to manage item states
+  in which the finances advice may be given instead new constant FINANCE_GIVEABLE_ADVICE_STATES
+- Override adaptable method MeetingItem._adviceIsAddable to only return True if item _is_complete, this way the
+  'searchitemstocontrolcompletenessof' faceted search is working
+- Only set completeness to 'completeness_evaluation_asked_again' when advice coming from 'advice_given' to 'advicecreated'
+- Fix meetingitem_view when displaying MeetingItem.category
 
 4.1rc1 (2019-06-28)
 -------------------

@@ -20,11 +20,8 @@ def onAdviceAfterTransition(advice, event):
     oldStateId = event.old_state.id
     newStateId = event.new_state.id
 
-    # initial_state or going back from 'advice_given', we set automatically
-    # advice_hide_during_redaction to True
-    if not event.transition or \
-       (newStateId == 'advicecreated' and oldStateId == 'advice_given'):
-        # if completeness was already evaluated, we will eval it again
+    # if going back from 'advice_given', we ask automatically evaluation again
+    if newStateId == 'advicecreated' and oldStateId == 'advice_given':
         if item.getCompleteness() not in ('completeness_not_yet_evaluated',
                                           'completeness_evaluation_asked_again'):
             changeCompleteness = item.restrictedTraverse('@@change-item-completeness')

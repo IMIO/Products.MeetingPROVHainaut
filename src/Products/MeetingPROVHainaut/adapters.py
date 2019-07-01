@@ -6,8 +6,8 @@ from plone import api
 from Products.MeetingCommunes.adapters import CustomMeetingConfig as MCCustomMeetingConfig
 from Products.MeetingCommunes.adapters import CustomMeetingItem as MCCustomMeetingItem
 from Products.MeetingCommunes.adapters import MeetingAdviceCommunesWorkflowConditions
+from Products.MeetingCommunes.config import FINANCE_WAITING_ADVICES_STATES
 from Products.MeetingPROVHainaut.utils import finance_group_uid
-from Products.MeetingPROVHainaut.config import FINANCE_GIVEABLE_ADVICE_STATES
 from Products.MeetingPROVHainaut.interfaces import IMeetingAdvicePROVHainautWorkflowConditions
 from zope.i18n import translate
 from zope.interface import implements
@@ -102,6 +102,10 @@ class CustomMeetingItem(MCCustomMeetingItem):
             return self._is_complete()
         return super(CustomMeetingItem, self)._adviceIsAddableByCurrentUser(org_uid)
 
+    def _adviceIsAddable(self, org_uid):
+        ''' '''
+        return self.adapted()._adviceIsAddableByCurrentUser(org_uid)
+
     def _adviceIsEditableByCurrentUser(self, org_uid):
         """Only when item completeness is 'complete' or 'evaluation_not_required'."""
         if org_uid == finance_group_uid():
@@ -128,7 +132,7 @@ class CustomMeetingItem(MCCustomMeetingItem):
            advice['delay'] and \
            not advice['delay_started_on']:
             # item in state giveable but item not complete
-            if item.queryState() in FINANCE_GIVEABLE_ADVICE_STATES:
+            if item.queryState() in FINANCE_WAITING_ADVICES_STATES:
                 if not self._is_complete():
                     return {'displayDefaultComplementaryMessage': False,
                             'customAdviceMessage':
