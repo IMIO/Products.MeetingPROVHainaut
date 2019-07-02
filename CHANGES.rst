@@ -1,7 +1,7 @@
 Products.MeetingPROVHainaut Changelog
 =====================================
 
-4.1rc2 (unreleased)
+4.1rc2 (2019-07-02)
 -------------------
 
 - Use already existing Products.MeetingCommunes.config.FINANCE_WAITING_ADVICES_STATES constant to manage item states
