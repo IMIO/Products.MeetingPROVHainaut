@@ -14,7 +14,7 @@
          &lt;field name="advice_accounting_commitment" type="plone.app.textfield.RichText" &gt;
            &lt;description/&gt;
            &lt;title i18n:translate=""&gt;MeetingPROVHainaut_label_advice_accounting_commitment&lt;/title&gt;
-           &lt;required&gt;True&lt;/required&gt;
+           &lt;required&gt;False&lt;/required&gt;
          &lt;/field&gt;
        &lt;/schema&gt;
      &lt;/model&gt;

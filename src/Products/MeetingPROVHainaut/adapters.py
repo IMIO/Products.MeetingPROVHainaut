@@ -6,7 +6,6 @@ from plone import api
 from Products.MeetingCommunes.adapters import CustomMeetingConfig as MCCustomMeetingConfig
 from Products.MeetingCommunes.adapters import CustomMeetingItem as MCCustomMeetingItem
 from Products.MeetingCommunes.adapters import MeetingAdviceCommunesWorkflowConditions
-from Products.MeetingCommunes.config import FINANCE_WAITING_ADVICES_STATES
 from Products.MeetingPROVHainaut.utils import finance_group_uid
 from Products.MeetingPROVHainaut.interfaces import IMeetingAdvicePROVHainautWorkflowConditions
 from zope.i18n import translate
@@ -131,6 +130,8 @@ class CustomMeetingItem(MCCustomMeetingItem):
         if advice['id'] == finance_group_uid() and \
            advice['delay'] and \
            not advice['delay_started_on']:
+            # import FINANCE_WAITING_ADVICES_STATES as it is monkeypatched
+            from Products.MeetingCommunes.config import FINANCE_WAITING_ADVICES_STATES
             # item in state giveable but item not complete
             if item.queryState() in FINANCE_WAITING_ADVICES_STATES:
                 if not self._is_complete():

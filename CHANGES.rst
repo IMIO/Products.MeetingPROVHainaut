@@ -10,6 +10,8 @@ Products.MeetingPROVHainaut Changelog
   'searchitemstocontrolcompletenessof' faceted search is working
 - Only set completeness to 'completeness_evaluation_asked_again' when advice coming from 'advice_given' to 'advicecreated'
 - Fix meetingitem_view when displaying MeetingItem.category
+- Set meetingadvicefinances.advice_accounting_commitment to required=False
+- Import FINANCE_WAITING_ADVICES_STATES only when about to use it, as it is monkeypatched from Products.MeetingCommunes.config
 
 4.1rc1 (2019-06-28)
 -------------------
