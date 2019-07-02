@@ -1,6 +1,12 @@
 Products.MeetingPROVHainaut Changelog
 =====================================
 
+4.1rc3 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
 4.1rc2 (2019-07-02)
 -------------------
 
