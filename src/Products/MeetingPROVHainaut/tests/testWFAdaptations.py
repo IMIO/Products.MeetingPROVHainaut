@@ -1,30 +1,4 @@
 # -*- coding: utf-8 -*-
-#
-# File: testWFAdaptations.py
-#
-# Copyright (c) 2013 by Imio.be
-#
-# GNU General Public License (GPL)
-#
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-# 02110-1301, USA.
-#
-
-from DateTime import DateTime
-
-from Products.PloneMeeting.model.adaptations import RETURN_TO_PROPOSING_GROUP_CUSTOM_PERMISSIONS
 
 from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingCommunes.tests.testWFAdaptations import testWFAdaptations as mctwfa
@@ -32,6 +6,41 @@ from Products.MeetingCommunes.tests.testWFAdaptations import testWFAdaptations a
 
 class testWFAdaptations(MeetingPROVHainautTestCase, mctwfa):
     '''Tests various aspects of votes management.'''
+
+    def test_pm_WFA_availableWFAdaptations(self):
+        '''Test what are the available wfAdaptations.'''
+        # we removed the 'archiving' and 'creator_initiated_decisions' wfAdaptations
+        self.assertEquals(sorted(self.meetingConfig.listWorkflowAdaptations().keys()),
+                          ['accepted_out_of_meeting',
+                           'accepted_out_of_meeting_and_duplicated',
+                           'accepted_out_of_meeting_emergency',
+                           'accepted_out_of_meeting_emergency_and_duplicated',
+                           'creator_edits_unless_closed',
+                           'decide_item_when_back_to_meeting_from_returned_to_proposing_group',
+                           'everyone_reads_all',
+                           'hide_decisions_when_under_writing',
+                           'items_come_validated',
+                           'mark_not_applicable',
+                           'meetingadvicefinances_add_advicecreated_state',
+                           'meetingadvicefinances_controller_propose_to_manager',
+                           'no_global_observation',
+                           'no_proposal',
+                           'no_publication',
+                           'only_creator_may_delete',
+                           'postpone_next_meeting',
+                           'pre_validation',
+                           'pre_validation_keep_reviewer_permissions',
+                           'presented_item_back_to_itemcreated',
+                           'presented_item_back_to_prevalidated',
+                           'presented_item_back_to_proposed',
+                           'refused',
+                           'removed',
+                           'removed_and_duplicated',
+                           'return_to_proposing_group',
+                           'return_to_proposing_group_with_all_validations',
+                           'return_to_proposing_group_with_last_validation',
+                           'reviewers_take_back_validated_item',
+                           'waiting_advices'])
 
 
 def test_suite():
