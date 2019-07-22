@@ -3,13 +3,20 @@
 from AccessControl import ClassSecurityInfo
 from Globals import InitializeClass
 from plone import api
+from Products.MeetingCommunes.adapters import customwfAdaptations
 from Products.MeetingCommunes.adapters import CustomMeetingConfig as MCCustomMeetingConfig
 from Products.MeetingCommunes.adapters import CustomMeetingItem as MCCustomMeetingItem
 from Products.MeetingCommunes.adapters import MeetingAdviceCommunesWorkflowConditions
 from Products.MeetingPROVHainaut.utils import finance_group_uid
 from Products.MeetingPROVHainaut.interfaces import IMeetingAdvicePROVHainautWorkflowConditions
+from Products.PloneMeeting.MeetingConfig import MeetingConfig
 from zope.i18n import translate
 from zope.interface import implements
+
+# add finances advice related wfAdaptations
+customwfAdaptations.append('meetingadvicefinances_add_advicecreated_state')
+customwfAdaptations.append('meetingadvicefinances_controller_propose_to_manager')
+MeetingConfig.wfAdaptations = customwfAdaptations
 
 
 class MeetingAdvicePROVHainautWorkflowConditions(MeetingAdviceCommunesWorkflowConditions):
