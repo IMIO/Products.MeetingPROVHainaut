@@ -3,7 +3,6 @@
  <import-step id="initializetool-MeetingPROVHainaut" version="20180312-01"
               handler="Products.MeetingPROVHainaut.setuphandlers.initializeTool"
               title="Initialize MeetingPROVHainaut with examples.">
-  <dependency step="installMeetingPROVHainaut"/>
   Initialize portal_plonemeeting folders.
  </import-step>
  <import-step id="finalizeInstanceMeetingPROVHainaut" version="20180312-01"

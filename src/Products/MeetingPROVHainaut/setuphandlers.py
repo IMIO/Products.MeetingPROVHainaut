@@ -38,8 +38,10 @@ def postInstall(context):
     site = context.getSite()
     addOrUpdateIndexes(site, {'getGroupedItemsNum': ('FieldIndex', {})})
     _showHomeTab(context, site)
-    logStep("reorderSkinsLayers", context)
+    logStep("_reorderSkinsLayers", context)
     _reorderSkinsLayers(context, site)
+    logStep("_reorderCss", context)
+    _reorderCss(context)
     logStep("_addFacetedCriteria", context)
     _addFacetedCriteria()
 
@@ -69,12 +71,10 @@ def _reorderSkinsLayers(context, site):
 
 def finalizeInstance(context):
     """Called at the very end of the installation process (after PloneMeeting)."""
-    if not isMeetingPROVHainautProfile(context):
+    if not isMeetingPROVHainautConfigureProfile(context):
         return
 
     site = context.getSite()
-    _reorderSkinsLayers(context, site)
-    _reorderCss(context)
     _addDemoData(site)
 
 
@@ -114,7 +114,8 @@ def _addDemoData(site,
                  associated_groups=['ag1', 'ag2', 'ag3', 'ag4', 'ag5'],
                  # need 5
                  groupsInCharge=['dp-eric-massin', 'dp-fabienne-capot',
-                                 'dp-fabienne-devilers', 'dp-pascal-lafosse', 'dp-serge-hustache']
+                                 'dp-fabienne-devilers', 'dp-pascal-lafosse', 'dp-serge-hustache'],
+                 userId='pmManager'
                  ):
     """ """
     items = (
@@ -206,32 +207,32 @@ def _addDemoData(site,
     members = mTool.getMembersFolder()
     if members is None:
         _createObjectByType('Folder', site, id='Members')
-    mTool.createMemberArea('dgen')
-    dgenFolder = tool.getPloneMeetingFolder('meeting-config-zcollege', 'dgen')
+    mTool.createMemberArea(userId)
+    userFolder = tool.getPloneMeetingFolder('meeting-config-zcollege', userId)
     date = DateTime() - 1
-    meeting = api.content.create(container=dgenFolder,
-                                 type='MeetingZCollege',
-                                 id=date.strftime('%Y%m%d'),
-                                 date=date)
-    meeting.processForm()
-
-    i = 1
-    cfg = tool.getMeetingConfig(meeting)
-    site.REQUEST['PUBLISHED'] = meeting
-    for item in items:
-        newItem = api.content.create(container=dgenFolder,
-                                     type='MeetingItemZCollege',
-                                     id=str(i),
-                                     title=item['title'],
-                                     proposingGroup=org_id_to_uid(item['proposingGroup']),
-                                     category=item['category'],
-                                     associatedGroups=[org_id_to_uid(associatedGroup)
-                                                       for associatedGroup in item['associatedGroups']],
-                                     groupsInCharge=[org_id_to_uid(groupInCharge)
-                                                     for groupInCharge in item['groupsInCharge']],
-                                     description=SAMPLE_TEXT,
-                                     motivation=SAMPLE_TEXT,
-                                     decision=SAMPLE_TEXT)
-        for transition in cfg.getTransitionsForPresentingAnItem():
-            wfTool.doActionFor(newItem, transition)
+    with api.env.adopt_user(userId):
+        meeting = api.content.create(container=userFolder,
+                                     type='MeetingZCollege',
+                                     id=date.strftime('%Y%m%d'),
+                                     date=date)
+        meeting.processForm()
+        i = 1
+        cfg = tool.getMeetingConfig(meeting)
+        site.REQUEST['PUBLISHED'] = meeting
+        for item in items:
+            newItem = api.content.create(container=userFolder,
+                                         type='MeetingItemZCollege',
+                                         id=str(i),
+                                         title=item['title'],
+                                         proposingGroup=org_id_to_uid(item['proposingGroup']),
+                                         category=item['category'],
+                                         associatedGroups=[org_id_to_uid(associatedGroup)
+                                                           for associatedGroup in item['associatedGroups']],
+                                         groupsInCharge=[org_id_to_uid(groupInCharge)
+                                                         for groupInCharge in item['groupsInCharge']],
+                                         description=SAMPLE_TEXT,
+                                         motivation=SAMPLE_TEXT,
+                                         decision=SAMPLE_TEXT)
+            for transition in cfg.getTransitionsForPresentingAnItem():
+                wfTool.doActionFor(newItem, transition)
     return meeting
