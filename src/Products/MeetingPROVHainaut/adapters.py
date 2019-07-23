@@ -136,7 +136,7 @@ class CustomMeetingItem(MCCustomMeetingItem):
         item = self.getSelf()
         if advice['id'] == finance_group_uid() and \
            advice['delay'] and \
-           not advice['delay_started_on']:
+           (not advice['delay_started_on'] or advice['type'] == 'asked_again'):
             # import FINANCE_WAITING_ADVICES_STATES as it is monkeypatched
             from Products.MeetingCommunes.config import FINANCE_WAITING_ADVICES_STATES
             # item in state giveable but item not complete

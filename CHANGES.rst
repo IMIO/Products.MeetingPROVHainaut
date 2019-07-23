@@ -4,8 +4,7 @@ Products.MeetingPROVHainaut Changelog
 4.1rc3 (unreleased)
 -------------------
 
-- Nothing changed yet.
-
+- Display item completeness not evaluated advice custom message also when advice is asked again
 
 4.1rc2 (2019-07-02)
 -------------------
