@@ -10,6 +10,7 @@
       title="MeetingPROVHainaut"
       directory="profiles/default"
       description="Extension profile for MeetingPROVHainaut."
+      post_handler=".setuphandlers.postInstall"
       provides="Products.GenericSetup.interfaces.EXTENSION" />
 
   <genericsetup:registerProfile
@@ -17,6 +18,7 @@
       title="PloneMeeting / Province de Hainaut"
       directory="profiles/zprovhainaut"
       description="PloneMeeting for Province de Hainaut (Belgium)"
+      post_handler=".setuphandlers.post_handler_zprovhainaut"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot" />
 

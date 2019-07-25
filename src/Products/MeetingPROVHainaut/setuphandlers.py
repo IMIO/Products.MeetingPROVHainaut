@@ -17,23 +17,11 @@ from DateTime import DateTime
 import os
 
 
-def isMeetingPROVHainautProfile(context):
-    return context.readDataFile("MeetingPROVHainaut_marker.txt") or \
-        context.readDataFile("MeetingPROVHainaut_zprovhainaut_marker.txt") or \
-        context.readDataFile("MeetingPROVHainaut_testing_marker.txt")
-
-
-def isMeetingPROVHainautConfigureProfile(context):
-    return context.readDataFile("MeetingPROVHainaut_zprovhainaut_marker.txt") or \
-        context.readDataFile("MeetingPROVHainaut_testing_marker.txt")
-
-
 def postInstall(context):
     """Called as at the end of the setup process. """
-    # the right place for your custom code
-    if not isMeetingPROVHainautProfile(context):
-        return
-
+    if not hasattr(context, '_profile_path'):
+        profile_id = 'profile-Products.MeetingPROVHainaut:default'
+        context = context._getImportContext(profile_id)
     logStep("postInstall", context)
     site = context.getSite()
     addOrUpdateIndexes(site, {'getGroupedItemsNum': ('FieldIndex', {})})
@@ -46,34 +34,42 @@ def postInstall(context):
     _addFacetedCriteria()
 
 
+def post_handler_zprovhainaut(context):
+    """ """
+    if not hasattr(context, '_profile_path'):
+        profile_id = 'profile-Products.MeetingPROVHainaut:zprovhainaut'
+        context = context._getImportContext(profile_id)
+
+    initializeTool(context)
+    finalizeInstance(context)
+
+
+def post_handler_testing(context):
+    """ """
+    if not hasattr(context, '_profile_path'):
+        profile_id = 'profile-Products.MeetingPROVHainaut:testing'
+        context = context._getImportContext(profile_id)
+
+    initializeTool(context)
+
+
 def initializeTool(context):
     """Initialises the PloneMeeting tool based on information from the current profile."""
-    if not isMeetingPROVHainautConfigureProfile(context):
-        return
-
     logStep("initializeTool", context)
     return ToolInitializer(context, PROJECTNAME).run()
 
 
 def _reorderSkinsLayers(context, site):
     """Re-apply MeetingPROVHainaut skins.xml step to be sure the order is correct."""
-    try:
-        site.portal_setup.runAllImportStepsFromProfile(u'profile-plonetheme.imioapps:default')
-        site.portal_setup.runAllImportStepsFromProfile(u'profile-plonetheme.imioapps:plonemeetingskin')
-        site.portal_setup.runImportStepFromProfile(u'profile-Products.PloneMeeting:default', 'skins')
-        site.portal_setup.runImportStepFromProfile(u'profile-Products.MeetingCommunes:default', 'skins')
-        site.portal_setup.runImportStepFromProfile(u'profile-Products.MeetingPROVHainaut:default', 'skins')
-    except KeyError:
-        # if the plonemeetingskin or imioapps profile is not available
-        # (not using plonemeetingskin, imioapps or in testing?) we pass...
-        pass
+    site.portal_setup.runImportStepFromProfile(u'profile-plonetheme.imioapps:default', 'skins')
+    site.portal_setup.runImportStepFromProfile(u'profile-plonetheme.imioapps:plonemeetingskin', 'skins')
+    site.portal_setup.runImportStepFromProfile(u'profile-Products.PloneMeeting:default', 'skins')
+    site.portal_setup.runImportStepFromProfile(u'profile-Products.MeetingCommunes:default', 'skins')
+    site.portal_setup.runImportStepFromProfile(u'profile-Products.MeetingPROVHainaut:default', 'skins')
 
 
 def finalizeInstance(context):
     """Called at the very end of the installation process (after PloneMeeting)."""
-    if not isMeetingPROVHainautConfigureProfile(context):
-        return
-
     site = context.getSite()
     _addDemoData(site)
 
@@ -115,7 +111,7 @@ def _addDemoData(site,
                  # need 5
                  groupsInCharge=['dp-eric-massin', 'dp-fabienne-capot',
                                  'dp-fabienne-devilers', 'dp-pascal-lafosse', 'dp-serge-hustache'],
-                 userId='pmManager'
+                 userId='dgen'
                  ):
     """ """
     items = (
@@ -207,8 +203,12 @@ def _addDemoData(site,
     members = mTool.getMembersFolder()
     if members is None:
         _createObjectByType('Folder', site, id='Members')
+    mTool.setMemberareaCreationFlag()
     mTool.createMemberArea(userId)
-    userFolder = tool.getPloneMeetingFolder('meeting-config-zcollege', userId)
+    # in tests, the MeetingConfig id is generated
+    cfg1 = tool.objectValues('MeetingConfig')[0]
+    cfg1_id = cfg1.getId()
+    userFolder = tool.getPloneMeetingFolder(cfg1_id, userId)
     date = DateTime() - 1
     with api.env.adopt_user(userId):
         meeting = api.content.create(container=userFolder,

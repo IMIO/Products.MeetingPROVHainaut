@@ -1,5 +1,6 @@
 <configure xmlns="http://namespaces.zope.org/zope"
-           xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+           xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+           i18n_domain="PloneMeeting">
 
     <include file="configure.zcml"/>
     <includeOverrides file="overrides.zcml" />
@@ -9,6 +10,7 @@
         title="MeetingPROVHainaut / Testing profile"
         description="Testing profile for MeetingPROVHainaut (PloneMeeting profile)"
         directory="profiles/testing"
+        post_handler=".setuphandlers.post_handler_testing"
         provides="Products.GenericSetup.interfaces.EXTENSION"
         for="Products.CMFCore.interfaces.ISiteRoot" />
 
