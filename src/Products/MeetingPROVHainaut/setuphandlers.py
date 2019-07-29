@@ -40,8 +40,8 @@ def post_handler_zprovhainaut(context):
         profile_id = 'profile-Products.MeetingPROVHainaut:zprovhainaut'
         context = context._getImportContext(profile_id)
 
-    initializeTool(context)
-    finalizeInstance(context)
+    initializeAppTool(context)
+    finalizePROVHainautInstance(context)
 
 
 def post_handler_testing(context):
@@ -50,12 +50,12 @@ def post_handler_testing(context):
         profile_id = 'profile-Products.MeetingPROVHainaut:testing'
         context = context._getImportContext(profile_id)
 
-    initializeTool(context)
+    initializeAppTool(context)
 
 
-def initializeTool(context):
+def initializeAppTool(context):
     """Initialises the PloneMeeting tool based on information from the current profile."""
-    logStep("initializeTool", context)
+    logStep("initializeAppTool", context)
     return ToolInitializer(context, PROJECTNAME).run()
 
 
@@ -68,8 +68,8 @@ def _reorderSkinsLayers(context, site):
     site.portal_setup.runImportStepFromProfile(u'profile-Products.MeetingPROVHainaut:default', 'skins')
 
 
-def finalizeInstance(context):
-    """Called at the very end of the installation process (after PloneMeeting)."""
+def finalizePROVHainautInstance(context):
+    """ """
     site = context.getSite()
     _addDemoData(site)
 
