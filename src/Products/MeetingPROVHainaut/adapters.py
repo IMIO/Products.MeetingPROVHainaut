@@ -4,16 +4,18 @@ from AccessControl import ClassSecurityInfo
 from collective.contact.plonegroup.utils import get_organization
 from Globals import InitializeClass
 from plone import api
-from Products.MeetingCommunes.adapters import customwfAdaptations
 from Products.MeetingCommunes.adapters import CustomMeetingConfig as MCCustomMeetingConfig
 from Products.MeetingCommunes.adapters import CustomMeetingItem as MCCustomMeetingItem
+from Products.MeetingCommunes.adapters import customwfAdaptations
 from Products.MeetingCommunes.adapters import MeetingAdviceCommunesWorkflowConditions
-from Products.MeetingPROVHainaut.utils import finance_group_uid
+from Products.MeetingCommunes.utils import finances_give_advice_states
 from Products.MeetingPROVHainaut.interfaces import IMeetingAdvicePROVHainautWorkflowConditions
+from Products.MeetingPROVHainaut.utils import finance_group_uid
 from Products.PloneMeeting.MeetingConfig import MeetingConfig
 from Products.PloneMeeting.model import adaptations
 from zope.i18n import translate
 from zope.interface import implements
+
 
 # add finances advice related wfAdaptations
 customwfAdaptations.append('meetingadvicefinances_add_advicecreated_state')
@@ -94,27 +96,24 @@ class CustomMeetingItem(MCCustomMeetingItem):
 
         item = self.getSelf()
         if item.isDefinedInTool():
-            return
-        member = api.user.get_current()
-        # bypass for Managers
-        if member.has_role('Manager'):
-            return True
+            return False
 
         # finances advice asked?
         finance_org_uid = finance_group_uid()
         if finance_org_uid not in item.adviceIndex:
             return False
 
-        # relevant state?
-        finance_org = get_organization(finance_org_uid)
+        # bypass for Managers
         tool = api.portal.get_tool('portal_plonemeeting')
+        if tool.isManager(item, realManagers=True):
+            return True
+
+        # relevant state?
         cfg = tool.getMeetingConfig(item)
-        # item in state giveable but item not complete
-        if item.queryState() not in finance_org.get_item_advice_states(cfg):
+        if item.queryState() not in finances_give_advice_states(cfg):
             return False
 
         # current user is pre-controller for asked advice?
-        tool = api.portal.get_tool('portal_plonemeeting')
         userGroups = tool.get_plone_groups_for_user()
         if '%s_financialprecontrollers' % finance_org_uid not in userGroups:
             return False
