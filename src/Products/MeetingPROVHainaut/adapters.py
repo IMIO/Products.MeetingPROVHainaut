@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from AccessControl import ClassSecurityInfo
-from collective.contact.plonegroup.utils import get_organization
 from Globals import InitializeClass
 from plone import api
 from Products.MeetingCommunes.adapters import customwfAdaptations
@@ -11,7 +10,6 @@ from Products.MeetingCommunes.adapters import MeetingAdviceCommunesWorkflowCondi
 from Products.MeetingPROVHainaut.utils import finance_group_uid
 from Products.MeetingPROVHainaut.interfaces import IMeetingAdvicePROVHainautWorkflowConditions
 from Products.PloneMeeting.MeetingConfig import MeetingConfig
-from Products.PloneMeeting.model import adaptations
 from zope.i18n import translate
 from zope.interface import implements
 
@@ -19,26 +17,6 @@ from zope.interface import implements
 customwfAdaptations.append('meetingadvicefinances_add_advicecreated_state')
 customwfAdaptations.append('meetingadvicefinances_controller_propose_to_manager')
 MeetingConfig.wfAdaptations = customwfAdaptations
-
-adaptations.WAITING_ADVICES_FROM_STATES = (
-    {'from_states': ('proposedToValidationLevel1',
-                     'proposedToValidationLevel2',
-                     'proposedToValidationLevel3',
-                     'proposedToValidationLevel4',
-                     'proposedToValidationLevel5'),
-     'back_states': ('proposedToValidationLevel1',
-                     'proposedToValidationLevel2',
-                     'proposedToValidationLevel3',
-                     'proposedToValidationLevel4',
-                     'proposedToValidationLevel5',
-                     'validated'),
-     'perm_cloned_states': ('validated',),
-     'remove_modify_access': True,
-     'use_custom_icon': False,
-     'use_custom_back_transition_title_for': ('validated'),
-     'use_custom_state_title': False,
-     },
-)
 
 
 class MeetingAdvicePROVHainautWorkflowConditions(MeetingAdviceCommunesWorkflowConditions):
@@ -100,23 +78,19 @@ class CustomMeetingItem(MCCustomMeetingItem):
         if member.has_role('Manager'):
             return True
 
-        # finances advice asked?
-        finance_org_uid = finance_group_uid()
-        if finance_org_uid not in item.adviceIndex:
+        # relevant state?
+        if item.queryState() != 'proposed__or__prevalidated_waiting_advices':
             return False
 
-        # relevant state?
-        finance_org = get_organization(finance_org_uid)
-        tool = api.portal.get_tool('portal_plonemeeting')
-        cfg = tool.getMeetingConfig(item)
-        # item in state giveable but item not complete
-        if item.queryState() not in finance_org.get_item_advice_states(cfg):
+        # finances advice asked?
+        finance_group = finance_group_uid()
+        if finance_group not in item.adviceIndex:
             return False
 
         # current user is pre-controller for asked advice?
         tool = api.portal.get_tool('portal_plonemeeting')
         userGroups = tool.get_plone_groups_for_user()
-        if '%s_financialprecontrollers' % finance_org_uid not in userGroups:
+        if '%s_financialprecontrollers' % finance_group not in userGroups:
             return False
 
         return True
@@ -160,15 +134,13 @@ class CustomMeetingItem(MCCustomMeetingItem):
         '''If we are on a finance advice that is still not giveable because
            the item is not 'complete', we display a clear message.'''
         item = self.getSelf()
-        finance_org_uid = finance_group_uid()
-        if advice['id'] == finance_org_uid and \
+        if advice['id'] == finance_group_uid() and \
            advice['delay'] and \
            (not advice['delay_started_on'] or advice['type'] == 'asked_again'):
-            finance_org = get_organization(finance_org_uid)
-            tool = api.portal.get_tool('portal_plonemeeting')
-            cfg = tool.getMeetingConfig(item)
+            # import FINANCE_WAITING_ADVICES_STATES as it is monkeypatched
+            from Products.MeetingCommunes.config import FINANCE_WAITING_ADVICES_STATES
             # item in state giveable but item not complete
-            if item.queryState() in finance_org.get_item_advice_states(cfg):
+            if item.queryState() in FINANCE_WAITING_ADVICES_STATES:
                 if not self._is_complete():
                     return {'displayDefaultComplementaryMessage': False,
                             'customAdviceMessage':
