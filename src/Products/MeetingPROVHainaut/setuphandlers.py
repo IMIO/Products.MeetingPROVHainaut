@@ -203,7 +203,8 @@ def _addDemoData(site,
     members = mTool.getMembersFolder()
     if members is None:
         _createObjectByType('Folder', site, id='Members')
-    mTool.setMemberareaCreationFlag()
+    if not mTool.getMemberareaCreationFlag():
+        mTool.setMemberareaCreationFlag()
     mTool.createMemberArea(userId)
     # in tests, the MeetingConfig id is generated
     cfg1 = tool.objectValues('MeetingConfig')[0]
