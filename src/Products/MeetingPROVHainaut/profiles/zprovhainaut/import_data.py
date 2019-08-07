@@ -118,6 +118,10 @@ dirgen = [org for org in orgs if org.id == 'dirgen'][0]
 dirgen.level1reviewers = deepcopy(dirgen.creators)
 dirgen.level2reviewers = deepcopy(dirgen.creators)
 dirgen.level3reviewers = deepcopy(dirgen.creators)
+secr = [org for org in orgs if org.id == 'secretariat'][0]
+secr.level1reviewers = deepcopy(secr.creators)
+secr.level2reviewers = deepcopy(secr.creators)
+secr.level3reviewers = deepcopy(secr.creators)
 
 # create associated groups and groups in charge
 ag1 = OrgDescriptor('ag1', 'Associated group 1', u'AG1', active=False)
