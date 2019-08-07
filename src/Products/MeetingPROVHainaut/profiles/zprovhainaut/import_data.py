@@ -89,8 +89,8 @@ groupedItemsTemplate.odt_file = 'bordereaux.odt'
 groupedItemsTemplate.pod_formats = ['docx', 'pdf', ]
 groupedItemsTemplate.pod_portal_types = ['Meeting']
 groupedItemsTemplate.merge_templates = [{'pod_context_name': u'delib',
-                              'do_rendering': False,
-                              'template': 'arrete'}]
+                                         'do_rendering': False,
+                                         'template': 'arrete'}]
 templates.append(groupedItemsTemplate)
 
 orgs = deepcopy(zones_import_data.data.orgs)
