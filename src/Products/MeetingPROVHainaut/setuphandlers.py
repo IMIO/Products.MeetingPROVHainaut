@@ -7,8 +7,6 @@ from Products.CMFPlone.utils import _createObjectByType
 from Products.MeetingCommunes.config import SAMPLE_TEXT
 from Products.MeetingCommunes.setuphandlers import _showHomeTab
 from Products.MeetingCommunes.setuphandlers import logStep
-from Products.MeetingPROVHainaut.config import COMPTA_GROUP_ID
-from Products.MeetingPROVHainaut.config import FINANCE_GROUP_ID
 from Products.MeetingPROVHainaut.config import PROJECTNAME
 from Products.PloneMeeting.exportimport.content import ToolInitializer
 from Products.PloneMeeting.utils import org_id_to_uid
@@ -103,7 +101,7 @@ def _addFacetedCriteria():
 
 def _addDemoData(site,
                  # need 2
-                 proposing_groups=[FINANCE_GROUP_ID, COMPTA_GROUP_ID],
+                 proposing_groups=['dirgen', 'secretariat'],
                  # need 4
                  categories=[u'assurances', u'autorites-provinciales', u'contentieux', u'intercommunales'],
                  # need 4
