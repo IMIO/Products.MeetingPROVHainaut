@@ -32,31 +32,66 @@ categories = [
 ]
 
 # Pod templates ----------------------------------------------------------------
-agendaTemplate = PodTemplateDescriptor('role', 'Rôle')
-agendaTemplate.is_reusable = True
-agendaTemplate.odt_file = 'role.odt'
-agendaTemplate.pod_formats = ['odt', 'pdf', ]
-agendaTemplate.pod_portal_types = ['Meeting']
-agendaTemplate.tal_condition = u'python:tool.isManager(here)'
-agendaTemplate.style_template = ['styles1']
+templates = []
 
-decisionsTemplate = PodTemplateDescriptor('pv', 'Procès-verbal')
-decisionsTemplate.is_reusable = True
-decisionsTemplate.odt_file = 'pv.odt'
-decisionsTemplate.pod_formats = ['odt', 'pdf', ]
-decisionsTemplate.pod_portal_types = ['Meeting']
-decisionsTemplate.tal_condition = u'python:tool.isManager(here)'
-decisionsTemplate.style_template = ['styles1']
+delibTemplate = PodTemplateDescriptor('delib', 'Délibération')
+delibTemplate.is_reusable = True
+delibTemplate.odt_file = 'deliberation.odt'
+delibTemplate.pod_formats = ['docx', 'pdf', ]
+delibTemplate.pod_portal_types = ['MeetingItem']
+templates.append(delibTemplate)
 
-noteTemplate = PodTemplateDescriptor('note', 'Note')
-noteTemplate.is_reusable = True
-noteTemplate.odt_file = 'note.odt'
-noteTemplate.pod_formats = ['odt', 'pdf', ]
-noteTemplate.pod_portal_types = ['MeetingItem']
-noteTemplate.tal_condition = u'python:tool.isManager(here)'
-noteTemplate.style_template = ['styles1']
+arreteTemplate = PodTemplateDescriptor('arrete', 'Arrêté')
+arreteTemplate.is_reusable = True
+arreteTemplate.odt_file = 'arrete.odt'
+arreteTemplate.pod_formats = ['docx', 'pdf', ]
+arreteTemplate.pod_portal_types = ['MeetingItem']
+templates.append(arreteTemplate)
 
-templates = [agendaTemplate, decisionsTemplate, noteTemplate]
+roleATemplate = PodTemplateDescriptor('role-a', 'Rôle A')
+roleATemplate.is_reusable = True
+roleATemplate.odt_file = 'role.odt'
+roleATemplate.pod_formats = ['docx', 'pdf', ]
+roleATemplate.pod_portal_types = ['Meeting']
+roleATemplate.context_variables = [{'role': u'A', 'toDiscuss': u'False', 'ListTypes': u'normal'}]
+templates.append(roleATemplate)
+
+roleBTemplate = PodTemplateDescriptor('role-b', 'Rôle B')
+roleBTemplate.pod_template_to_use = {'cfg_id': 'meeting-config-zcollege', 'template_id': 'role-a'}
+roleBTemplate.pod_formats = ['docx', 'pdf', ]
+roleBTemplate.pod_portal_types = ['Meeting']
+roleBTemplate.context_variables = [{'role': u'B', 'toDiscuss': u'True', 'ListTypes': u'normal'}]
+templates.append(roleBTemplate)
+
+roleSTemplate = PodTemplateDescriptor('role-s', 'Rôle S')
+roleSTemplate.pod_template_to_use = {'cfg_id': 'meeting-config-zcollege', 'template_id': 'role-a'}
+roleSTemplate.pod_formats = ['docx', 'pdf', ]
+roleSTemplate.pod_portal_types = ['Meeting']
+roleSTemplate.context_variables = [{'role': u'S', 'toDiscuss': u'True', 'ListTypes': u'late'}]
+templates.append(roleSTemplate)
+
+presencesTemplate = PodTemplateDescriptor('presences', 'Présences')
+presencesTemplate.is_reusable = True
+presencesTemplate.odt_file = 'presences.odt'
+presencesTemplate.pod_formats = ['docx', 'pdf', ]
+presencesTemplate.pod_portal_types = ['Meeting']
+templates.append(presencesTemplate)
+
+pvTemplate = PodTemplateDescriptor('pv', 'Procès-verbal')
+pvTemplate.is_reusable = True
+pvTemplate.odt_file = 'pv.odt'
+pvTemplate.pod_formats = ['docx', 'pdf', ]
+pvTemplate.pod_portal_types = ['Meeting']
+templates.append(pvTemplate)
+
+groupedItemsTemplate = PodTemplateDescriptor('grouped-items', 'Tous les bordereaux')
+groupedItemsTemplate.odt_file = 'bordereaux.odt'
+groupedItemsTemplate.pod_formats = ['docx', 'pdf', ]
+groupedItemsTemplate.pod_portal_types = ['Meeting']
+groupedItemsTemplate.merge_templates = [{'pod_context_name': u'delib',
+                              'do_rendering': False,
+                              'template': 'arrete'}]
+templates.append(groupedItemsTemplate)
 
 orgs = deepcopy(zones_import_data.data.orgs)
 dirfin = [org for org in orgs if org.id == FINANCE_GROUP_ID][0]
