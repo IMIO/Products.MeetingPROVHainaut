@@ -102,18 +102,24 @@ templates.append(groupedItemsTemplate)
 orgs = deepcopy(zones_import_data.data.orgs)
 dirfin = [org for org in orgs if org.id == FINANCE_GROUP_ID][0]
 dirfin.item_advice_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
 dirfin.item_advice_edit_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
 dirfin.item_advice_view_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
 compta = [org for org in orgs if org.id == COMPTA_GROUP_ID][0]
 compta.item_advice_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
 compta.item_advice_edit_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
 compta.item_advice_view_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
 dirgen = [org for org in orgs if org.id == 'dirgen'][0]
 dirgen.level1reviewers = deepcopy(dirgen.creators)
 dirgen.level2reviewers = deepcopy(dirgen.creators)
@@ -141,20 +147,46 @@ orgs += [ag1, ag2, ag3, ag4, ag5, gic1, gic2, gic3, gic4, gic5]
 # College
 collegeMeeting = deepcopy(zones_import_data.collegeMeeting)
 collegeMeeting.podTemplates = templates
-collegeMeeting.usedItemAttributes = collegeMeeting.usedItemAttributes + \
-    ['completeness', 'associatedGroups', 'groupsInCharge']
-collegeMeeting.workflowAdaptations = ('apply_item_validation_levels',
-                                      'no_global_observation',
-                                      'only_creator_may_delete',
-                                      'no_publication',
-                                      'no_proposal',
-                                      'presented_item_back_to_itemcreated',
-                                      'return_to_proposing_group',
-                                      'waiting_advices_from_last_validation_level',
-                                      'postpone_next_meeting',
-                                      'refused',
-                                      'meetingadvicefinances_add_advicecreated_state',
-                                      'meetingadvicefinances_controller_propose_to_manager')
+collegeMeeting.usedItemAttributes = (
+    u'budgetInfos', u'groupsInCharge', u'associatedGroups',
+    u'motivation', u'toDiscuss', u'inAndOutMoves',
+    u'notes', u'marginalNotes', u'observations',
+    u'manuallyLinkedItems', u'otherMeetingConfigsClonableToPrivacy',
+    u'completeness', u'groupedItemsNum')
+collegeMeeting.usedMeetingAttributes = (
+    u'startDate', u'endDate', u'attendees',
+    u'excused', u'absents', u'signatories',
+    u'place', u'extraordinarySession', u'inAndOutMoves',
+    u'notes', u'observations')
+collegeMeeting.workflowAdaptations = (
+    'apply_item_validation_levels', 'no_global_observation',
+    'only_creator_may_delete', 'no_publication',
+    'no_proposal', 'presented_item_back_to_itemcreated',
+    'return_to_proposing_group', 'waiting_advices_from_last_validation_level',
+    'postpone_next_meeting', 'refused',
+    'meetingadvicefinances_add_advicecreated_state',
+    'meetingadvicefinances_controller_propose_to_manager')
+collegeMeeting.dashboardItemsListingsFilters = (
+    u'c4', u'c5', u'c6', u'c7', u'c8', u'c9',
+    u'c10', u'c11', u'c13', u'c14', u'c15',
+    u'c16', u'c18', u'c19', u'c23', u'c27')
+collegeMeeting.dashboardMeetingAvailableItemsFilters = (
+    u'c4', u'c5', u'c7', u'c8', u'c11', u'c16', u'c23', u'c27')
+collegeMeeting.dashboardMeetingLinkedItemsFilters = (
+    u'c4', u'c5', u'c6', u'c7', u'c8', u'c11', u'c12', u'c16', u'c19', u'c23')
+collegeMeeting.itemColumns = (
+    u'Creator', u'CreationDate', u'ModificationDate',
+    u'review_state', u'getCategory', u'proposing_group_acronym',
+    u'associated_groups_acronym', u'groups_in_charge_acronym',
+    u'advices', u'toDiscuss', u'linkedMeetingDate', u'actions')
+collegeMeeting.availableItemsListVisibleColumns = (
+    u'Creator', u'getCategory', u'proposing_group_acronym',
+    u'associated_groups_acronym', u'groups_in_charge_acronym',
+    u'advices', u'toDiscuss', u'getPreferredMeetingDate', u'actions')
+collegeMeeting.itemsListVisibleColumns = (
+    u'static_item_reference', u'Creator', u'review_state',
+    u'getCategory', u'proposing_group_acronym', u'associated_groups_acronym',
+    u'groups_in_charge_acronym', u'advices', u'toDiscuss', u'actions')
 collegeMeeting.itemWFValidationLevels = (
     {'leading_transition': '',
      'state_title': 'itemcreated',
@@ -229,11 +261,9 @@ collegeMeeting.itemWFValidationLevels = (
      'leading_transition_title': 'proposeToValidationLevel5',
      'extra_suffixes': []},
 )
-collegeMeeting.transitionsForPresentingAnItem = ('proposeToValidationLevel1',
-                                                 'proposeToValidationLevel2',
-                                                 'proposeToValidationLevel3',
-                                                 'validate',
-                                                 'present')
+collegeMeeting.transitionsForPresentingAnItem = (
+    'proposeToValidationLevel1', 'proposeToValidationLevel2',
+    'proposeToValidationLevel3', 'validate', 'present')
 collegeMeeting.transitionsToConfirm = []
 collegeMeeting.usedAdviceTypes = collegeMeeting.usedAdviceTypes + [u'asked_again']
 collegeMeeting.itemBudgetInfosStates = []
