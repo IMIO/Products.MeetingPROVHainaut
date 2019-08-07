@@ -53,21 +53,27 @@ roleATemplate.is_reusable = True
 roleATemplate.odt_file = 'role.odt'
 roleATemplate.pod_formats = ['docx', 'pdf', ]
 roleATemplate.pod_portal_types = ['Meeting']
-roleATemplate.context_variables = [{'role': u'A', 'toDiscuss': u'False', 'ListTypes': u'normal'}]
+roleATemplate.context_variables = [{'name': u'role', 'value': u'A'},
+                                   {'name': u'toDiscuss', 'value': u'False'},
+                                   {'name': u'listTypes', 'value': u'normal'}]
 templates.append(roleATemplate)
 
 roleBTemplate = PodTemplateDescriptor('role-b', 'Rôle B')
 roleBTemplate.pod_template_to_use = {'cfg_id': 'meeting-config-zcollege', 'template_id': 'role-a'}
 roleBTemplate.pod_formats = ['docx', 'pdf', ]
 roleBTemplate.pod_portal_types = ['Meeting']
-roleBTemplate.context_variables = [{'role': u'B', 'toDiscuss': u'True', 'ListTypes': u'normal'}]
+roleBTemplate.context_variables = [{'name': u'role', 'value': u'B'},
+                                   {'name': u'toDiscuss', 'value': u'True'},
+                                   {'name': u'listTypes', 'value': u'normal'}]
 templates.append(roleBTemplate)
 
 roleSTemplate = PodTemplateDescriptor('role-s', 'Rôle S')
 roleSTemplate.pod_template_to_use = {'cfg_id': 'meeting-config-zcollege', 'template_id': 'role-a'}
 roleSTemplate.pod_formats = ['docx', 'pdf', ]
 roleSTemplate.pod_portal_types = ['Meeting']
-roleSTemplate.context_variables = [{'role': u'S', 'toDiscuss': u'True', 'ListTypes': u'late'}]
+roleSTemplate.context_variables = [{'name': u'role', 'value': u'S'},
+                                   {'name': u'toDiscuss', 'value': u'True'},
+                                   {'name': u'listTypes', 'value': u'late'}]
 templates.append(roleSTemplate)
 
 presencesTemplate = PodTemplateDescriptor('presences', 'Présences')
