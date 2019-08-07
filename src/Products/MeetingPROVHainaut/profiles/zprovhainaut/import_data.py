@@ -60,13 +60,23 @@ templates = [agendaTemplate, decisionsTemplate, noteTemplate]
 
 orgs = deepcopy(zones_import_data.data.orgs)
 dirfin = [org for org in orgs if org.id == FINANCE_GROUP_ID][0]
-dirfin.item_advice_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
-dirfin.item_advice_edit_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
-dirfin.item_advice_view_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
+dirfin.item_advice_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2__or__proposedToValidationLevel3_waiting_advices']
+dirfin.item_advice_edit_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2__or__proposedToValidationLevel3_waiting_advices']
+dirfin.item_advice_view_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2__or__proposedToValidationLevel3_waiting_advices']
 compta = [org for org in orgs if org.id == COMPTA_GROUP_ID][0]
-compta.item_advice_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
-compta.item_advice_edit_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
-compta.item_advice_view_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
+compta.item_advice_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2__or__proposedToValidationLevel3_waiting_advices']
+compta.item_advice_edit_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2__or__proposedToValidationLevel3_waiting_advices']
+compta.item_advice_view_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2__or__proposedToValidationLevel3_waiting_advices']
+dirgen = [org for org in orgs if org.id == 'dirgen'][0]
+dirgen.level1reviewers = deepcopy(dirgen.creators)
+dirgen.level2reviewers = deepcopy(dirgen.creators)
+dirgen.level3reviewers = deepcopy(dirgen.creators)
 
 # create associated groups and groups in charge
 ag1 = OrgDescriptor('ag1', 'Associated group 1', u'AG1', active=False)
@@ -88,22 +98,100 @@ collegeMeeting = deepcopy(zones_import_data.collegeMeeting)
 collegeMeeting.podTemplates = templates
 collegeMeeting.usedItemAttributes = collegeMeeting.usedItemAttributes + \
     ['completeness', 'associatedGroups', 'groupsInCharge']
-collegeMeeting.workflowAdaptations = ('no_global_observation',
+collegeMeeting.workflowAdaptations = ('apply_item_validation_levels',
+                                      'no_global_observation',
                                       'only_creator_may_delete',
-                                      'pre_validation',
                                       'no_publication',
+                                      'no_proposal',
                                       'presented_item_back_to_itemcreated',
-                                      'presented_item_back_to_proposed',
                                       'return_to_proposing_group',
-                                      'waiting_advices',
+                                      'waiting_advices_from_last_validation_level',
+                                      'postpone_next_meeting',
                                       'refused',
                                       'meetingadvicefinances_add_advicecreated_state',
                                       'meetingadvicefinances_controller_propose_to_manager')
-collegeMeeting.transitionsForPresentingAnItem = ('propose',
-                                                 'prevalidate',
+collegeMeeting.itemWFValidationLevels = (
+    {'leading_transition': '',
+     'state_title': 'itemcreated',
+     'suffix': 'creators',
+     'enabled': '1',
+     'state': 'itemcreated',
+     'back_transition_title': 'backToItemCreated',
+     'back_transition': 'backToItemCreated',
+     'leading_transition_title': '',
+     'extra_suffixes': []},
+    {'leading_transition': 'propose',
+     'state_title': 'proposed',
+     'suffix': 'reviewers',
+     'enabled': '0',
+     'state': 'proposed',
+     'back_transition_title': 'backToProposed',
+     'back_transition': 'backToProposed',
+     'leading_transition_title': 'propose',
+     'extra_suffixes': []},
+    {'leading_transition': 'prevalidate',
+     'state_title': 'prevalidated',
+     'suffix': 'reviewers',
+     'enabled': '0',
+     'state': 'prevalidated',
+     'back_transition_title': 'backToPrevalidated',
+     'back_transition': 'backToPrevalidated',
+     'leading_transition_title': 'prevalidate',
+     'extra_suffixes': []},
+    {'leading_transition': 'proposeToValidationLevel1',
+     'state_title': 'proposedToValidationLevel1',
+     'suffix': 'level1reviewers',
+     'enabled': '1',
+     'state': 'proposedToValidationLevel1',
+     'back_transition_title': 'backToProposedToValidationLevel1',
+     'back_transition': 'backToProposedToValidationLevel1',
+     'leading_transition_title': 'proposeToValidationLevel1',
+     'extra_suffixes': []},
+    {'leading_transition': 'proposeToValidationLevel2',
+     'state_title': 'proposedToValidationLevel2',
+     'suffix': 'level2reviewers',
+     'enabled': '1',
+     'state': 'proposedToValidationLevel2',
+     'back_transition_title': 'backToProposedToValidationLevel2',
+     'back_transition': 'backToProposedToValidationLevel2',
+     'leading_transition_title': 'proposeToValidationLevel2',
+     'extra_suffixes': []},
+    {'leading_transition': 'proposeToValidationLevel3',
+     'state_title': 'proposedToValidationLevel3',
+     'suffix': 'level3reviewers',
+     'enabled': '1',
+     'state': 'proposedToValidationLevel3',
+     'back_transition_title': 'backToProposedToValidationLevel3',
+     'back_transition': 'backToProposedToValidationLevel3',
+     'leading_transition_title': 'proposeToValidationLevel3',
+     'extra_suffixes': []},
+    {'leading_transition': 'proposeToValidationLevel4',
+     'state_title': 'proposedToValidationLevel4',
+     'suffix': 'level4reviewers',
+     'enabled': '0',
+     'state': 'proposedToValidationLevel4',
+     'back_transition_title': 'backToProposedToValidationLevel4',
+     'back_transition': 'backToProposedToValidationLevel4',
+     'leading_transition_title': 'proposeToValidationLevel4',
+     'extra_suffixes': []},
+    {'leading_transition': 'proposeToValidationLevel5',
+     'state_title': 'proposedToValidationLevel5',
+     'suffix': 'level5reviewers',
+     'enabled': '0',
+     'state': 'proposedToValidationLevel5',
+     'back_transition_title': 'backToProposedToValidationLevel5',
+     'back_transition': 'backToProposedToValidationLevel5',
+     'leading_transition_title': 'proposeToValidationLevel5',
+     'extra_suffixes': []},
+)
+collegeMeeting.transitionsForPresentingAnItem = ('proposeToValidationLevel1',
+                                                 'proposeToValidationLevel2',
+                                                 'proposeToValidationLevel3',
                                                  'validate',
                                                  'present')
+collegeMeeting.transitionsToConfirm = []
 collegeMeeting.usedAdviceTypes = collegeMeeting.usedAdviceTypes + [u'asked_again']
+collegeMeeting.itemBudgetInfosStates = []
 collegeMeeting.orderedContacts = []
 collegeMeeting.orderedAssociatedOrganizations = [
     PLONEGROUP_ORG + '/ag1',
@@ -128,6 +216,13 @@ collegeMeeting.insertingMethodsOnAddItem = (
 # Council
 councilMeeting = deepcopy(zones_import_data.councilMeeting)
 councilMeeting.podTemplates = []
+councilMeeting.workflowAdaptations = ('apply_item_validation_levels',
+                                      'no_global_observation',
+                                      'only_creator_may_delete',
+                                      'no_publication',
+                                      'refused')
+councilMeeting.transitionsToConfirm = []
+councilMeeting.itemBudgetInfosStates = []
 councilMeeting.orderedContacts = []
 
 data = PloneMeetingConfiguration(
