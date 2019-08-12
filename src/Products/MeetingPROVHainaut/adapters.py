@@ -8,9 +8,13 @@ from Products.MeetingCommunes.adapters import CustomMeetingConfig as MCCustomMee
 from Products.MeetingCommunes.adapters import CustomMeetingItem as MCCustomMeetingItem
 from Products.MeetingCommunes.adapters import customwfAdaptations
 from Products.MeetingCommunes.adapters import MeetingAdviceCommunesWorkflowConditions
+from Products.MeetingCommunes.adapters import CustomToolPloneMeeting as MCCustomToolPloneMeeting
 from Products.MeetingCommunes.utils import finances_give_advice_states
 from Products.MeetingPROVHainaut.interfaces import IMeetingAdvicePROVHainautWorkflowConditions
+from Products.MeetingPROVHainaut.utils import finance_group_cec_uid
+from Products.MeetingPROVHainaut.utils import finance_group_no_cec_uid
 from Products.MeetingPROVHainaut.utils import finance_group_uid
+from Products.MeetingPROVHainaut.utils import finance_group_uids
 from Products.PloneMeeting.MeetingConfig import MeetingConfig
 from Products.PloneMeeting.model import adaptations
 from zope.i18n import translate
@@ -49,37 +53,13 @@ class MeetingAdvicePROVHainautWorkflowConditions(MeetingAdviceCommunesWorkflowCo
     implements(IMeetingAdvicePROVHainautWorkflowConditions)
     security = ClassSecurityInfo()
 
-    security.declarePublic('mayProposeToFinancialEditor')
-
-    def mayProposeToFinancialEditor(self):
-        ''' '''
-        res = super(MeetingAdvicePROVHainautWorkflowConditions, self).mayProposeToFinancialEditor()
-        if res and \
-           self.context.queryState() == 'proposed_to_financial_controller' and \
-           self.context.advice_category == 'comptabilite':
-            res = False
-        return res
-
-    security.declarePublic('mayProposeToFinancialManager')
-
-    def mayProposeToFinancialManager(self):
-        '''A financial manager may send the advice to the financial manager
-           in any case (advice positive or negative) except if advice
-           is still 'asked_again'.'''
-        res = super(MeetingAdvicePROVHainautWorkflowConditions, self).mayProposeToFinancialManager()
-        if res and \
-           self.context.queryState() == 'proposed_to_financial_controller' and \
-           self.context.advice_category != 'comptabilite':
-            res = False
-        return res
-
 
 class CustomMeetingConfig(MCCustomMeetingConfig):
     ''' '''
 
     def _adviceConditionsInterfaceFor(self, advice_obj):
         '''See doc in interfaces.py.'''
-        if advice_obj.portal_type == 'meetingadvicefinances':
+        if advice_obj.portal_type.startswith('meetingadvicefinances'):
             return IMeetingAdvicePROVHainautWorkflowConditions.__identifier__
         else:
             return super(CustomMeetingConfig, self)._adviceConditionsInterfaceFor(advice_obj)
@@ -100,7 +80,9 @@ class CustomMeetingItem(MCCustomMeetingItem):
 
         # finances advice asked?
         finance_org_uid = finance_group_uid()
-        if finance_org_uid not in item.adviceIndex:
+        finance_org_cec_uid = finance_group_cec_uid()
+        if finance_org_uid not in item.adviceIndex and \
+           finance_org_cec_uid not in item.adviceIndex:
             return False
 
         # bypass for Managers
@@ -115,21 +97,15 @@ class CustomMeetingItem(MCCustomMeetingItem):
 
         # current user is pre-controller for asked advice?
         userGroups = tool.get_plone_groups_for_user()
-        if '%s_financialprecontrollers' % finance_org_uid not in userGroups:
+        if '%s_financialprecontrollers' % finance_org_uid not in userGroups and \
+           '%s_financialprecontrollers' % finance_org_cec_uid not in userGroups:
             return False
 
         return True
 
-    def _advicePortalTypeForAdviser(self, groupId):
-        """ """
-        if groupId == finance_group_uid():
-            return "meetingadvicefinances"
-        else:
-            return "meetingadvice"
-
     def _adviceIsAddableByCurrentUser(self, org_uid):
         """Only when item completeness is 'complete' or 'evaluation_not_required'."""
-        if org_uid == finance_group_uid():
+        if org_uid in finance_group_uids():
             return self._is_complete()
         return super(CustomMeetingItem, self)._adviceIsAddableByCurrentUser(org_uid)
 
@@ -139,7 +115,7 @@ class CustomMeetingItem(MCCustomMeetingItem):
 
     def _adviceIsEditableByCurrentUser(self, org_uid):
         """Only when item completeness is 'complete' or 'evaluation_not_required'."""
-        if org_uid == finance_group_uid():
+        if org_uid in finance_group_uids():
             return self._is_complete()
         return super(CustomMeetingItem, self)._adviceIsEditableByCurrentUser(org_uid)
 
@@ -149,7 +125,8 @@ class CustomMeetingItem(MCCustomMeetingItem):
         if org_uid == finance_group_uid():
             item = self.getSelf()
             adviceObj = item.getAdviceObj(org_uid)
-            if not adviceObj or adviceObj.queryState() in ['advicecreated', 'proposed_to_financial_controller']:
+            if not adviceObj or adviceObj.queryState() in ['advicecreated',
+                                                           'proposed_to_financial_controller']:
                 res = False
         if res:
             res = super(CustomMeetingItem, self)._adviceDelayMayBeStarted(org_uid)
@@ -187,5 +164,27 @@ class CustomMeetingItem(MCCustomMeetingItem):
                 'customAdviceMessage': None}
 
 
+class CustomToolPloneMeeting(MCCustomToolPloneMeeting):
+    ''' '''
+
+    def get_extra_adviser_infos(self):
+        ''' '''
+        infos = {}
+        infos[finance_group_uid()] = {'portal_type': 'meetingadvicefinances',
+                                      'base_wf': 'meetingadvicefinances_workflow',
+                                      'wf_adaptations': ['add_advicecreated_state']}
+        infos[finance_group_cec_uid()] = {'portal_type': 'meetingadvicefinancescec',
+                                          'base_wf': 'meetingadvicefinances_workflow',
+                                          'wf_adaptations': ['add_advicecreated_state',
+                                                             'remove_proposed_to_financial_editor',
+                                                             'remove_proposed_to_financial_reviewer']}
+        infos[finance_group_no_cec_uid()] = {'portal_type': 'meetingadvicefinancescec',
+                                             'base_wf': 'meetingadvicefinances_workflow',
+                                             'wf_adaptations': ['remove_proposed_to_financial_controller',
+                                                                'remove_proposed_to_financial_reviewer']}
+        return infos
+
+
 InitializeClass(CustomMeetingConfig)
 InitializeClass(CustomMeetingItem)
+InitializeClass(CustomToolPloneMeeting)

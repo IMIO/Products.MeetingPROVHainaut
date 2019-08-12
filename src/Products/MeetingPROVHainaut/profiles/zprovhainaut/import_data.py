@@ -120,6 +120,12 @@ compta.item_advice_edit_states = [
 compta.item_advice_view_states = [
     u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
     u'__or__proposedToValidationLevel3_waiting_advices']
+
+# extra dirfin groups
+dirfincec = OrgDescriptor('dirfincec', 'Directeur Financier (CEC)', u'DFCEC')
+dirfinnocec = OrgDescriptor('dirfinnocec', 'Directeur Financier (NO CEC)', u'DFNOCEC')
+
+# assign user 'dgen' to 'dirgen' and 'secretariat' extra validation levels
 dirgen = [org for org in orgs if org.id == 'dirgen'][0]
 dirgen.level1reviewers = deepcopy(dirgen.creators)
 dirgen.level2reviewers = deepcopy(dirgen.creators)
@@ -141,7 +147,7 @@ gic3 = OrgDescriptor('dp-fabienne-devilers', 'DP Fabienne Devilers', u'DPFD')
 gic4 = OrgDescriptor('dp-pascal-lafosse', 'DP Pascal Lafosse', u'DPPL')
 gic5 = OrgDescriptor('dp-serge-hustache', 'DP Serge Hustache', u'DPSH')
 
-orgs += [ag1, ag2, ag3, ag4, ag5, gic1, gic2, gic3, gic4, gic5]
+orgs += [dirfincec, dirfinnocec, ag1, ag2, ag3, ag4, ag5, gic1, gic2, gic3, gic4, gic5]
 
 # Meeting configurations -------------------------------------------------------
 # College

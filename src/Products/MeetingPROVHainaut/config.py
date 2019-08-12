@@ -8,6 +8,8 @@ product_globals = globals()
 PROJECTNAME = "MeetingPROVHainaut"
 COMPTA_GROUP_ID = 'comptabilite'
 FINANCE_GROUP_ID = 'dirfin'
+FINANCE_GROUP_CEC_ID = 'dirfincec'
+FINANCE_GROUP_NO_CEC_ID = 'dirfinnocec'
 
 ADVICE_CATEGORIES = (
     ('comptabilite', u'Passage à la CEC'),

@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<object name="meetingadvicefinances" meta_type="MeetingAdvice" i18n:domain="PloneMeeting"
+<object name="meetingadvicefinancesnocec" meta_type="MeetingAdvice" i18n:domain="PloneMeeting"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">MeetingAdviceFinances</property>
+ <property name="title" i18n:translate="">MeetingAdviceFinancesNoCEC</property>
  <property name="description" i18n:translate=""></property>
  <property name="icon_expr">string:${portal_url}/meetingadvice.png</property>
  <property name="factory">meetingadvice</property>
- <property name="add_view_expr">string:${folder_url}/++add++meetingadvicefinances</property>
+ <property name="add_view_expr">string:${folder_url}/++add++meetingadvicefinancesnocec</property>
  <property name="link_target"></property>
  <property name="immediate_view">view</property>
  <property name="global_allow">True</property>
@@ -29,21 +29,8 @@
  </property>
  <property name="schema"></property>
  <property name="model_source">
-     &lt;model xmlns:security="http://namespaces.plone.org/supermodel/security" xmlns:marshal="http://namespaces.plone.org/supermodel/marshal" xmlns:form="http://namespaces.plone.org/supermodel/form" xmlns="http://namespaces.plone.org/supermodel/schema" xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="PloneMeeting"&gt;
-       &lt;schema based-on="Products.PloneMeeting.content.advice.IMeetingAdvice"&gt;
-         &lt;field name="advice_category" type="zope.schema.Choice" &gt;
-           &lt;description/&gt;
-           &lt;title i18n:translate=""&gt;MeetingPROVHainaut_label_advice_category&lt;/title&gt;
-           &lt;vocabulary&gt;Products.MeetingPROVHainaut.vocabularies.advicecategoriesvocabulary&lt;/vocabulary&gt;
-           &lt;default&gt;comptabilite&lt;/default&gt;
-           &lt;required&gt;False&lt;/required&gt;
-         &lt;/field&gt;
-         &lt;field name="advice_accounting_commitment" type="plone.app.textfield.RichText" &gt;
-           &lt;description/&gt;
-           &lt;title i18n:translate=""&gt;MeetingPROVHainaut_label_advice_accounting_commitment&lt;/title&gt;
-           &lt;required&gt;False&lt;/required&gt;
-         &lt;/field&gt;
-       &lt;/schema&gt;
+     &lt;model xmlns="http://namespaces.plone.org/supermodel/schema"&gt;
+       &lt;schema/&gt;
      &lt;/model&gt;
  </property>
 
