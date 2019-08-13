@@ -136,11 +136,11 @@ class CustomMeetingItem(MCCustomMeetingItem):
         '''If we are on a finance advice that is still not giveable because
            the item is not 'complete', we display a clear message.'''
         item = self.getSelf()
-        finance_org_uid = finance_group_uid()
-        if advice['id'] == finance_org_uid and \
+        finance_org_uids = finance_group_uids()
+        if advice['id'] in finance_org_uids and \
            advice['delay'] and \
            (not advice['delay_started_on'] or advice['type'] == 'asked_again'):
-            finance_org = get_organization(finance_org_uid)
+            finance_org = get_organization(advice['id'])
             tool = api.portal.get_tool('portal_plonemeeting')
             cfg = tool.getMeetingConfig(item)
             # item in state giveable but item not complete
@@ -174,14 +174,11 @@ class CustomToolPloneMeeting(MCCustomToolPloneMeeting):
                                       'base_wf': 'meetingadvicefinances_workflow',
                                       'wf_adaptations': ['add_advicecreated_state']}
         infos[finance_group_cec_uid()] = {'portal_type': 'meetingadvicefinancescec',
-                                          'base_wf': 'meetingadvicefinances_workflow',
-                                          'wf_adaptations': ['add_advicecreated_state',
-                                                             'remove_proposed_to_financial_editor',
-                                                             'remove_proposed_to_financial_reviewer']}
-        infos[finance_group_no_cec_uid()] = {'portal_type': 'meetingadvicefinancescec',
-                                             'base_wf': 'meetingadvicefinances_workflow',
-                                             'wf_adaptations': ['remove_proposed_to_financial_controller',
-                                                                'remove_proposed_to_financial_reviewer']}
+                                          'base_wf': 'meetingadvicefinancesmanager_workflow',
+                                          'wf_adaptations': ['add_advicecreated_state']}
+        infos[finance_group_no_cec_uid()] = {'portal_type': 'meetingadvicefinancesnocec',
+                                             'base_wf': 'meetingadvicefinanceseditor_workflow',
+                                             'wf_adaptations': []}
         return infos
 
 
