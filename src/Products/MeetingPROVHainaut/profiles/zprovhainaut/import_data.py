@@ -107,9 +107,7 @@ dirfin.item_advice_states = [
 dirfin.item_advice_edit_states = [
     u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
     u'__or__proposedToValidationLevel3_waiting_advices']
-dirfin.item_advice_view_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
-    u'__or__proposedToValidationLevel3_waiting_advices']
+dirfin.item_advice_view_states = []
 compta = [org for org in orgs if org.id == COMPTA_GROUP_ID][0]
 compta.item_advice_states = [
     u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
@@ -122,8 +120,24 @@ compta.item_advice_view_states = [
     u'__or__proposedToValidationLevel3_waiting_advices']
 
 # extra dirfin groups
+# CEC
 dirfincec = OrgDescriptor('dirfincec', 'Directeur Financier (CEC)', u'DFCEC')
+dirfincec.item_advice_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
+dirfincec.item_advice_edit_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
+dirfincec.item_advice_view_states = []
+# NO CEC
 dirfinnocec = OrgDescriptor('dirfinnocec', 'Directeur Financier (NO CEC)', u'DFNOCEC')
+dirfinnocec.item_advice_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
+dirfinnocec.item_advice_edit_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
+dirfinnocec.item_advice_view_states = []
 
 # assign user 'dgen' to 'dirgen' and 'secretariat' extra validation levels
 dirgen = [org for org in orgs if org.id == 'dirgen'][0]
@@ -165,11 +179,16 @@ collegeMeeting.usedMeetingAttributes = (
     u'place', u'extraordinarySession', u'inAndOutMoves',
     u'notes', u'observations')
 collegeMeeting.workflowAdaptations = (
-    'apply_item_validation_levels', 'no_global_observation',
-    'only_creator_may_delete', 'no_publication',
-    'no_proposal', 'presented_item_back_to_itemcreated',
-    'return_to_proposing_group', 'waiting_advices_from_last_validation_level',
-    'postpone_next_meeting', 'refused',
+    'apply_item_validation_levels',
+    'no_global_observation',
+    'only_creator_may_delete',
+    'no_publication',
+    'no_proposal',
+    'presented_item_back_to_itemcreated',
+    'return_to_proposing_group',
+    'waiting_advices_from_last_val_level_only_adviser_send_back',
+    'postpone_next_meeting',
+    'refused',
     'meetingadvicefinances_add_advicecreated_state',
     'meetingadvicefinances_controller_propose_to_manager')
 collegeMeeting.dashboardItemsListingsFilters = (
@@ -193,6 +212,7 @@ collegeMeeting.itemsListVisibleColumns = (
     u'static_item_reference', u'Creator', u'review_state',
     u'getCategory', u'proposing_group_acronym', u'associated_groups_acronym',
     u'groups_in_charge_acronym', u'advices', u'toDiscuss', u'actions')
+collegeMeeting.itemActionsInterface = 'Products.MeetingPROVHainaut.interfaces.IMeetingItemPROVHainautWorkflowActions'
 collegeMeeting.itemWFValidationLevels = (
     {'leading_transition': '',
      'state_title': 'itemcreated',

@@ -16,6 +16,10 @@
            factory="Products.MeetingPROVHainaut.adapters.MeetingAdvicePROVHainautWorkflowConditions"
            provides="Products.MeetingPROVHainaut.interfaces.IMeetingAdvicePROVHainautWorkflowConditions"/>
 
+  <adapter for="Products.PloneMeeting.interfaces.IMeetingItem"
+           factory="Products.MeetingPROVHainaut.adapters.MeetingItemPROVHainautWorkflowActions"
+           provides="Products.MeetingPROVHainaut.interfaces.IMeetingItemPROVHainautWorkflowActions"/>
+
   <utility component=".vocabularies.AdviceCategoriesVocabularyFactory"
            name="Products.MeetingPROVHainaut.vocabularies.advicecategoriesvocabulary" />
 

@@ -8,6 +8,7 @@ from Products.MeetingCommunes.adapters import CustomMeetingConfig as MCCustomMee
 from Products.MeetingCommunes.adapters import CustomMeetingItem as MCCustomMeetingItem
 from Products.MeetingCommunes.adapters import customwfAdaptations
 from Products.MeetingCommunes.adapters import MeetingAdviceCommunesWorkflowConditions
+from Products.MeetingCommunes.adapters import MeetingItemCommunesWorkflowActions
 from Products.MeetingCommunes.adapters import CustomToolPloneMeeting as MCCustomToolPloneMeeting
 from Products.MeetingCommunes.utils import finances_give_advice_states
 from Products.MeetingPROVHainaut.interfaces import IMeetingAdvicePROVHainautWorkflowConditions
@@ -52,6 +53,23 @@ class MeetingAdvicePROVHainautWorkflowConditions(MeetingAdviceCommunesWorkflowCo
 
     implements(IMeetingAdvicePROVHainautWorkflowConditions)
     security = ClassSecurityInfo()
+
+
+class MeetingItemPROVHainautWorkflowActions(MeetingItemCommunesWorkflowActions):
+    """ """
+
+    def _will_ask_completeness_eval_again(self):
+        ''' '''
+        res = False
+        if finance_group_uid() in self.context.adviceIndex or \
+           finance_group_cec_uid() in self.context.adviceIndex:
+            res = super(MeetingItemPROVHainautWorkflowActions, self)._will_ask_completeness_eval_again()
+        return res
+
+    def _will_set_completeness_to_not_required(self):
+        ''' '''
+        finance_group_no_cec = finance_group_no_cec_uid()
+        return finance_group_no_cec in self.context.adviceIndex
 
 
 class CustomMeetingConfig(MCCustomMeetingConfig):
@@ -185,3 +203,4 @@ class CustomToolPloneMeeting(MCCustomToolPloneMeeting):
 InitializeClass(CustomMeetingConfig)
 InitializeClass(CustomMeetingItem)
 InitializeClass(CustomToolPloneMeeting)
+InitializeClass(MeetingItemPROVHainautWorkflowActions)

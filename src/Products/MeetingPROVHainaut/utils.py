@@ -36,4 +36,4 @@ def finance_group_no_cec_uid(raise_on_error=False):
 @forever.memoize
 def finance_group_uids(raise_on_error=False):
     """ """
-    return (finance_group_uid, finance_group_cec_uid, finance_group_no_cec_uid)
+    return (finance_group_uid(), finance_group_cec_uid(), finance_group_no_cec_uid())
