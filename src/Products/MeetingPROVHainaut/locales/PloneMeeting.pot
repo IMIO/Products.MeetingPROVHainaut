@@ -34,3 +34,7 @@ msgstr ""
 #. Default: "Accounting commitment"
 msgid "MeetingPROVHainaut_label_advice_accounting_commitment"
 msgstr ""
+
+#. Default: "You can not select several financial advisers, please select only one."
+msgid "can_not_select_several_financial_advisers"
+msgstr ""

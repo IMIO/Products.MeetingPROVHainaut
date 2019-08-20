@@ -38,6 +38,10 @@ msgstr "Numéro de bordereau"
 msgid "add_new_meetingadvicecompta"
 msgstr "Ajouter un avis Comptabilité"
 
+#. Default: "You can not select several financial advisers, please select only one."
+msgid "can_not_select_several_financial_advisers"
+msgstr "Vous ne pouvez pas sélectionner plusieurs avis \"Directeur financier\"."
+
 #. Default: "Financial pre-controllers"
 msgid "financialprecontrollers"
 msgstr "Pré-contrôleurs financiers"

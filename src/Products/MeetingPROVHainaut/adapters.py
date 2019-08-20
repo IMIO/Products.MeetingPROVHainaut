@@ -9,6 +9,7 @@ from Products.MeetingCommunes.adapters import CustomMeetingItem as MCCustomMeeti
 from Products.MeetingCommunes.adapters import customwfAdaptations
 from Products.MeetingCommunes.adapters import MeetingAdviceCommunesWorkflowConditions
 from Products.MeetingCommunes.adapters import MeetingItemCommunesWorkflowActions
+from Products.MeetingCommunes.adapters import MeetingItemCommunesWorkflowConditions
 from Products.MeetingCommunes.adapters import CustomToolPloneMeeting as MCCustomToolPloneMeeting
 from Products.MeetingCommunes.utils import finances_give_advice_states
 from Products.MeetingPROVHainaut.interfaces import IMeetingAdvicePROVHainautWorkflowConditions
@@ -70,6 +71,15 @@ class MeetingItemPROVHainautWorkflowActions(MeetingItemCommunesWorkflowActions):
         ''' '''
         finance_group_no_cec = finance_group_no_cec_uid()
         return finance_group_no_cec in self.context.adviceIndex
+
+
+class MeetingItemPROVHainautWorkflowConditions(MeetingItemCommunesWorkflowConditions):
+    """ """
+
+    def _currentUserIsAdviserAbleToSendItemBackExtraCondition(self, org):
+        ''' '''
+        userGroups = self.tool.get_plone_groups_for_user()
+        return '%s_financialmanagers' % org.UID() in userGroups
 
 
 class CustomMeetingConfig(MCCustomMeetingConfig):
@@ -180,6 +190,14 @@ class CustomMeetingItem(MCCustomMeetingItem):
                                 default="Advice delay is still not started.")}
         return {'displayDefaultComplementaryMessage': True,
                 'customAdviceMessage': None}
+
+    def custom_validate_optionalAdvisers(self, value, storedOptionalAdvisers, removedAdvisers):
+        '''Several finances advices may not be asked together.'''
+        item = self.getSelf()
+        if len(value) > 1:
+            return translate('can_not_select_several_financial_advisers',
+                             domain='PloneMeeting',
+                             context=item.REQUEST)
 
 
 class CustomToolPloneMeeting(MCCustomToolPloneMeeting):

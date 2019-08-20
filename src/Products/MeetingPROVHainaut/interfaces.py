@@ -2,6 +2,7 @@
 
 from Products.PloneMeeting.content.advice import IMeetingAdviceWorkflowConditions
 from Products.MeetingCommunes.interfaces import IMeetingItemCommunesWorkflowActions
+from Products.MeetingCommunes.interfaces import IMeetingItemCommunesWorkflowConditions
 
 
 class IMeetingAdvicePROVHainautWorkflowConditions(IMeetingAdviceWorkflowConditions):
@@ -9,4 +10,8 @@ class IMeetingAdvicePROVHainautWorkflowConditions(IMeetingAdviceWorkflowConditio
 
 
 class IMeetingItemPROVHainautWorkflowActions(IMeetingItemCommunesWorkflowActions):
+    ''' '''
+
+
+class IMeetingItemPROVHainautWorkflowConditions(IMeetingItemCommunesWorkflowConditions):
     ''' '''

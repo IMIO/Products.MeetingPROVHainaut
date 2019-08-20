@@ -212,7 +212,10 @@ collegeMeeting.itemsListVisibleColumns = (
     u'static_item_reference', u'Creator', u'review_state',
     u'getCategory', u'proposing_group_acronym', u'associated_groups_acronym',
     u'groups_in_charge_acronym', u'advices', u'toDiscuss', u'actions')
-collegeMeeting.itemActionsInterface = 'Products.MeetingPROVHainaut.interfaces.IMeetingItemPROVHainautWorkflowActions'
+collegeMeeting.itemActionsInterface = \
+    'Products.MeetingPROVHainaut.interfaces.IMeetingItemPROVHainautWorkflowActions'
+collegeMeeting.itemConditionsInterface = \
+    'Products.MeetingPROVHainaut.interfaces.IMeetingItemPROVHainautWorkflowConditions'
 collegeMeeting.itemWFValidationLevels = (
     {'leading_transition': '',
      'state_title': 'itemcreated',
