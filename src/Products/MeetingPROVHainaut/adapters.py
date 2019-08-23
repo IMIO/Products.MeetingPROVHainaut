@@ -29,12 +29,14 @@ customwfAdaptations.append('meetingadvicefinances_controller_propose_to_manager'
 MeetingConfig.wfAdaptations = customwfAdaptations
 
 adaptations.WAITING_ADVICES_FROM_STATES = (
-    {'from_states': ('proposedToValidationLevel1',
+    {'from_states': ('itemcreated',
+                     'proposedToValidationLevel1',
                      'proposedToValidationLevel2',
                      'proposedToValidationLevel3',
                      'proposedToValidationLevel4',
                      'proposedToValidationLevel5'),
-     'back_states': ('proposedToValidationLevel1',
+     'back_states': ('itemcreated',
+                     'proposedToValidationLevel1',
                      'proposedToValidationLevel2',
                      'proposedToValidationLevel3',
                      'proposedToValidationLevel4',
