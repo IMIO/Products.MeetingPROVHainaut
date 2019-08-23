@@ -78,10 +78,13 @@ class MeetingItemPROVHainautWorkflowActions(MeetingItemCommunesWorkflowActions):
 class MeetingItemPROVHainautWorkflowConditions(MeetingItemCommunesWorkflowConditions):
     """ """
 
-    def _currentUserIsAdviserAbleToSendItemBackExtraCondition(self, org):
-        ''' '''
-        userGroups = self.tool.get_plone_groups_for_user()
-        return '%s_financialmanagers' % org.UID() in userGroups
+    def _currentUserIsAdviserAbleToSendItemBackExtraCondition(self, org, destinationState):
+        '''Only financial managers may send item back to validated (aka validate the item).'''
+        res = True
+        if destinationState == 'validated':
+            userGroups = self.tool.get_plone_groups_for_user()
+            res = '%s_financialmanagers' % org.UID() in userGroups
+        return res
 
 
 class CustomMeetingConfig(MCCustomMeetingConfig):
