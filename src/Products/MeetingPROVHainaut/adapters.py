@@ -153,8 +153,8 @@ class CustomMeetingItem(MCCustomMeetingItem):
     def _adviceIsEditableByCurrentUser(self, org_uid):
         """Only when item completeness is 'complete' or 'evaluation_not_required'."""
         if org_uid in finance_group_uids():
-            return self._is_complete()
-        return super(CustomMeetingItem, self)._adviceIsEditableByCurrentUser(org_uid)
+            is_complete = self._is_complete()
+        return is_complete and super(CustomMeetingItem, self)._adviceIsEditableByCurrentUser(org_uid)
 
     def _adviceDelayMayBeStarted(self, org_uid):
         """Delay is started when advice no more at controllers states."""
