@@ -5,6 +5,17 @@
 color: red;
 }
 
+#portal-header #portal-globalnav li a {
+    padding-top: 2.5em;
+}
+#portal-header #portal-globalnav {
+    padding-left: 7em;
+}
+#portal-header #portal-logo {
+    position: fixed !important;
+}
+
+
 /* </dtml-with> */
 /* DOCUMENTATION ON PRE-DEFINED PROPERTIES FROM PLONE */
 

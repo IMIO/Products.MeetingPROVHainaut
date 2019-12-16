@@ -11,6 +11,7 @@ Products.MeetingPROVHainaut Changelog
 - Fixed _adviceIsEditableByCurrentUser, check if item is_complete AND if user is able to edit the advice or edit.png icon appear
   even when user can not really edit the advice
 - Override translations for wait_advices_from, MeetingItem.manuallyLinkedItems description and MeetingItem.preferredMeeting description
+- Added specific logo.png
 
 4.1rc2 (2019-07-02)
 -------------------
