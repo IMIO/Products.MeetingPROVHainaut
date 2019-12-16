@@ -10,6 +10,7 @@ Products.MeetingPROVHainaut Changelog
 - Removed overrides of meetingitem_view.pt/meetingitem_edit.pt, it was to include no more used MeetingItem.groupedItemsNum field
 - Fixed _adviceIsEditableByCurrentUser, check if item is_complete AND if user is able to edit the advice or edit.png icon appear
   even when user can not really edit the advice
+- Override translations for wait_advices_from, MeetingItem.manuallyLinkedItems description and MeetingItem.preferredMeeting description
 
 4.1rc2 (2019-07-02)
 -------------------
