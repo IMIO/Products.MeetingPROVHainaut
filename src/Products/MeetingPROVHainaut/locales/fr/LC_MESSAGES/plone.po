@@ -20,4 +20,4 @@ msgstr ""
 
 #. Default: "Ask advices"
 msgid "wait_advices_from"
-msgstr ""
+msgstr "Envoyer aux finances pour avis"
