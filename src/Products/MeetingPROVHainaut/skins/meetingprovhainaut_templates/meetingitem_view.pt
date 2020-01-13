@@ -24,8 +24,6 @@
                                   meeting context/getMeeting;
                                   usedAttrs meetingConfig/getUsedItemAttributes;
                                   usedMeetingAttrs meetingConfig/getUsedMeetingAttributes;
-                                  bilingual python: 'secondLanguage' in tool.getModelAdaptations();
-                                  portal context/plone_portal_state/portal;
                                   context_url context/absolute_url;
                                   showAdvices python: context.adapted().showAdvices()">
 
@@ -40,22 +38,23 @@
 
     <table width="100%" border="0" class="item-infos">
       <tr valign="top">
-        <td width="50%" style="padding-right: 0.5em;">
+        <td width="50%" style="padding-right: 0.5em;" tal:define="proposingGroup python: context.getProposingGroup(theObject=True)">
 
             <tal:comment replace="nothing">Proposing group (when proposingGroupWithGroupInCharge is not used)</tal:comment>
             <div class="discreet" tal:condition="python: not 'proposingGroupWithGroupInCharge' in usedAttrs">
                 <span class="item_attribute_label"
                       i18n:translate="PloneMeeting_label_proposingGroup"></span>:&nbsp;&nbsp;
-                <span tal:content="python: context.getProposingGroup(theObject=True).Title()" />
-                <span tal:condition="not: context/getProposingGroup">-</span>
+                <span tal:condition="nocall:proposingGroup"
+                      tal:content="proposingGroup/Title" />
+                <span tal:condition="not:nocall:proposingGroup">-</span>
             </div>
 
             <tal:comment replace="nothing">Proposing group (when proposingGroupWithGroupInCharge is used)</tal:comment>
             <div class="discreet" tal:condition="python: 'proposingGroupWithGroupInCharge' in usedAttrs">
                 <span class="item_attribute_label"
                       i18n:translate="PloneMeeting_label_proposingGroupWithGroupInCharge"></span>:&nbsp;&nbsp;
-                <span tal:content="python: context.getProposingGroup(theObject=True).Title()" />&nbsp;(<span tal:content="python: context.getGroupsInCharge(theObjects=True, first=True).Title()" />)
-                <span tal:condition="not: context/getProposingGroup">-</span>
+                <span tal:content="proposingGroup/Title" />&nbsp;(<span tal:content="python: context.getGroupsInCharge(theObjects=True, first=True).Title()" />)
+                <span tal:condition="not:nocall:proposingGroup">-</span>
             </div>
 
             <tal:comment replace="nothing">Groups in charge</tal:comment>
@@ -178,7 +177,7 @@
                                       tal:attributes="class python: 'assembly' in redefinedItemAssemblies and 'item_attribute_label highlightValue' or 'item_attribute_label'"
                                       i18n:translate="attendees_for_item"></span>:&nbsp;&nbsp;
                             </tal:displayAssemblyLabel>
-                            <span tal:replace="structure python: context.getItemAssembly(striked=True) or '-'">Assembly</span>
+                            <span tal:replace="structure python: context.displayStrikedItemAssembly() or '-'">Assembly</span>
                         </div>
                         <div tal:condition="python: 'assemblyExcused' in usedMeetingAttrs or 'assemblyExcused' in redefinedItemAssemblies">
                             <span class="item_attribute_label"
@@ -194,12 +193,12 @@
                         </div>
                       </tal:defines>
                   </tal:item_assembly>
-    
+
                   <div tal:condition="python: ('attendees' in usedMeetingAttrs or meeting.getAttendees()) and not meeting.getAssembly()">
                     <tal:comment replace="nothing">People (item attendees, signers and votes)</tal:comment>
                     <metal:people use-macro="here/@@pm-macros/itemPeople"/>
                   </div>
-  
+
                   <tal:item_assembly_common_fields>
                     <div tal:condition="python: 'assemblyGuests' in usedMeetingAttrs or 'assemblyGuests' in redefinedItemAssemblies">
                         <span class="item_attribute_label"
@@ -208,16 +207,16 @@
                         <span tal:replace="structure python: context.getItemAssemblyGuests() or '-'">Assembly guests</span>
                     </div>
                   </tal:item_assembly_common_fields>
-  
+
                   <tal:comment replace="nothing">Item signatures</tal:comment>
                   <tal:item_signatures tal:condition="python: ('signatures' in usedMeetingAttrs or context.getItemSignatures()) and not meeting.getSignatories()">
                       <tal:defines define="class_if_highlighted python: redefinedItemSignatures and 'highlightValue' or '';
                                            class_to_use python: mayQuickEditItemSignatures and (class_if_highlighted and class_if_highlighted + ' item_attribute_label' or ' item_attribute_label') or class_if_highlighted + ' item_attribute_label'">
-                        <div>
+                        <div class="item_signatures">
                             <span class="item_attribute_label"
                                   tal:attributes="class string:${class_to_use}"
                                   i18n:translate="PloneMeeting_label_itemSignatures"></span>:&nbsp;&nbsp;
-                            <span tal:replace="structure python: context.getItemSignatures(mimetype='text/x-html-safe') or '-'">Signatures</span>
+                            <span tal:replace="structure python: context.getItemSignatures(for_display=True) or '-'">Signatures</span>
                         </div>
                       </tal:defines>
                   </tal:item_signatures>
@@ -493,7 +492,7 @@
         </tr>
     </table>
 
-    <tal:textCheckList condition="python: 'textCheckList' in usedAttrs">
+    <tal:textCheckList condition="python: 'textCheckList' in usedAttrs and context.getTextCheckList()">
       <div id="textCheckList" class="collapsible discreet" onclick="toggleDoc('collapsible-text-checklist');">
         <span class="item_attribute_label" i18n:translate="PloneMeeting_label_textCheckList">
             Text check list
@@ -537,7 +536,25 @@
       <tal:itemNavigation replace="structure context/@@item-navigation-widget" />
     </tal:itemNavigation>
 
-       </metal:body_macro>
+    <tal:comment replace="nothing">Fields that appear only if the item is defined in a configuration</tal:comment>
+    <tal:itemInConfig condition="context/isDefinedInTool">
+      <tal:templateUsingGroups condition="python: context.isDefinedInTool(item_type='itemtemplate')">
+        <div class="discreet itemtemplate-infos">
+         <span class="item_attribute_label" i18n:translate="PloneMeeting_label_templateUsingGroups">Template using groups</span>:&nbsp;&nbsp;
+         <span metal:use-macro="python: here.widget('templateUsingGroups', mode='view')" />
+        </div>
+      </tal:templateUsingGroups>
+
+      <tal:transitionsForRecurring condition="python: context.isDefinedInTool(item_type='recurring')">
+        <div class="discreet recurringitem-infos">
+         <span class="item_attribute_label" i18n:translate="PloneMeeting_label_meetingTransitionInsertingMe">Meeting transition inserting me</span>:&nbsp;&nbsp;
+         <span metal:use-macro="python: here.widget('meetingTransitionInsertingMe', mode='view')" />
+        </div>
+      </tal:transitionsForRecurring>
+
+    </tal:itemInConfig>
+
+    </metal:body_macro>
     </metal:fill>
   </body>
 </html>
