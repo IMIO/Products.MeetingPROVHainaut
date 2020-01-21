@@ -9,7 +9,6 @@ class testWFAdaptations(MeetingPROVHainautTestCase, mctwfa):
 
     def test_pm_WFA_availableWFAdaptations(self):
         '''Test what are the available wfAdaptations.'''
-        # we removed the 'archiving' and 'creator_initiated_decisions' wfAdaptations
         self.assertEquals(sorted(self.meetingConfig.listWorkflowAdaptations().keys()),
                           ['accepted_out_of_meeting',
                            'accepted_out_of_meeting_and_duplicated',

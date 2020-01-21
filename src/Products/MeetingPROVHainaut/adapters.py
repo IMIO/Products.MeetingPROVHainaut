@@ -6,7 +6,6 @@ from Globals import InitializeClass
 from plone import api
 from Products.MeetingCommunes.adapters import CustomMeetingConfig as MCCustomMeetingConfig
 from Products.MeetingCommunes.adapters import CustomMeetingItem as MCCustomMeetingItem
-from Products.MeetingCommunes.adapters import customwfAdaptations
 from Products.MeetingCommunes.adapters import MeetingAdviceCommunesWorkflowConditions
 from Products.MeetingCommunes.adapters import MeetingItemCommunesWorkflowActions
 from Products.MeetingCommunes.adapters import MeetingItemCommunesWorkflowConditions
@@ -24,9 +23,10 @@ from zope.interface import implements
 
 
 # add finances advice related wfAdaptations
-customwfAdaptations.append('meetingadvicefinances_add_advicecreated_state')
-customwfAdaptations.append('meetingadvicefinances_controller_propose_to_manager')
-MeetingConfig.wfAdaptations = customwfAdaptations
+wfAdaptations = list(MeetingConfig.wfAdaptations)
+wfAdaptations.append('meetingadvicefinances_add_advicecreated_state')
+wfAdaptations.append('meetingadvicefinances_controller_propose_to_manager')
+MeetingConfig.wfAdaptations = tuple(wfAdaptations)
 
 adaptations.WAITING_ADVICES_FROM_STATES = (
     {'from_states': ('itemcreated',
