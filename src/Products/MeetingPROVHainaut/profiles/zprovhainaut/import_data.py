@@ -179,11 +179,8 @@ collegeMeeting.usedMeetingAttributes = (
     u'place', u'extraordinarySession', u'inAndOutMoves',
     u'notes', u'observations')
 collegeMeeting.workflowAdaptations = (
-    'apply_item_validation_levels',
-    'no_global_observation',
     'only_creator_may_delete',
     'no_publication',
-    'no_proposal',
     'presented_item_back_to_itemcreated',
     'return_to_proposing_group',
     'waiting_advices_from_last_val_level_only_adviser_send_back',
@@ -320,9 +317,7 @@ collegeMeeting.insertingMethodsOnAddItem = (
 # Council
 councilMeeting = deepcopy(zones_import_data.councilMeeting)
 councilMeeting.podTemplates = []
-councilMeeting.workflowAdaptations = ('apply_item_validation_levels',
-                                      'no_global_observation',
-                                      'only_creator_may_delete',
+councilMeeting.workflowAdaptations = ('only_creator_may_delete',
                                       'no_publication',
                                       'refused')
 councilMeeting.transitionsToConfirm = []
