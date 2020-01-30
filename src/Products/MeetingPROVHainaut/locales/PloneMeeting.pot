@@ -11,18 +11,6 @@ msgstr ""
 "Preferred-encodings: utf-8 latin1\n"
 "Domain: PloneMeeting\n"
 
-#. Default: "Accounting advice"
-msgid "MeetingAdviceComptabilite"
-msgstr ""
-
-#. Default: "Add an accounting advice"
-msgid "add_new_meetingadvicecompta"
-msgstr ""
-
-#. Default: "Financial pre-controllers"
-msgid "financialprecontrollers"
-msgstr ""
-
 #. Default: "Slip number"
 msgid "MeetingPROVHainaut_label_groupedItemsNum"
 msgstr ""
@@ -45,4 +33,20 @@ msgstr ""
 
 #. Default: "If this is a normal item and you want it to be inserted in any availale meeting, just select \"No preference\" value.  Selecting a date is for 2 usecases : this will make the item not presentable to the meetings before selected one, or if the selected meeting is \"frozen\", this will make current item considered as \"late\" item presentable in the selected frozen meeting.  Indeed, the only way to insert an item in a frozen meeting is to select this meeting as preferred meeting."
 msgid "preferred_meeting_descr"
+msgstr ""
+
+#. Default: "Accounting advice (CEC)"
+msgid "MeetingAdviceFinancesCEC"
+msgstr ""
+
+#. Default: "Accounting advice (no CEC)"
+msgid "MeetingAdviceFinancesNoCEC"
+msgstr ""
+
+#. Default: "Add a finances advice (CEC)"
+msgid "add_new_meetingadvicefinancescec"
+msgstr ""
+
+#. Default: "Add a finances advice (no CEC)"
+msgid "add_new_meetingadvicefinancesnocec"
 msgstr ""

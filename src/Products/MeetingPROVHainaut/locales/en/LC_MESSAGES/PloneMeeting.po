@@ -14,8 +14,12 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#. Default: "Accounting advice"
-msgid "MeetingAdviceComptabilite"
+#. Default: "Accounting advice (CEC)"
+msgid "MeetingAdviceFinancesCEC"
+msgstr ""
+
+#. Default: "Accounting advice (no CEC)"
+msgid "MeetingAdviceFinancesNoCEC"
 msgstr ""
 
 #. Default: "Accounting commitment"
@@ -30,16 +34,16 @@ msgstr ""
 msgid "MeetingPROVHainaut_label_groupedItemsNum"
 msgstr ""
 
-#. Default: "Add an accounting advice"
-msgid "add_new_meetingadvicecompta"
+#. Default: "Add a finances advice (CEC)"
+msgid "add_new_meetingadvicefinancescec"
+msgstr ""
+
+#. Default: "Add a finances advice (no CEC)"
+msgid "add_new_meetingadvicefinancesnocec"
 msgstr ""
 
 #. Default: "You can not select several financial advisers, please select only one."
 msgid "can_not_select_several_financial_advisers"
-msgstr ""
-
-#. Default: "Financial pre-controllers"
-msgid "financialprecontrollers"
 msgstr ""
 
 #. Default: "Select here items that are linked to this item.  These items will appear in linked items but separated from items linked automatically by the application.  Current item will be also visible in the manually linked items of items you just linked...  To remove a linked item, just unckeck the checkbox in front of the item title.  Items will be automatically sorted chronologically. Manually linked items works like a \"virtual folder\" where every items are stored.  If you unlink an item, it will be unlinked from every items of the \"virtual folder\".  If you unlink every items, this will destroy this \"virtual folder\"."
