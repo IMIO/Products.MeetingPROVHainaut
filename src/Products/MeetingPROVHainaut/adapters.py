@@ -142,9 +142,11 @@ class CustomMeetingItem(MCCustomMeetingItem):
 
     def _adviceIsAddableByCurrentUser(self, org_uid):
         """Only when item completeness is 'complete' or 'evaluation_not_required'."""
+        # is_complete by default for "non finances" advices
+        is_complete = True
         if org_uid in finance_group_uids():
-            return self._is_complete()
-        return super(CustomMeetingItem, self)._adviceIsAddableByCurrentUser(org_uid)
+            is_complete = self._is_complete()
+        return is_complete and super(CustomMeetingItem, self)._adviceIsAddableByCurrentUser(org_uid)
 
     def _adviceIsAddable(self, org_uid):
         ''' '''
@@ -152,6 +154,8 @@ class CustomMeetingItem(MCCustomMeetingItem):
 
     def _adviceIsEditableByCurrentUser(self, org_uid):
         """Only when item completeness is 'complete' or 'evaluation_not_required'."""
+        # is_complete by default for "non finances" advices
+        is_complete = True
         if org_uid in finance_group_uids():
             is_complete = self._is_complete()
         return is_complete and super(CustomMeetingItem, self)._adviceIsEditableByCurrentUser(org_uid)
@@ -200,13 +204,18 @@ class CustomMeetingItem(MCCustomMeetingItem):
         return {'displayDefaultComplementaryMessage': True,
                 'customAdviceMessage': None}
 
-    def custom_validate_optionalAdvisers(self, value, storedOptionalAdvisers, removedAdvisers):
+    def custom_validate_optionalAdvisers(self, values, storedOptionalAdvisers, removedAdvisers):
         '''Several finances advices may not be asked together.'''
         item = self.getSelf()
-        if len(value) > 1:
-            return translate('can_not_select_several_financial_advisers',
-                             domain='PloneMeeting',
-                             context=item.REQUEST)
+        if len(values) > 1:
+            # double check to avoid failing tests
+            fin_group_uids = finance_group_uids()
+            value_org_uids = [value.split('_')[0] for value in values
+                              if value is not None]
+            if len(set(fin_group_uids).intersection(set(value_org_uids))) > 1:
+                return translate('can_not_select_several_financial_advisers',
+                                 domain='PloneMeeting',
+                                 context=item.REQUEST)
 
 
 class CustomToolPloneMeeting(MCCustomToolPloneMeeting):
