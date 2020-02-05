@@ -42,10 +42,10 @@ def post_handler_zprovhainaut(context):
         profile_id = 'profile-Products.MeetingPROVHainaut:zprovhainaut'
         context = context._getImportContext(profile_id)
 
-    #initializeAppTool(context)
+    # initializeAppTool(context)
     logStep("_configureDexterityLocalRolesField", context)
     _configureDexterityLocalRolesField()
-    #finalizePROVHainautInstance(context)
+    # finalizePROVHainautInstance(context)
 
 
 def post_handler_testing(context):
@@ -107,6 +107,8 @@ def _configureDexterityLocalRolesField():
                 u'financialprecontrollers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
             'proposed_to_financial_controller': {
                 u'financialcontrollers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
+            'proposed_to_financial_reviewer': {
+                u'financialreviewers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
             'proposed_to_financial_manager': {
                 u'financialmanagers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
             'financial_advice_signed': {
@@ -125,6 +127,8 @@ def _configureDexterityLocalRolesField():
                 'advisers': {'roles': [], 'rel': ''}},
             'proposed_to_financial_editor': {
                 u'financialeditors': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
+            'proposed_to_financial_reviewer': {
+                u'financialreviewers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
             'proposed_to_financial_manager': {
                 u'financialmanagers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
             'financial_advice_signed': {

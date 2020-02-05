@@ -1,4 +1,4 @@
-/* <dtml-with base_properties> (do not remove this :) */
+/* <dtml-with imioapps_properties> (do not remove this :) */
 /* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
 
 #description_help {
@@ -15,6 +15,14 @@ color: red;
     position: fixed !important;
 }
 
+#portal-header #portal-globalnav li a {
+    color: white;
+}
+#portal-header #portal-globalnav li a:hover,
+#portal-header #portal-globalnav li.selected a:hover,
+#portal-header #portal-globalnav li.selected a {
+    color: &dtml-linkColor;;
+}
 
 /* </dtml-with> */
 /* DOCUMENTATION ON PRE-DEFINED PROPERTIES FROM PLONE */

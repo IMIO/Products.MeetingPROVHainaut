@@ -8,10 +8,12 @@ Products.MeetingPROVHainaut Changelog
 - Use profile post_handler attribute to manage postInstall handler, removed use of import_steps.xml for every profiles
 - Define 3 types of finances advice with separated workflows
 - Removed overrides of meetingitem_view.pt/meetingitem_edit.pt, it was to include no more used MeetingItem.groupedItemsNum field
+- Change colors to match visual identity of Province of Hainaut
 - Fixed _adviceIsEditableByCurrentUser, check if item is_complete AND if user is able to edit the advice or edit.png icon appear
   even when user can not really edit the advice
 - Override translations for wait_advices_from, MeetingItem.manuallyLinkedItems description and MeetingItem.preferredMeeting description
 - Added specific logo.png
+- Configure local roles for state 'proposed_to_financial_reviewer' in workflows meetingadvicefinanceseditor_workflow and meetingadvicefinancesmanager_workflow
 
 4.1rc2 (2019-07-02)
 -------------------
