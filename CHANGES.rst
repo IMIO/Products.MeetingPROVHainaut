@@ -6,6 +6,7 @@ Products.MeetingPROVHainaut Changelog
 
 - Display item completeness not evaluated advice custom message also when advice is asked again
 - Use profile post_handler attribute to manage postInstall handler, removed use of import_steps.xml for every profiles
+- Removed overrides of meetingitem_view.pt/meetingitem_edit.pt, it was to include no more used MeetingItem.groupedItemsNum field
 
 4.1rc2 (2019-07-02)
 -------------------
