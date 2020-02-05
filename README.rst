@@ -1,2 +1,2 @@
-Products.PloneMeeting profile for Provice de Hainaut (Belgium)
-==============================================================
+Products.PloneMeeting profile for Province de Hainaut (Belgium)
+===============================================================
