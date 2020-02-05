@@ -101,13 +101,53 @@ templates.append(groupedItemsTemplate)
 
 orgs = deepcopy(zones_import_data.data.orgs)
 dirfin = [org for org in orgs if org.id == FINANCE_GROUP_ID][0]
-dirfin.item_advice_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
-dirfin.item_advice_edit_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
-dirfin.item_advice_view_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
+dirfin.item_advice_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
+dirfin.item_advice_edit_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
+dirfin.item_advice_view_states = []
 compta = [org for org in orgs if org.id == COMPTA_GROUP_ID][0]
-compta.item_advice_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
-compta.item_advice_edit_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
-compta.item_advice_view_states = [u'cfg1__state__proposed__or__prevalidated_waiting_advices']
+compta.item_advice_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
+compta.item_advice_edit_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
+compta.item_advice_view_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
+
+# extra dirfin groups
+# CEC
+dirfincec = OrgDescriptor('dirfincec', 'Directeur Financier (CEC)', u'DFCEC')
+dirfincec.item_advice_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
+dirfincec.item_advice_edit_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
+dirfincec.item_advice_view_states = []
+# NO CEC
+dirfinnocec = OrgDescriptor('dirfinnocec', 'Directeur Financier (NO CEC)', u'DFNOCEC')
+dirfinnocec.item_advice_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
+dirfinnocec.item_advice_edit_states = [
+    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3_waiting_advices']
+dirfinnocec.item_advice_view_states = []
+
+# assign user 'dgen' to 'dirgen' and 'secretariat' extra validation levels
+dirgen = [org for org in orgs if org.id == 'dirgen'][0]
+dirgen.level1reviewers = deepcopy(dirgen.creators)
+dirgen.level2reviewers = deepcopy(dirgen.creators)
+dirgen.level3reviewers = deepcopy(dirgen.creators)
+secr = [org for org in orgs if org.id == 'secretariat'][0]
+secr.level1reviewers = deepcopy(secr.creators)
+secr.level2reviewers = deepcopy(secr.creators)
+secr.level3reviewers = deepcopy(secr.creators)
 
 # create associated groups and groups in charge
 ag1 = OrgDescriptor('ag1', 'Associated group 1', u'AG1', active=False)
@@ -121,30 +161,138 @@ gic3 = OrgDescriptor('dp-fabienne-devilers', 'DP Fabienne Devilers', u'DPFD')
 gic4 = OrgDescriptor('dp-pascal-lafosse', 'DP Pascal Lafosse', u'DPPL')
 gic5 = OrgDescriptor('dp-serge-hustache', 'DP Serge Hustache', u'DPSH')
 
-orgs += [ag1, ag2, ag3, ag4, ag5, gic1, gic2, gic3, gic4, gic5]
+orgs += [dirfincec, dirfinnocec, ag1, ag2, ag3, ag4, ag5, gic1, gic2, gic3, gic4, gic5]
 
 # Meeting configurations -------------------------------------------------------
 # College
 collegeMeeting = deepcopy(zones_import_data.collegeMeeting)
 collegeMeeting.podTemplates = templates
-collegeMeeting.usedItemAttributes = collegeMeeting.usedItemAttributes + \
-    ['completeness', 'associatedGroups', 'groupsInCharge']
-collegeMeeting.workflowAdaptations = ('no_global_observation',
-                                      'only_creator_may_delete',
-                                      'pre_validation',
-                                      'no_publication',
-                                      'presented_item_back_to_itemcreated',
-                                      'presented_item_back_to_proposed',
-                                      'return_to_proposing_group',
-                                      'waiting_advices',
-                                      'refused',
-                                      'meetingadvicefinances_add_advicecreated_state',
-                                      'meetingadvicefinances_controller_propose_to_manager')
-collegeMeeting.transitionsForPresentingAnItem = ('propose',
-                                                 'prevalidate',
-                                                 'validate',
-                                                 'present')
+collegeMeeting.usedItemAttributes = (
+    u'budgetInfos', u'groupsInCharge', u'associatedGroups',
+    u'motivation', u'toDiscuss', u'inAndOutMoves',
+    u'notes', u'marginalNotes', u'observations',
+    u'manuallyLinkedItems', u'otherMeetingConfigsClonableToPrivacy',
+    u'completeness', u'groupedItemsNum')
+collegeMeeting.usedMeetingAttributes = (
+    u'startDate', u'endDate', u'attendees',
+    u'excused', u'absents', u'signatories',
+    u'place', u'extraordinarySession', u'inAndOutMoves',
+    u'notes', u'observations')
+collegeMeeting.workflowAdaptations = (
+    'only_creator_may_delete',
+    'no_publication',
+    'presented_item_back_to_itemcreated',
+    'return_to_proposing_group',
+    'waiting_advices_from_last_val_level_only_adviser_send_back',
+    'postpone_next_meeting',
+    'refused',
+    'meetingadvicefinances_add_advicecreated_state',
+    'meetingadvicefinances_controller_propose_to_manager')
+collegeMeeting.dashboardItemsListingsFilters = (
+    u'c4', u'c5', u'c6', u'c7', u'c8', u'c9',
+    u'c10', u'c11', u'c13', u'c14', u'c15',
+    u'c16', u'c18', u'c19', u'c23', u'c27')
+collegeMeeting.dashboardMeetingAvailableItemsFilters = (
+    u'c4', u'c5', u'c7', u'c8', u'c11', u'c16', u'c23', u'c27')
+collegeMeeting.dashboardMeetingLinkedItemsFilters = (
+    u'c4', u'c5', u'c6', u'c7', u'c8', u'c11', u'c12', u'c16', u'c19', u'c23')
+collegeMeeting.itemColumns = (
+    u'Creator', u'CreationDate', u'ModificationDate',
+    u'review_state', u'getCategory', u'proposing_group_acronym',
+    u'associated_groups_acronym', u'groups_in_charge_acronym',
+    u'advices', u'toDiscuss', u'linkedMeetingDate', u'actions')
+collegeMeeting.availableItemsListVisibleColumns = (
+    u'Creator', u'getCategory', u'proposing_group_acronym',
+    u'associated_groups_acronym', u'groups_in_charge_acronym',
+    u'advices', u'toDiscuss', u'getPreferredMeetingDate', u'actions')
+collegeMeeting.itemsListVisibleColumns = (
+    u'static_item_reference', u'Creator', u'review_state',
+    u'getCategory', u'proposing_group_acronym', u'associated_groups_acronym',
+    u'groups_in_charge_acronym', u'advices', u'toDiscuss', u'actions')
+collegeMeeting.itemActionsInterface = \
+    'Products.MeetingPROVHainaut.interfaces.IMeetingItemPROVHainautWorkflowActions'
+collegeMeeting.itemConditionsInterface = \
+    'Products.MeetingPROVHainaut.interfaces.IMeetingItemPROVHainautWorkflowConditions'
+collegeMeeting.itemWFValidationLevels = (
+    {'leading_transition': '',
+     'state_title': 'itemcreated',
+     'suffix': 'creators',
+     'enabled': '1',
+     'state': 'itemcreated',
+     'back_transition_title': 'backToItemCreated',
+     'back_transition': 'backToItemCreated',
+     'leading_transition_title': '',
+     'extra_suffixes': []},
+    {'leading_transition': 'propose',
+     'state_title': 'proposed',
+     'suffix': 'reviewers',
+     'enabled': '0',
+     'state': 'proposed',
+     'back_transition_title': 'backToProposed',
+     'back_transition': 'backToProposed',
+     'leading_transition_title': 'propose',
+     'extra_suffixes': []},
+    {'leading_transition': 'prevalidate',
+     'state_title': 'prevalidated',
+     'suffix': 'reviewers',
+     'enabled': '0',
+     'state': 'prevalidated',
+     'back_transition_title': 'backToPrevalidated',
+     'back_transition': 'backToPrevalidated',
+     'leading_transition_title': 'prevalidate',
+     'extra_suffixes': []},
+    {'leading_transition': 'proposeToValidationLevel1',
+     'state_title': 'proposedToValidationLevel1',
+     'suffix': 'level1reviewers',
+     'enabled': '1',
+     'state': 'proposedToValidationLevel1',
+     'back_transition_title': 'backToProposedToValidationLevel1',
+     'back_transition': 'backToProposedToValidationLevel1',
+     'leading_transition_title': 'proposeToValidationLevel1',
+     'extra_suffixes': []},
+    {'leading_transition': 'proposeToValidationLevel2',
+     'state_title': 'proposedToValidationLevel2',
+     'suffix': 'level2reviewers',
+     'enabled': '1',
+     'state': 'proposedToValidationLevel2',
+     'back_transition_title': 'backToProposedToValidationLevel2',
+     'back_transition': 'backToProposedToValidationLevel2',
+     'leading_transition_title': 'proposeToValidationLevel2',
+     'extra_suffixes': []},
+    {'leading_transition': 'proposeToValidationLevel3',
+     'state_title': 'proposedToValidationLevel3',
+     'suffix': 'level3reviewers',
+     'enabled': '1',
+     'state': 'proposedToValidationLevel3',
+     'back_transition_title': 'backToProposedToValidationLevel3',
+     'back_transition': 'backToProposedToValidationLevel3',
+     'leading_transition_title': 'proposeToValidationLevel3',
+     'extra_suffixes': []},
+    {'leading_transition': 'proposeToValidationLevel4',
+     'state_title': 'proposedToValidationLevel4',
+     'suffix': 'level4reviewers',
+     'enabled': '1',
+     'state': 'proposedToValidationLevel4',
+     'back_transition_title': 'backToProposedToValidationLevel4',
+     'back_transition': 'backToProposedToValidationLevel4',
+     'leading_transition_title': 'proposeToValidationLevel4',
+     'extra_suffixes': []},
+    {'leading_transition': 'proposeToValidationLevel5',
+     'state_title': 'proposedToValidationLevel5',
+     'suffix': 'level5reviewers',
+     'enabled': '1',
+     'state': 'proposedToValidationLevel5',
+     'back_transition_title': 'backToProposedToValidationLevel5',
+     'back_transition': 'backToProposedToValidationLevel5',
+     'leading_transition_title': 'proposeToValidationLevel5',
+     'extra_suffixes': []},
+)
+collegeMeeting.transitionsForPresentingAnItem = (
+    'proposeToValidationLevel1', 'proposeToValidationLevel2',
+    'proposeToValidationLevel3', 'validate', 'present')
+collegeMeeting.transitionsToConfirm = []
 collegeMeeting.usedAdviceTypes = collegeMeeting.usedAdviceTypes + [u'asked_again']
+collegeMeeting.itemBudgetInfosStates = []
 collegeMeeting.orderedContacts = []
 collegeMeeting.orderedAssociatedOrganizations = [
     PLONEGROUP_ORG + '/ag1',
@@ -169,6 +317,11 @@ collegeMeeting.insertingMethodsOnAddItem = (
 # Council
 councilMeeting = deepcopy(zones_import_data.councilMeeting)
 councilMeeting.podTemplates = []
+councilMeeting.workflowAdaptations = ('only_creator_may_delete',
+                                      'no_publication',
+                                      'refused')
+councilMeeting.transitionsToConfirm = []
+councilMeeting.itemBudgetInfosStates = []
 councilMeeting.orderedContacts = []
 
 data = PloneMeetingConfiguration(

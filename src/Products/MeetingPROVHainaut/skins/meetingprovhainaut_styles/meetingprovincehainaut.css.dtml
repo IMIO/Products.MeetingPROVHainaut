@@ -1,8 +1,27 @@
-/* <dtml-with base_properties> (do not remove this :) */
+/* <dtml-with imioapps_properties> (do not remove this :) */
 /* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
 
 #description_help {
 color: red;
+}
+
+#portal-header #portal-globalnav li a {
+    padding-top: 2.5em;
+}
+#portal-header #portal-globalnav {
+    padding-left: 7em;
+}
+#portal-header #portal-logo {
+    position: fixed !important;
+}
+
+#portal-header #portal-globalnav li a {
+    color: white;
+}
+#portal-header #portal-globalnav li a:hover,
+#portal-header #portal-globalnav li.selected a:hover,
+#portal-header #portal-globalnav li.selected a {
+    color: &dtml-linkColor;;
 }
 
 /* </dtml-with> */

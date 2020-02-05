@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from Products.PloneMeeting import config as PMconfig
-from Products.MeetingCommunes import config as MConfig
 
 
 product_globals = globals()
@@ -9,9 +8,8 @@ product_globals = globals()
 PROJECTNAME = "MeetingPROVHainaut"
 COMPTA_GROUP_ID = 'comptabilite'
 FINANCE_GROUP_ID = 'dirfin'
-
-MConfig.FINANCE_WAITING_ADVICES_STATES = ('prevalidated_waiting_advices',
-                                          'proposed__or__prevalidated_waiting_advices')
+FINANCE_GROUP_CEC_ID = 'dirfincec'
+FINANCE_GROUP_NO_CEC_ID = 'dirfinnocec'
 
 ADVICE_CATEGORIES = (
     ('comptabilite', u'Passage à la CEC'),

@@ -17,3 +17,7 @@ msgstr ""
 "Language-name: French\n"
 "Preferred-encodings: utf-8 latin1\n"
 "X-is-fallback-for: fr-be fr-ca fr-lu fr-mc fr-ch fr-fr\n"
+
+#. Default: "Ask advices"
+msgid "wait_advices_from"
+msgstr "Envoyer aux finances pour avis"

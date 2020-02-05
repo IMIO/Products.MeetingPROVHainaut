@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<object name="meetingadvicefinances" meta_type="MeetingAdvice" i18n:domain="PloneMeeting"
+<object name="meetingadvicefinancescec" meta_type="MeetingAdvice" i18n:domain="PloneMeeting"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">MeetingAdviceFinances</property>
+ <property name="title" i18n:translate="">MeetingAdviceFinancesCEC</property>
  <property name="description" i18n:translate=""></property>
  <property name="icon_expr">string:${portal_url}/meetingadvice.png</property>
  <property name="factory">meetingadvice</property>
- <property name="add_view_expr">string:${folder_url}/++add++meetingadvicefinances</property>
+ <property name="add_view_expr">string:${folder_url}/++add++meetingadvicefinancescec</property>
  <property name="link_target"></property>
  <property name="immediate_view">view</property>
  <property name="global_allow">True</property>

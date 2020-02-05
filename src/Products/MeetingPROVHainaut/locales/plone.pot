@@ -10,3 +10,7 @@ msgstr ""
 "Language-Name: \n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
+
+#. Default: "Ask advices"
+msgid "wait_advices_from"
+msgstr ""

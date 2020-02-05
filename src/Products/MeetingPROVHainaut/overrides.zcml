@@ -11,4 +11,8 @@
              factory="Products.MeetingPROVHainaut.adapters.CustomMeetingItem"
              provides="Products.PloneMeeting.interfaces.IMeetingItemCustom"/>
 
+    <adapter for="Products.PloneMeeting.interfaces.IToolPloneMeeting"
+             factory="Products.MeetingPROVHainaut.adapters.CustomToolPloneMeeting"
+             provides="Products.PloneMeeting.interfaces.IToolPloneMeetingCustom"/>
+
 </configure>

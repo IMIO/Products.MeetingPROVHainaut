@@ -1,11 +1,3 @@
 <?xml version="1.0"?>
 <object name="portal_workflow" meta_type="Plone Workflow Tool">
- <bindings>
-  <type type_id="meetingadvicefinances">
-     <bound-workflow workflow_id="patched_meetingadvicefinances_workflow" />
-  </type>
-  <type type_id="meetingadvicecompta">
-     <bound-workflow workflow_id="patched_meetingadvicecompta_workflow" />
-  </type>
- </bindings>
 </object>

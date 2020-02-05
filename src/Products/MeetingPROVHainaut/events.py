@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from Products.MeetingPROVHainaut.utils import finance_group_uid
+from Products.MeetingPROVHainaut.utils import finance_group_uids
 from zope.i18n import translate
 
 
@@ -12,8 +12,8 @@ def onAdviceAfterTransition(advice, event):
 
     # manage finance workflow, just consider relevant transitions
     # if it is not a finance wf transition, return
-    finance_group = finance_group_uid()
-    if advice.advice_group != finance_group:
+    finance_groups = finance_group_uids()
+    if advice.advice_group not in finance_groups:
         return
 
     item = advice.getParentNode()
@@ -23,7 +23,8 @@ def onAdviceAfterTransition(advice, event):
     # if going back from 'advice_given', we ask automatically evaluation again
     if newStateId == 'advicecreated' and oldStateId == 'advice_given':
         if item.getCompleteness() not in ('completeness_not_yet_evaluated',
-                                          'completeness_evaluation_asked_again'):
+                                          'completeness_evaluation_asked_again',
+                                          'completeness_evaluation_not_required'):
             changeCompleteness = item.restrictedTraverse('@@change-item-completeness')
             comment = translate('completeness_asked_again_by_app',
                                 domain='PloneMeeting',
@@ -43,10 +44,3 @@ def onAdviceAfterTransition(advice, event):
     # also bypass if we are creating the advice as onAdviceAdded is called after onAdviceTransition
     if event.transition and not item.REQUEST.get('currentlyUpdatingAdvice', False):
         item.updateLocalRoles()
-
-
-def onItemLocalRolesUpdated(item, event):
-    """Called after localRoles have been updated on the item.
-       Update local_roles regarding :
-       - finances adviser able to change item's state."""
-    pass

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from collective.eeafaceted.dashboard.utils import addFacetedCriteria
+from DateTime import DateTime
+from dexterity.localroles.utils import add_fti_configuration
 from imio.helpers.catalog import addOrUpdateIndexes
 from plone import api
 from Products.CMFPlone.utils import _createObjectByType
@@ -10,9 +12,11 @@ from Products.MeetingCommunes.setuphandlers import logStep
 from Products.MeetingPROVHainaut.config import PROJECTNAME
 from Products.PloneMeeting.exportimport.content import ToolInitializer
 from Products.PloneMeeting.utils import org_id_to_uid
-from DateTime import DateTime
 
+import logging
 import os
+
+logger = logging.getLogger('MeetingPROVHainaut: setuphandlers')
 
 
 def postInstall(context):
@@ -38,8 +42,10 @@ def post_handler_zprovhainaut(context):
         profile_id = 'profile-Products.MeetingPROVHainaut:zprovhainaut'
         context = context._getImportContext(profile_id)
 
-    initializeAppTool(context)
-    finalizePROVHainautInstance(context)
+    # initializeAppTool(context)
+    logStep("_configureDexterityLocalRolesField", context)
+    _configureDexterityLocalRolesField()
+    # finalizePROVHainautInstance(context)
 
 
 def post_handler_testing(context):
@@ -64,6 +70,78 @@ def _reorderSkinsLayers(context, site):
     site.portal_setup.runImportStepFromProfile(u'profile-Products.PloneMeeting:default', 'skins')
     site.portal_setup.runImportStepFromProfile(u'profile-Products.MeetingCommunes:default', 'skins')
     site.portal_setup.runImportStepFromProfile(u'profile-Products.MeetingPROVHainaut:default', 'skins')
+
+
+def _configureDexterityLocalRolesField():
+    """Configure field meetingadvice.advice_group for meetingadvicefinances."""
+    # meetingadvicefinances
+    roles_config = {
+        'advice_group': {
+            'advice_given': {
+                'advisers': {'roles': [], 'rel': ''}},
+            'advicecreated': {
+                u'financialprecontrollers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
+            'proposed_to_financial_controller': {
+                u'financialcontrollers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
+            'proposed_to_financial_editor': {
+                u'financialeditors': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
+            'proposed_to_financial_reviewer': {
+                u'financialreviewers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
+            'proposed_to_financial_manager': {
+                u'financialmanagers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
+            'financial_advice_signed': {
+                u'financialmanagers': {'roles': [u'Reviewer'], 'rel': ''}},
+        }
+    }
+    msg = add_fti_configuration(portal_type='meetingadvicefinances',
+                                configuration=roles_config['advice_group'],
+                                keyname='advice_group',
+                                force=True)
+
+    # meetingadvicefinancesmanager
+    roles_config = {
+        'advice_group': {
+            'advice_given': {
+                'advisers': {'roles': [], 'rel': ''}},
+            'advicecreated': {
+                u'financialprecontrollers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
+            'proposed_to_financial_controller': {
+                u'financialcontrollers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
+            'proposed_to_financial_reviewer': {
+                u'financialreviewers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
+            'proposed_to_financial_manager': {
+                u'financialmanagers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
+            'financial_advice_signed': {
+                u'financialmanagers': {'roles': [u'Reviewer'], 'rel': ''}},
+        }
+    }
+    msg = add_fti_configuration(portal_type='meetingadvicefinancescec',
+                                configuration=roles_config['advice_group'],
+                                keyname='advice_group',
+                                force=True)
+
+    # meetingadvicefinanceseditor
+    roles_config = {
+        'advice_group': {
+            'advice_given': {
+                'advisers': {'roles': [], 'rel': ''}},
+            'proposed_to_financial_editor': {
+                u'financialeditors': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
+            'proposed_to_financial_reviewer': {
+                u'financialreviewers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
+            'proposed_to_financial_manager': {
+                u'financialmanagers': {'roles': [u'Editor', u'Reviewer', u'Contributor'], 'rel': ''}},
+            'financial_advice_signed': {
+                u'financialmanagers': {'roles': [u'Reviewer'], 'rel': ''}},
+        }
+    }
+    msg = add_fti_configuration(portal_type='meetingadvicefinancesnocec',
+                                configuration=roles_config['advice_group'],
+                                keyname='advice_group',
+                                force=True)
+
+    if msg:
+        logger.warn(msg)
 
 
 def finalizePROVHainautInstance(context):

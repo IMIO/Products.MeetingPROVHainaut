@@ -11,18 +11,6 @@ msgstr ""
 "Preferred-encodings: utf-8 latin1\n"
 "Domain: PloneMeeting\n"
 
-#. Default: "Accounting advice"
-msgid "MeetingAdviceComptabilite"
-msgstr ""
-
-#. Default: "Add an accounting advice"
-msgid "add_new_meetingadvicecompta"
-msgstr ""
-
-#. Default: "Financial pre-controllers"
-msgid "financialprecontrollers"
-msgstr ""
-
 #. Default: "Slip number"
 msgid "MeetingPROVHainaut_label_groupedItemsNum"
 msgstr ""
@@ -33,4 +21,32 @@ msgstr ""
 
 #. Default: "Accounting commitment"
 msgid "MeetingPROVHainaut_label_advice_accounting_commitment"
+msgstr ""
+
+#. Default: "You can not select several financial advisers, please select only one."
+msgid "can_not_select_several_financial_advisers"
+msgstr ""
+
+#. Default: "Select here items that are linked to this item.  These items will appear in linked items but separated from items linked automatically by the application.  Current item will be also visible in the manually linked items of items you just linked...  To remove a linked item, just unckeck the checkbox in front of the item title.  Items will be automatically sorted chronologically. Manually linked items works like a \"virtual folder\" where every items are stored.  If you unlink an item, it will be unlinked from every items of the \"virtual folder\".  If you unlink every items, this will destroy this \"virtual folder\"."
+msgid "manually_linked_items_descr"
+msgstr ""
+
+#. Default: "If this is a normal item and you want it to be inserted in any availale meeting, just select \"No preference\" value.  Selecting a date is for 2 usecases : this will make the item not presentable to the meetings before selected one, or if the selected meeting is \"frozen\", this will make current item considered as \"late\" item presentable in the selected frozen meeting.  Indeed, the only way to insert an item in a frozen meeting is to select this meeting as preferred meeting."
+msgid "preferred_meeting_descr"
+msgstr ""
+
+#. Default: "Accounting advice (CEC)"
+msgid "MeetingAdviceFinancesCEC"
+msgstr ""
+
+#. Default: "Accounting advice (no CEC)"
+msgid "MeetingAdviceFinancesNoCEC"
+msgstr ""
+
+#. Default: "Add a finances advice (CEC)"
+msgid "add_new_meetingadvicefinancescec"
+msgstr ""
+
+#. Default: "Add a finances advice (no CEC)"
+msgid "add_new_meetingadvicefinancesnocec"
 msgstr ""

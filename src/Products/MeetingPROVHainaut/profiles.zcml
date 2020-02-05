@@ -22,4 +22,12 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot" />
 
+  <genericsetup:upgradeStep
+      title="Go to MeetingPROVHainaut 4200"
+      description=""
+      source="*"
+      destination="4200"
+      handler="Products.MeetingPROVHainaut.migrations.migrate_to_4200.migrate"
+      profile="Products.MeetingPROVHainaut:default" />
+
 </configure>
