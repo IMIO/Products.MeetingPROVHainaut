@@ -1,8 +1,8 @@
 Products.MeetingPROVHainaut Changelog
 =====================================
 
-4.1rc3 (unreleased)
--------------------
+4.2a1 (unreleased)
+------------------
 
 - Display item completeness not evaluated advice custom message also when advice is asked again
 - Use profile post_handler attribute to manage postInstall handler, removed use of import_steps.xml for every profiles
