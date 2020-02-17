@@ -12,6 +12,7 @@ from Products.PloneMeeting.profiles import ItemAnnexTypeDescriptor
 from Products.PloneMeeting.profiles import OrgDescriptor
 from Products.PloneMeeting.profiles import PloneMeetingConfiguration
 from Products.PloneMeeting.profiles import PodTemplateDescriptor
+from Products.PloneMeeting.profiles import RecurringItemDescriptor
 
 
 # File types -------------------------------------------------------------------
@@ -325,6 +326,14 @@ collegeMeeting.itemAdviceViewStates = ('validated',
                                        'accepted_but_modified',
                                        'delayed')
 collegeMeeting.powerObservers = defValues.powerObservers
+collegeMeeting.recurringItems = [
+    RecurringItemDescriptor(
+        id='recurringagenda1',
+        title='Approbation du procès-verbal de la séance du xx/xx/20xx',
+        category='dirgen',
+        proposingGroup='dirgen',
+        decision='<p>Procès-verbal approuvé</p>'), ]
+collegeMeeting.recurringItems[0].groupsInCharge = 'dirgen'
 
 # Council
 councilMeeting = deepcopy(zones_import_data.councilMeeting)
