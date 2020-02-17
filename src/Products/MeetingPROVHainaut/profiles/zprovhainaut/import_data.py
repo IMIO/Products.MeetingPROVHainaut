@@ -330,7 +330,7 @@ collegeMeeting.recurringItems = [
     RecurringItemDescriptor(
         id='recurringagenda1',
         title='Approbation du procès-verbal de la séance du xx/xx/20xx',
-        category='dirgen',
+        category='autorites-provinciales',
         proposingGroup='dirgen',
         decision='<p>Procès-verbal approuvé</p>'), ]
 collegeMeeting.recurringItems[0].groupsInCharge = 'dirgen'
