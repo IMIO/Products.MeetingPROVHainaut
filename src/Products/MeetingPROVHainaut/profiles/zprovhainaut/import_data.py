@@ -5,6 +5,7 @@ from copy import deepcopy
 from Products.MeetingCommunes.profiles.zones import import_data as zones_import_data
 from Products.MeetingPROVHainaut.config import COMPTA_GROUP_ID
 from Products.MeetingPROVHainaut.config import FINANCE_GROUP_ID
+from Products.PloneMeeting.MeetingConfig import defValues
 from Products.PloneMeeting.profiles import AnnexTypeDescriptor
 from Products.PloneMeeting.profiles import CategoryDescriptor
 from Products.PloneMeeting.profiles import ItemAnnexTypeDescriptor
@@ -186,6 +187,8 @@ collegeMeeting.workflowAdaptations = (
     'waiting_advices_from_last_val_level_only_adviser_send_back',
     'postpone_next_meeting',
     'refused',
+    'delayed',
+    'accepted_but_modified',
     'meetingadvicefinances_add_advicecreated_state',
     'meetingadvicefinances_controller_propose_to_manager')
 collegeMeeting.dashboardItemsListingsFilters = (
@@ -280,7 +283,7 @@ collegeMeeting.itemWFValidationLevels = (
     {'leading_transition': 'proposeToValidationLevel5',
      'state_title': 'proposedToValidationLevel5',
      'suffix': 'level5reviewers',
-     'enabled': '1',
+     'enabled': '0',
      'state': 'proposedToValidationLevel5',
      'back_transition_title': 'backToProposedToValidationLevel5',
      'back_transition': 'backToProposedToValidationLevel5',
@@ -313,13 +316,24 @@ collegeMeeting.insertingMethodsOnAddItem = (
     {'insertingMethod': 'on_categories', 'reverse': '0'},
     {'insertingMethod': 'on_all_associated_groups', 'reverse': '0'},
     {'insertingMethod': 'on_proposing_groups', 'reverse': '0'})
+# remove pre_accepted as not used
+collegeMeeting.itemAdviceViewStates = ('validated',
+                                       'presented',
+                                       'itemfrozen',
+                                       'accepted',
+                                       'refused',
+                                       'accepted_but_modified',
+                                       'delayed')
+collegeMeeting.powerObservers = defValues.powerObservers
 
 # Council
 councilMeeting = deepcopy(zones_import_data.councilMeeting)
 councilMeeting.podTemplates = []
 councilMeeting.workflowAdaptations = ('only_creator_may_delete',
                                       'no_publication',
-                                      'refused')
+                                      'refused',
+                                      'delayed',
+                                      'accepted_but_modified',)
 councilMeeting.transitionsToConfirm = []
 councilMeeting.itemBudgetInfosStates = []
 councilMeeting.orderedContacts = []

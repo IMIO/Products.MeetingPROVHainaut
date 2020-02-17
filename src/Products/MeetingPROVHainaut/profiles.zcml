@@ -15,7 +15,7 @@
 
   <genericsetup:registerProfile
       name="zprovhainaut"
-      title="PloneMeeting / Province de Hainaut"
+      title="PloneMeeting / Demo profile for Province de Hainaut with french examples"
       directory="profiles/zprovhainaut"
       description="PloneMeeting for Province de Hainaut (Belgium)"
       post_handler=".setuphandlers.post_handler_zprovhainaut"

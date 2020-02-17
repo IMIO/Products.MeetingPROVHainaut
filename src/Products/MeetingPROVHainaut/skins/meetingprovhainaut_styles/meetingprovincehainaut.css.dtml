@@ -9,7 +9,7 @@ color: red;
     padding-top: 2.5em;
 }
 #portal-header #portal-globalnav {
-    padding-left: 7em;
+    padding-left: 6em;
 }
 #portal-header #portal-logo {
     position: fixed !important;

@@ -42,10 +42,10 @@ def post_handler_zprovhainaut(context):
         profile_id = 'profile-Products.MeetingPROVHainaut:zprovhainaut'
         context = context._getImportContext(profile_id)
 
-    # initializeAppTool(context)
+    initializeAppTool(context)
     logStep("_configureDexterityLocalRolesField", context)
     _configureDexterityLocalRolesField()
-    # finalizePROVHainautInstance(context)
+    finalizePROVHainautInstance(context)
 
 
 def post_handler_testing(context):
