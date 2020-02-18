@@ -5,7 +5,7 @@ Products.MeetingPROVHainaut Changelog
 ------------------
 
 - Added import_meetingsUsersAndRoles_from_csv in Extensions.utils
-
+- Removed override of meetingitem_view for now as it was only done to display field MeetingItem.groupedItemsNum that is not really used...
 
 4.2a1 (2020-02-06)
 ------------------
