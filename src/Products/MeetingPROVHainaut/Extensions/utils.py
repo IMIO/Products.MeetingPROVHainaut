@@ -8,8 +8,8 @@ from Products.CMFCore.exceptions import BadRequest
 from Products.CMFPlone.utils import normalizeString
 from Products.CMFPlone.utils import safe_unicode
 from Products.PloneMeeting.utils import org_id_to_uid
-import unicodedata
 
+import unicodedata
 import csv
 
 
@@ -95,6 +95,10 @@ def import_meetingsUsersAndRoles_from_csv(self, fname=None):
 
 
 def normalized_org_titles_equals(title1, title2):
+    """
+    Is title1 normalized equals title2 normalized ?
+    :return: True if equals, False if not
+    """
     normalized_title_1 = unicodedata.normalize('NFKD', safe_unicode(title1)).encode('ASCII', 'ignore')
     normalized_title_2 = unicodedata.normalize('NFKD', safe_unicode(title2)).encode('ASCII', 'ignore')
     return normalized_title_1 == normalized_title_2
