@@ -4,7 +4,7 @@ Products.MeetingPROVHainaut Changelog
 4.2a2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Added import_meetingsUsersAndRoles_from_csv in Extensions.utils
 
 
 4.2a1 (2020-02-06)
