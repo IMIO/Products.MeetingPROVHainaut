@@ -2,6 +2,7 @@
 
 from Products.GenericSetup.tool import DEPENDENCY_STRATEGY_REAPPLY
 from Products.MeetingCommunes.migrations.migrate_to_4200 import Migrate_To_4200 as MCMigrate_To_4200
+from Products.MeetingPROVHainaut.setuphandlers import _configureDexterityLocalRolesField
 
 import logging
 
@@ -16,6 +17,7 @@ class Migrate_To_4200(MCMigrate_To_4200):
         self.reinstall(profiles=[u'profile-Products.MeetingPROVHainaut:default'],
                        ignore_dependencies=False,
                        dependency_strategy=DEPENDENCY_STRATEGY_REAPPLY)
+        _configureDexterityLocalRolesField()
 
 
 def migrate(context):
