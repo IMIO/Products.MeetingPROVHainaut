@@ -7,6 +7,7 @@ recursive-include src *.csv
 recursive-include src *.dtml
 recursive-include src *.gif
 recursive-include src *.gitkeep
+recursive-include src *.ico
 recursive-include src *.odt
 recursive-include src *.png
 recursive-include src *.po
