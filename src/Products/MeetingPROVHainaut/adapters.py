@@ -177,10 +177,9 @@ class CustomMeetingItem(MCCustomMeetingItem):
         '''If we are on a finance advice that is still not giveable because
            the item is not 'complete', we display a clear message.'''
         item = self.getSelf()
-        finance_org_uids = finance_group_uids()
+        finance_org_uids = (finance_group_uid(), finance_group_cec_uid())
         if advice['id'] in finance_org_uids and \
-           advice['delay'] and \
-           (not advice['delay_started_on'] or advice['type'] == 'asked_again'):
+           not advice['advice_addable']:
             finance_org = get_organization(advice['id'])
             tool = api.portal.get_tool('portal_plonemeeting')
             cfg = tool.getMeetingConfig(item)
