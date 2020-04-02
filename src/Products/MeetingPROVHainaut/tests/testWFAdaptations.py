@@ -22,6 +22,7 @@ class testWFAdaptations(MeetingPROVHainautTestCase, mctwfa):
              'mark_not_applicable',
              'meetingadvicefinances_add_advicecreated_state',
              'meetingadvicefinances_controller_propose_to_manager',
+             'meetingmanager_correct_closed_meeting',
              'no_publication',
              'only_creator_may_delete',
              'postpone_next_meeting',
