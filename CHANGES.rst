@@ -1,7 +1,7 @@
 Products.MeetingPROVHainaut Changelog
 =====================================
 
-4.2a3 (unreleased)
+4.2a3 (2020-04-02)
 ------------------
 
 - Display also 'Can not add advice before item is complete' for DF 2. advice
