@@ -1,7 +1,7 @@
 Products.MeetingPROVHainaut Changelog
 =====================================
 
-4.2a4 (unreleased)
+4.2a4 (2020-06-24)
 ------------------
 
 - Fixed demo data as now MeetingItem.groupsInCharge can not be empty.
