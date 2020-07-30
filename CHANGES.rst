@@ -4,13 +4,12 @@ Products.MeetingPROVHainaut Changelog
 4.2a5 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Added upgrade step to 4201 to move MeetingItem.motivation to MeetingItem.description
 
 4.2a4 (2020-06-24)
 ------------------
 
-- Fixed demo data as now MeetingItem.groupsInCharge can not be empty.
+- Fixed demo data as now MeetingItem.groupsInCharge can not be empty
 
 4.2a3 (2020-04-02)
 ------------------
