@@ -1,7 +1,7 @@
 Products.MeetingPROVHainaut Changelog
 =====================================
 
-4.2a5 (unreleased)
+4.2b1 (unreleased)
 ------------------
 
 - Added upgrade step to 4201 to move MeetingItem.motivation to MeetingItem.description
