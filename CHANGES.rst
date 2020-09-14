@@ -4,8 +4,8 @@ Products.MeetingPROVHainaut Changelog
 4.2b2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- In `CustomMeetingItem.getCustomAdviceMessageFor`, take into account new key `displayAdviceReviewState`,
+  set it to True so advice review_state is shown to users that may not view the advice.
 
 4.2b1 (2020-08-24)
 ------------------

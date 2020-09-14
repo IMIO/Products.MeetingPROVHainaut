@@ -187,6 +187,7 @@ class CustomMeetingItem(MCCustomMeetingItem):
             if item.queryState() in finance_org.get_item_advice_states(cfg):
                 if not self._is_complete():
                     return {'displayDefaultComplementaryMessage': False,
+                            'displayAdviceReviewState': True,
                             'customAdviceMessage':
                             translate('finance_advice_not_giveable_because_item_not_complete',
                                       domain="PloneMeeting",
@@ -195,12 +196,14 @@ class CustomMeetingItem(MCCustomMeetingItem):
                 # delay still not started when advice created/proposed_to_controller
                 if not item.adapted()._adviceDelayMayBeStarted(advice['id']):
                     return {'displayDefaultComplementaryMessage': False,
+                            'displayAdviceReviewState': True,
                             'customAdviceMessage': translate(
                                 'finance_advice_delay_still_not_started',
                                 domain="PloneMeeting",
                                 context=item.REQUEST,
                                 default="Advice delay is still not started.")}
         return {'displayDefaultComplementaryMessage': True,
+                'displayAdviceReviewState': True,
                 'customAdviceMessage': None}
 
     def custom_validate_optionalAdvisers(self, values, storedOptionalAdvisers, removedAdvisers):
