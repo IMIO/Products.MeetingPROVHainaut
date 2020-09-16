@@ -6,6 +6,7 @@ Products.MeetingPROVHainaut Changelog
 
 - In `CustomMeetingItem.getCustomAdviceMessageFor`, take into account new key `displayAdviceReviewState`,
   set it to True so advice review_state is shown to users that may not view the advice.
+- Fixed `config.EXTRA_GROUP_SUFFIXES` regarding new key `fct_management` in `collective.contact.plonegroup`.
 
 4.2b1 (2020-08-24)
 ------------------
