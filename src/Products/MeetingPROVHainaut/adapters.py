@@ -90,6 +90,11 @@ class MeetingItemPROVHainautWorkflowConditions(MeetingItemCommunesWorkflowCondit
                 (advice_obj and advice_obj.queryState() in ['financial_advice_signed', 'advice_given'])
         return res
 
+    def _get_waiting_advices_icon_advisers(self):
+        '''To be overrided, return adviser ids for which the waiting_advices icon
+           color must be computed.'''
+        return finance_group_uids()
+
 
 class CustomMeetingConfig(MCCustomMeetingConfig):
     ''' '''
