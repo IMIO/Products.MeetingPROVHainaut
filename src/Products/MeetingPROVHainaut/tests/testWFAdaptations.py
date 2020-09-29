@@ -36,11 +36,13 @@ class testWFAdaptations(MeetingPROVHainautTestCase, mctwfa):
              'return_to_proposing_group_with_all_validations',
              'return_to_proposing_group_with_last_validation',
              'reviewers_take_back_validated_item',
+             'waiting_advices',
+             'waiting_advices_from_every_val_level',
              'waiting_advices_from_before_last_val_level',
-             'waiting_advices_from_last_val_level_advices_required_to_validate',
-             'waiting_advices_from_last_val_level_adviser_and_proposing_group_send_back',
-             'waiting_advices_from_last_val_level_only_adviser_send_back',
-             'waiting_advices_from_last_val_level_only_proposing_group_send_back'])
+             'waiting_advices_from_last_val_level',
+             'waiting_advices_given_advices_required_to_validate',
+             'waiting_advices_adviser_send_back',
+             'waiting_advices_proposing_group_send_back'])
 
 
 def test_suite():

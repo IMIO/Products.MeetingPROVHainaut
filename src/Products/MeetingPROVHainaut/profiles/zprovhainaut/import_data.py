@@ -2,6 +2,7 @@
 
 from collective.contact.plonegroup.config import PLONEGROUP_ORG
 from copy import deepcopy
+from Products.MeetingCommunes.profiles.examples_fr import import_data as examples_fr_import_data
 from Products.MeetingCommunes.profiles.zones import import_data as zones_import_data
 from Products.MeetingPROVHainaut.config import COMPTA_GROUP_ID
 from Products.MeetingPROVHainaut.config import FINANCE_GROUP_ID
@@ -104,41 +105,49 @@ templates.append(groupedItemsTemplate)
 orgs = deepcopy(zones_import_data.data.orgs)
 dirfin = [org for org in orgs if org.id == FINANCE_GROUP_ID][0]
 dirfin.item_advice_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
-    u'__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3__or__proposedToValidationLevel4_waiting_advices']
 dirfin.item_advice_edit_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
-    u'__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3__or__proposedToValidationLevel4_waiting_advices']
 dirfin.item_advice_view_states = []
+dfin = deepcopy(examples_fr_import_data.dfin)
+dirfin.advisers.append(dfin)
+dirfin.financialprecontrollers.append(dfin)
+dirfin.financialcontrollers.append(dfin)
+dirfin.financialeditors.append(dfin)
+dirfin.financialreviewers.append(dfin)
+dirfin.financialmanagers.append(dfin)
+
 compta = [org for org in orgs if org.id == COMPTA_GROUP_ID][0]
 compta.item_advice_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
-    u'__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3__or__proposedToValidationLevel4_waiting_advices']
 compta.item_advice_edit_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
-    u'__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3__or__proposedToValidationLevel4_waiting_advices']
 compta.item_advice_view_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
-    u'__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3__or__proposedToValidationLevel4_waiting_advices']
 
 # extra dirfin groups
 # CEC
 dirfincec = OrgDescriptor('dirfincec', 'Directeur Financier (CEC)', u'DFCEC')
 dirfincec.item_advice_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
-    u'__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3__or__proposedToValidationLevel4_waiting_advices']
 dirfincec.item_advice_edit_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
-    u'__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3__or__proposedToValidationLevel4_waiting_advices']
 dirfincec.item_advice_view_states = []
 # NO CEC
 dirfinnocec = OrgDescriptor('dirfinnocec', 'Directeur Financier (NO CEC)', u'DFNOCEC')
 dirfinnocec.item_advice_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
-    u'__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3__or__proposedToValidationLevel4_waiting_advices']
 dirfinnocec.item_advice_edit_states = [
-    u'cfg1__state__proposedToValidationLevel1__or__proposedToValidationLevel2'
-    u'__or__proposedToValidationLevel3_waiting_advices']
+    u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
+    u'__or__proposedToValidationLevel3__or__proposedToValidationLevel4_waiting_advices']
 dirfinnocec.item_advice_view_states = []
 
 # assign user 'dgen' to 'dirgen' and 'secretariat' extra validation levels
@@ -181,17 +190,21 @@ collegeMeeting.usedMeetingAttributes = (
     u'place', u'extraordinarySession', u'inAndOutMoves',
     u'notes', u'observations')
 collegeMeeting.workflowAdaptations = (
-    'only_creator_may_delete',
-    'no_publication',
-    'presented_item_back_to_itemcreated',
-    'return_to_proposing_group',
-    'waiting_advices_from_last_val_level_only_adviser_send_back',
-    'postpone_next_meeting',
+    'meetingadvicefinances_add_advicecreated_state',
+    'meetingadvicefinances_controller_propose_to_manager',
+    'accepted_but_modified',
     'refused',
     'delayed',
-    'accepted_but_modified',
-    'meetingadvicefinances_add_advicecreated_state',
-    'meetingadvicefinances_controller_propose_to_manager')
+    'presented_item_back_to_itemcreated',
+    'postpone_next_meeting',
+    'no_publication',
+    'only_creator_may_delete',
+    'waiting_advices',
+    'waiting_advices_given_advices_required_to_validate',
+    'waiting_advices_from_before_last_val_level',
+    'waiting_advices_from_last_val_level',
+    'waiting_advices_adviser_send_back',
+    'waiting_advices_adviser_may_validate')
 collegeMeeting.dashboardItemsListingsFilters = (
     u'c4', u'c5', u'c6', u'c7', u'c8', u'c9',
     u'c10', u'c11', u'c13', u'c14', u'c15',
@@ -305,11 +318,11 @@ collegeMeeting.orderedAssociatedOrganizations = [
     PLONEGROUP_ORG + '/ag4',
     PLONEGROUP_ORG + '/ag5']
 collegeMeeting.orderedGroupsInCharge = [
-    PLONEGROUP_ORG + '/gic1',
-    PLONEGROUP_ORG + '/gic2',
-    PLONEGROUP_ORG + '/gic3',
-    PLONEGROUP_ORG + '/gic4',
-    PLONEGROUP_ORG + '/gic5']
+    PLONEGROUP_ORG + '/dp-eric-massin',
+    PLONEGROUP_ORG + '/dp-fabienne-capot',
+    PLONEGROUP_ORG + '/dp-fabienne-devilers',
+    PLONEGROUP_ORG + '/dp-pascal-lafosse',
+    PLONEGROUP_ORG + '/dp-serge-hustache']
 collegeMeeting.categories = categories
 collegeMeeting.useGroupsAsCategories = False
 collegeMeeting.insertingMethodsOnAddItem = (

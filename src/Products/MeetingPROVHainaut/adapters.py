@@ -29,19 +29,8 @@ wfAdaptations.append('meetingadvicefinances_controller_propose_to_manager')
 MeetingConfig.wfAdaptations = tuple(wfAdaptations)
 
 adaptations.WAITING_ADVICES_FROM_STATES = (
-    {'from_states': ('itemcreated',
-                     'proposedToValidationLevel1',
-                     'proposedToValidationLevel2',
-                     'proposedToValidationLevel3',
-                     'proposedToValidationLevel4',
-                     'proposedToValidationLevel5'),
-     'back_states': ('itemcreated',
-                     'proposedToValidationLevel1',
-                     'proposedToValidationLevel2',
-                     'proposedToValidationLevel3',
-                     'proposedToValidationLevel4',
-                     'proposedToValidationLevel5',
-                     'validated'),
+    {'from_states': (),  # will be generated as using 'waiting_advices_from_last_val_level'
+     'back_states': (),  # will be generated as using 'waiting_advices_from_last_val_level'
      'perm_cloned_states': ('validated',),
      'remove_modify_access': True,
      'use_custom_icon': False,
@@ -94,6 +83,13 @@ class MeetingItemPROVHainautWorkflowConditions(MeetingItemCommunesWorkflowCondit
         '''To be overrided, return adviser ids for which the waiting_advices icon
            color must be computed.'''
         return finance_group_uids()
+
+    def _adviceSendableBackOnlyWhenNoMoreEditable(self, org_uid):
+        '''Advice is only sendable back when no more editable, aka end of advice WF.'''
+        res = False
+        if org_uid == finance_group_no_cec_uid():
+            res = True
+        return res
 
 
 class CustomMeetingConfig(MCCustomMeetingConfig):

@@ -8,6 +8,7 @@ Products.MeetingPROVHainaut Changelog
   set it to True so advice review_state is shown to users that may not view the advice.
 - Fixed `config.EXTRA_GROUP_SUFFIXES` regarding new key `fct_management` in `collective.contact.plonegroup`.
 - Enable `MeetingItemPROVHainautWorkflowConditions._get_waiting_advices_icon_advisers` for every finances advisers.
+- Configure `waiting_advices` WFAdaptation regarding changes in `Products.PloneMeeting`.
 
 4.2b1 (2020-08-24)
 ------------------
