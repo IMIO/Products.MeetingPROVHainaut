@@ -40,9 +40,18 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
 
         # give advice
         self.changeUser('dfin')
-        import ipdb; ipdb.set_trace()
         self.assertEqual(self.transitions(item),
                          ['backTo_proposedToValidationLevel2_from_waiting_advices',
                           'backTo_proposedToValidationLevel3_from_waiting_advices'])
         # advice giveable when item complete
         self.assertFalse(item.adviceIndex[fin_group_uid]['advice_addable'])
+        self.assertTrue(item.adapted().mayEvaluateCompleteness())
+        item.setCompleteness('completeness_complete')
+        item.at_post_edit_script()
+        advice_portal_type = item._advicePortalTypeForAdviser(fin_group_uid)
+        advice = self.addAdvice(item,
+                                advice_group=fin_group_uid,
+                                advice_type='positive_finance',
+                                advice_portal_type=advice_portal_type)
+        self.assertEqual(self.transitions(advice),
+                         ['proposeToFinancialController'])
