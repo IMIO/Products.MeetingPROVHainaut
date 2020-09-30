@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from collective.contact.plonegroup.config import FUNCTIONS_REGISTRY
-from plone.registry.interfaces import IRegistry
 from Products.MeetingPROVHainaut.testing import MPH_FIN_TESTING_PROFILE_FUNCTIONAL
 from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingPROVHainaut.utils import finance_group_uid
-from zope.component import getUtility
 
 
 class testCustomWorkflows(MeetingPROVHainautTestCase):
