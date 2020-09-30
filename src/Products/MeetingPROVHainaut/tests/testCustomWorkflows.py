@@ -13,13 +13,6 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
 
     layer = MPH_FIN_TESTING_PROFILE_FUNCTIONAL
 
-    def tearDown(self):
-        super(MeetingPROVHainautTestCase, self).tearDown()
-        registry = getUtility(IRegistry)
-        # reinstalling collective.contact.plonegroup fails if
-        # the functions already exist
-        del registry.records[FUNCTIONS_REGISTRY]
-
     def test_FinancesAdvicesWorkflow(self):
         """
            Test finances advices workflow.
