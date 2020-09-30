@@ -1,14 +1,24 @@
 # -*- coding: utf-8 -*-
 
+from collective.contact.plonegroup.config import FUNCTIONS_REGISTRY
+from plone.registry.interfaces import IRegistry
 from Products.MeetingPROVHainaut.testing import MPH_FIN_TESTING_PROFILE_FUNCTIONAL
 from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingPROVHainaut.utils import finance_group_uid
+from zope.component import getUtility
 
 
 class testCustomWorkflows(MeetingPROVHainautTestCase):
     """Tests the default workflows implemented in MeetingPROVHainaut."""
 
     layer = MPH_FIN_TESTING_PROFILE_FUNCTIONAL
+
+    def tearDown(self):
+        super(MeetingPROVHainautTestCase, self).tearDown()
+        registry = getUtility(IRegistry)
+        # reinstalling collective.contact.plonegroup fails if
+        # the functions already exist
+        del registry.records[FUNCTIONS_REGISTRY]
 
     def test_FinancesAdvicesWorkflow(self):
         """
