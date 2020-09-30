@@ -53,5 +53,45 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
                                 advice_group=fin_group_uid,
                                 advice_type='positive_finance',
                                 advice_portal_type=advice_portal_type)
+        self.assertTrue(advice.advice_hide_during_redaction)
         self.assertEqual(self.transitions(advice),
                          ['proposeToFinancialController'])
+        # once advice given but hidden during redaction, item may no more be sent back
+        self.assertEqual(self.transitions(item), [])
+        # financial controller
+        self.do(advice, 'proposeToFinancialController')
+        self.assertEqual(self.transitions(advice),
+                         ['backToAdviceCreated',
+                          'proposeToFinancialEditor'])
+        self.assertEqual(self.transitions(item), [])
+        # financial editor
+        self.do(advice, 'proposeToFinancialEditor')
+        self.assertEqual(self.transitions(advice),
+                         ['backToProposedToFinancialController',
+                          'proposeToFinancialReviewer'])
+        # financial reviewer
+        self.do(advice, 'proposeToFinancialReviewer')
+        self.assertEqual(self.transitions(item), [])
+        self.assertEqual(self.transitions(advice),
+                         ['backToProposedToFinancialController',
+                          'backToProposedToFinancialEditor',
+                          'proposeToFinancialManager'])
+        # financial manager
+        self.do(advice, 'proposeToFinancialManager')
+        self.assertEqual(self.transitions(item), [])
+        self.assertEqual(self.transitions(advice),
+                         ['backToProposedToFinancialController',
+                          'backToProposedToFinancialReviewer',
+                          'signFinancialAdvice'])
+        # sign advice
+        self.do(advice, 'signFinancialAdvice')
+        self.assertEqual(self.transitions(item),
+                         ['backTo_proposedToValidationLevel2_from_waiting_advices',
+                          'backTo_proposedToValidationLevel3_from_waiting_advices',
+                          'backTo_validated_from_waiting_advices'])
+        self.assertEqual(self.transitions(advice),
+                         ['backToProposedToFinancialManager'])
+        self.assertFalse(advice.advice_hide_during_redaction)
+        # validate item
+        self.do(item, 'backTo_validated_from_waiting_advices')
+        self.assertEqual(item.queryState(), 'validated')

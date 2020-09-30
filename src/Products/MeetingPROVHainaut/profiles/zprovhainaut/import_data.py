@@ -338,6 +338,10 @@ collegeMeeting.itemAdviceViewStates = ('validated',
                                        'refused',
                                        'accepted_but_modified',
                                        'delayed')
+collegeMeeting.defaultAdviceHiddenDuringRedaction = (
+    'meetingadvicefinances',
+    'meetingadvicefinancescec',
+    'meetingadvicefinancesnocec')
 collegeMeeting.powerObservers = defValues.powerObservers
 collegeMeeting.recurringItems = [
     RecurringItemDescriptor(
