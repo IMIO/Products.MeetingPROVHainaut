@@ -28,16 +28,9 @@ wfAdaptations.append('meetingadvicefinances_add_advicecreated_state')
 wfAdaptations.append('meetingadvicefinances_controller_propose_to_manager')
 MeetingConfig.wfAdaptations = tuple(wfAdaptations)
 
-adaptations.WAITING_ADVICES_FROM_STATES = (
-    {'from_states': (),  # will be generated as using 'waiting_advices_from_last_val_level'
-     'back_states': (),  # will be generated as using 'waiting_advices_from_last_val_level'
-     'perm_cloned_states': ('validated',),
-     'remove_modify_access': True,
-     'use_custom_icon': False,
-     'use_custom_back_transition_title_for': ('validated'),
-     'use_custom_state_title': False,
-     },
-)
+adaptations.WAITING_ADVICES_USE_CUSTOM_ICON = False
+adaptations.WAITING_ADVICES_USE_CUSTOM_BACK_TR_TITLE_FOR = ('validated', )
+adaptations.WAITING_ADVICES_USE_CUSTOM_STATE_TITLE = False
 
 
 class MeetingAdvicePROVHainautWorkflowConditions(MeetingAdviceCommunesWorkflowConditions):
