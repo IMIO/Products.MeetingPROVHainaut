@@ -1,7 +1,7 @@
 Products.MeetingPROVHainaut Changelog
 =====================================
 
-4.2b2 (unreleased)
+4.2b2 (2020-10-02)
 ------------------
 
 - In `CustomMeetingItem.getCustomAdviceMessageFor`, take into account new key `displayAdviceReviewState`,
