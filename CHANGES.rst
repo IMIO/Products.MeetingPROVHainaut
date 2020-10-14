@@ -4,8 +4,8 @@ Products.MeetingPROVHainaut Changelog
 4.2b3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Added upgrade step to 4202 that will update `advice_type` of every finances advices.
+  [gbastien]
 
 4.2b2 (2020-10-02)
 ------------------
