@@ -4,8 +4,8 @@ Products.MeetingPROVHainaut Changelog
 4.2b4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Added `testVotes.py` as it is launched now by `Products.MeetingCommunes`.
+  [gbastien]
 
 4.2b3 (2020-10-14)
 ------------------
