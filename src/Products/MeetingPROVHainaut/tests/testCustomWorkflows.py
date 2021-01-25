@@ -3,6 +3,8 @@
 from Products.MeetingPROVHainaut.testing import MPH_FIN_TESTING_PROFILE_FUNCTIONAL
 from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingPROVHainaut.utils import finance_group_uid
+from Products.MeetingPROVHainaut.utils import finance_group_cec_uid
+from Products.MeetingPROVHainaut.utils import finance_group_no_cec_uid
 
 
 class testCustomWorkflows(MeetingPROVHainautTestCase):
@@ -95,3 +97,44 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
         # validate item
         self.do(item, 'backTo_validated_from_waiting_advices')
         self.assertEqual(item.queryState(), 'validated')
+
+    def test_CompletenessEvaluationAskedAgain(self):
+        """When item is sent for second+ time to the finances,
+           completeness is automatically set to asked again except
+           for finance_group_no_cec_uid."""
+        self.changeUser('dgen')
+        item_df1 = self.create(
+            'MeetingItem', optionalAdvisers=((finance_group_uid() + '__rowid__unique_id_002', )))
+        item_df2 = self.create(
+            'MeetingItem', optionalAdvisers=((finance_group_cec_uid(), )))
+        item_df3 = self.create(
+            'MeetingItem', optionalAdvisers=((finance_group_no_cec_uid(), )))
+        for tr in ['proposeToValidationLevel1',
+                   'proposeToValidationLevel2',
+                   'wait_advices_from_proposedToValidationLevel2']:
+            self.do(item_df1, tr)
+            self.do(item_df2, tr)
+            self.do(item_df3, tr)
+        self.assertEqual(item_df1.getCompleteness(), 'completeness_not_yet_evaluated')
+        self.assertEqual(item_df2.getCompleteness(), 'completeness_not_yet_evaluated')
+        self.assertEqual(item_df3.getCompleteness(), 'completeness_evaluation_not_required')
+        # incomplete, return
+        item_df1.setCompleteness('completeness_incomplete')
+        item_df2.setCompleteness('completeness_incomplete')
+        self.changeUser('dfin')
+        self.do(item_df1, 'backTo_proposedToValidationLevel2_from_waiting_advices')
+        self.do(item_df2, 'backTo_proposedToValidationLevel2_from_waiting_advices')
+        self.do(item_df3, 'backTo_proposedToValidationLevel2_from_waiting_advices')
+        # ask again
+        self.changeUser('dgen')
+        self.assertEqual(item_df1.getCompleteness(), 'completeness_incomplete')
+        self.assertEqual(item_df2.getCompleteness(), 'completeness_incomplete')
+        # manipulate completeness, like if we changed from DF3 to DF2
+        item_df2.setCompleteness('completeness_evaluation_not_required')
+        self.assertEqual(item_df3.getCompleteness(), 'completeness_evaluation_not_required')
+        self.do(item_df1, 'wait_advices_from_proposedToValidationLevel2')
+        self.do(item_df2, 'wait_advices_from_proposedToValidationLevel2')
+        self.do(item_df3, 'wait_advices_from_proposedToValidationLevel2')
+        self.assertEqual(item_df1.getCompleteness(), 'completeness_evaluation_asked_again')
+        self.assertEqual(item_df2.getCompleteness(), 'completeness_evaluation_asked_again')
+        self.assertEqual(item_df3.getCompleteness(), 'completeness_evaluation_not_required')

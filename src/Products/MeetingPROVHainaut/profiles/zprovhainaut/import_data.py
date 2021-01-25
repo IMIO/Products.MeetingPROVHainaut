@@ -140,6 +140,12 @@ dirfincec.item_advice_edit_states = [
     u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
     u'__or__proposedToValidationLevel3__or__proposedToValidationLevel4_waiting_advices']
 dirfincec.item_advice_view_states = []
+dirfincec.advisers.append(dfin)
+dirfincec.financialprecontrollers.append(dfin)
+dirfincec.financialcontrollers.append(dfin)
+dirfincec.financialreviewers.append(dfin)
+dirfincec.financialmanagers.append(dfin)
+
 # NO CEC
 dirfinnocec = OrgDescriptor('dirfinnocec', 'Directeur Financier (NO CEC)', u'DFNOCEC')
 dirfinnocec.item_advice_states = [
@@ -149,6 +155,10 @@ dirfinnocec.item_advice_edit_states = [
     u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
     u'__or__proposedToValidationLevel3__or__proposedToValidationLevel4_waiting_advices']
 dirfinnocec.item_advice_view_states = []
+dirfinnocec.advisers.append(dfin)
+dirfinnocec.financialeditors.append(dfin)
+dirfinnocec.financialreviewers.append(dfin)
+dirfinnocec.financialmanagers.append(dfin)
 
 # assign user 'dgen' to 'dirgen' and 'secretariat' extra validation levels
 dirgen = [org for org in orgs if org.id == 'dirgen'][0]
