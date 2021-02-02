@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from collective.eeafaceted.dashboard.utils import addFacetedCriteria
-from DateTime import DateTime
+from datetime import datetime
+from datetime import timedelta
 from dexterity.localroles.utils import add_fti_configuration
 from imio.helpers.catalog import addOrUpdateIndexes
 from plone import api
@@ -286,13 +287,12 @@ def _addDemoData(site,
     cfg1 = tool.objectValues('MeetingConfig')[0]
     cfg1_id = cfg1.getId()
     userFolder = tool.getPloneMeetingFolder(cfg1_id, userId)
-    date = DateTime() - 1
+    date = datetime.now() - timedelta(days=1)
     with api.env.adopt_user(userId):
         meeting = api.content.create(container=userFolder,
                                      type='MeetingZCollege',
                                      id=date.strftime('%Y%m%d'),
                                      date=date)
-        meeting.processForm()
         i = 1
         cfg = tool.getMeetingConfig(meeting)
         site.REQUEST['PUBLISHED'] = meeting

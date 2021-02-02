@@ -195,9 +195,9 @@ collegeMeeting.usedItemAttributes = (
     u'manuallyLinkedItems', u'otherMeetingConfigsClonableToPrivacy',
     u'completeness', u'groupedItemsNum')
 collegeMeeting.usedMeetingAttributes = (
-    u'startDate', u'endDate', u'attendees',
+    u'start_date', u'end_date', u'attendees',
     u'excused', u'absents', u'signatories',
-    u'place', u'extraordinarySession', u'inAndOutMoves',
+    u'place', u'extraordinary_session', u'in_and_out_moves',
     u'notes', u'observations')
 collegeMeeting.workflowAdaptations = (
     'meetingadvicefinances_add_advicecreated_state',

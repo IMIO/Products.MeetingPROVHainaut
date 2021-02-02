@@ -11,6 +11,8 @@ Products.MeetingPROVHainaut Changelog
   `Products.MeetingCommunes.adapters._will_ask_completeness_eval_again` and
   `Products.MeetingCommunes.adapters._doWaitAdvices`).
   [gbastien]
+- Adapted code regardind fact that Meeting was moved from AT to DX.
+  [gbastien]
 
 4.2b3 (2020-10-14)
 ------------------
