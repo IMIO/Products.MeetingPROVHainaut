@@ -227,11 +227,11 @@ collegeMeeting.itemColumns = (
     u'Creator', u'CreationDate', u'ModificationDate',
     u'review_state', u'getCategory', u'proposing_group_acronym',
     u'associated_groups_acronym', u'groups_in_charge_acronym',
-    u'advices', u'toDiscuss', u'linkedMeetingDate', u'actions')
+    u'advices', u'toDiscuss', u'meeting_date', u'actions')
 collegeMeeting.availableItemsListVisibleColumns = (
     u'Creator', u'getCategory', u'proposing_group_acronym',
     u'associated_groups_acronym', u'groups_in_charge_acronym',
-    u'advices', u'toDiscuss', u'getPreferredMeetingDate', u'actions')
+    u'advices', u'toDiscuss', u'preferred_meeting_date', u'actions')
 collegeMeeting.itemsListVisibleColumns = (
     u'static_item_reference', u'Creator', u'review_state',
     u'getCategory', u'proposing_group_acronym', u'associated_groups_acronym',
