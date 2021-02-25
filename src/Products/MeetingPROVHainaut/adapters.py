@@ -69,7 +69,7 @@ class MeetingItemPROVHainautWorkflowConditions(MeetingItemCommunesWorkflowCondit
             org_uid = org.UID()
             advice_obj = self.context.getAdviceObj(org_uid)
             res = '%s_financialmanagers' % org_uid in userGroups and \
-                (advice_obj and advice_obj.queryState() in ['financial_advice_signed', 'advice_given'])
+                (advice_obj and advice_obj.query_state() in ['financial_advice_signed', 'advice_given'])
         return res
 
     def _get_waiting_advices_icon_advisers(self):
@@ -123,7 +123,7 @@ class CustomMeetingItem(MCCustomMeetingItem):
 
         # relevant state?
         cfg = tool.getMeetingConfig(item)
-        if item.queryState() not in finances_give_advice_states(cfg):
+        if item.query_state() not in finances_give_advice_states(cfg):
             return False
 
         # current user is pre-controller for asked advice?
@@ -144,7 +144,7 @@ class CustomMeetingItem(MCCustomMeetingItem):
 
     def _adviceIsAddable(self, org_uid):
         ''' '''
-        return self.adapted()._adviceIsAddableByCurrentUser(org_uid)
+        return self._adviceIsAddableByCurrentUser(org_uid)
 
     def _adviceIsEditableByCurrentUser(self, org_uid):
         """Only when item completeness is 'complete' or 'evaluation_not_required'."""
@@ -160,8 +160,8 @@ class CustomMeetingItem(MCCustomMeetingItem):
         if org_uid == finance_group_uid():
             item = self.getSelf()
             adviceObj = item.getAdviceObj(org_uid)
-            if not adviceObj or adviceObj.queryState() in ['advicecreated',
-                                                           'proposed_to_financial_controller']:
+            if not adviceObj or adviceObj.query_state() in [
+                    'advicecreated', 'proposed_to_financial_controller']:
                 res = False
         if res:
             res = super(CustomMeetingItem, self)._adviceDelayMayBeStarted(org_uid)
@@ -178,7 +178,7 @@ class CustomMeetingItem(MCCustomMeetingItem):
             tool = api.portal.get_tool('portal_plonemeeting')
             cfg = tool.getMeetingConfig(item)
             # item in state giveable but item not complete
-            if item.queryState() in finance_org.get_item_advice_states(cfg):
+            if item.query_state() in finance_org.get_item_advice_states(cfg):
                 if not self._is_complete():
                     return {'displayDefaultComplementaryMessage': False,
                             'displayAdviceReviewState': True,

@@ -195,9 +195,9 @@ collegeMeeting.usedItemAttributes = (
     u'manuallyLinkedItems', u'otherMeetingConfigsClonableToPrivacy',
     u'completeness', u'groupedItemsNum')
 collegeMeeting.usedMeetingAttributes = (
-    u'startDate', u'endDate', u'attendees',
+    u'start_date', u'end_date', u'attendees',
     u'excused', u'absents', u'signatories',
-    u'place', u'extraordinarySession', u'inAndOutMoves',
+    u'place', u'extraordinary_session', u'in_and_out_moves',
     u'notes', u'observations')
 collegeMeeting.workflowAdaptations = (
     'meetingadvicefinances_add_advicecreated_state',
@@ -227,11 +227,11 @@ collegeMeeting.itemColumns = (
     u'Creator', u'CreationDate', u'ModificationDate',
     u'review_state', u'getCategory', u'proposing_group_acronym',
     u'associated_groups_acronym', u'groups_in_charge_acronym',
-    u'advices', u'toDiscuss', u'linkedMeetingDate', u'actions')
+    u'advices', u'toDiscuss', u'meeting_date', u'actions')
 collegeMeeting.availableItemsListVisibleColumns = (
     u'Creator', u'getCategory', u'proposing_group_acronym',
     u'associated_groups_acronym', u'groups_in_charge_acronym',
-    u'advices', u'toDiscuss', u'getPreferredMeetingDate', u'actions')
+    u'advices', u'toDiscuss', u'preferred_meeting_date', u'actions')
 collegeMeeting.itemsListVisibleColumns = (
     u'static_item_reference', u'Creator', u'review_state',
     u'getCategory', u'proposing_group_acronym', u'associated_groups_acronym',

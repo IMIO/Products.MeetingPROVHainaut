@@ -96,7 +96,7 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
         self.assertFalse(advice.advice_hide_during_redaction)
         # validate item
         self.do(item, 'backTo_validated_from_waiting_advices')
-        self.assertEqual(item.queryState(), 'validated')
+        self.assertEqual(item.query_state(), 'validated')
 
     def test_CompletenessEvaluationAskedAgain(self):
         """When item is sent for second+ time to the finances,
