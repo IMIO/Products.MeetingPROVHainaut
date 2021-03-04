@@ -24,10 +24,8 @@
 
 from AccessControl import Unauthorized
 from DateTime import DateTime
-
 from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.PloneMeeting.tests.testAnnexes import testAnnexes as pmta
-
 
 
 class testAnnexes(MeetingPROVHainautTestCase, pmta):

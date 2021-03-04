@@ -3,8 +3,8 @@
 
 from plone.memoize import forever
 from Products.MeetingPROVHainaut.config import COMPTA_GROUP_ID
-from Products.MeetingPROVHainaut.config import FINANCE_GROUP_ID
 from Products.MeetingPROVHainaut.config import FINANCE_GROUP_CEC_ID
+from Products.MeetingPROVHainaut.config import FINANCE_GROUP_ID
 from Products.MeetingPROVHainaut.config import FINANCE_GROUP_NO_CEC_ID
 from Products.PloneMeeting.utils import org_id_to_uid
 

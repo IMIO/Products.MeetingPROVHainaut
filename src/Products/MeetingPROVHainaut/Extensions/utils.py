@@ -2,15 +2,14 @@
 
 from AccessControl import Unauthorized
 from collective.contact.plonegroup.utils import get_organizations
-
 from plone import api
 from Products.CMFCore.exceptions import BadRequest
 from Products.CMFPlone.utils import normalizeString
 from Products.CMFPlone.utils import safe_unicode
 from Products.PloneMeeting.utils import org_id_to_uid
 
-import unicodedata
 import csv
+import unicodedata
 
 
 def import_meetingsUsersAndRoles_from_csv(self, fname=None):

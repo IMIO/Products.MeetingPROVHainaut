@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingCommunes.tests.testMeetingConfig import testMeetingConfig as mctmc
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 
 
 class testMeetingConfig(MeetingPROVHainautTestCase, mctmc):

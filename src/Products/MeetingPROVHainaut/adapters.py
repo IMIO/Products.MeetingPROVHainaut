@@ -6,10 +6,10 @@ from Globals import InitializeClass
 from plone import api
 from Products.MeetingCommunes.adapters import CustomMeetingConfig as MCCustomMeetingConfig
 from Products.MeetingCommunes.adapters import CustomMeetingItem as MCCustomMeetingItem
+from Products.MeetingCommunes.adapters import CustomToolPloneMeeting as MCCustomToolPloneMeeting
 from Products.MeetingCommunes.adapters import MeetingAdviceCommunesWorkflowConditions
 from Products.MeetingCommunes.adapters import MeetingItemCommunesWorkflowActions
 from Products.MeetingCommunes.adapters import MeetingItemCommunesWorkflowConditions
-from Products.MeetingCommunes.adapters import CustomToolPloneMeeting as MCCustomToolPloneMeeting
 from Products.MeetingCommunes.utils import finances_give_advice_states
 from Products.MeetingPROVHainaut.interfaces import IMeetingAdvicePROVHainautWorkflowConditions
 from Products.MeetingPROVHainaut.utils import finance_group_cec_uid

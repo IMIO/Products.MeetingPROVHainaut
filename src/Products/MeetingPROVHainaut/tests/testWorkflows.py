@@ -3,8 +3,8 @@
 # File: testWorkflows.py
 #
 
-from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingCommunes.tests.testWorkflows import testWorkflows as mctw
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 
 
 class testWorkflows(MeetingPROVHainautTestCase, mctw):

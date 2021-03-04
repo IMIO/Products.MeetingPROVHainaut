@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingCommunes.tests.testWFAdaptations import testWFAdaptations as mctwfa
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 
 
 class testWFAdaptations(MeetingPROVHainautTestCase, mctwfa):

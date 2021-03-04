@@ -22,8 +22,8 @@
 # 02110-1301, USA.
 #
 
-from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingCommunes.tests.testChangeItemOrderView import testChangeItemOrderView as mctciov
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 
 
 class testChangeItemOrderView(MeetingPROVHainautTestCase, mctciov):

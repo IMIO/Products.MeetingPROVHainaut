@@ -5,8 +5,8 @@
 # GNU General Public License (GPL)
 #
 
-from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingCommunes.tests.testMeeting import testMeetingType as mctmt
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 
 
 class testMeetingType(MeetingPROVHainautTestCase, mctmt):

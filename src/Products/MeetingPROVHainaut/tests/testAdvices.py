@@ -22,8 +22,8 @@
 # 02110-1301, USA.
 #
 
-from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 from Products.MeetingCommunes.tests.testAdvices import testAdvices as mcta
+from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
 
 
 class testAdvices(MeetingPROVHainautTestCase, mcta):

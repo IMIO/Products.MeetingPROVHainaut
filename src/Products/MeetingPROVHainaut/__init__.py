@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from Products.MeetingPROVHainaut.config import product_globals
 from Products.CMFCore import DirectoryView
+from Products.MeetingPROVHainaut.config import product_globals
 
 import adapters
 import logging

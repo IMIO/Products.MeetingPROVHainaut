@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from Products.MeetingCommunes.tests.MeetingCommunesTestCase import MeetingCommunesTestCase
 from Products.MeetingPROVHainaut.testing import MPH_TESTING_PROFILE_FUNCTIONAL
 from Products.MeetingPROVHainaut.tests.helpers import MeetingPROVHainautTestingHelpers
-from Products.MeetingCommunes.tests.MeetingCommunesTestCase import MeetingCommunesTestCase
 
 
 class MeetingPROVHainautTestCase(MeetingCommunesTestCase, MeetingPROVHainautTestingHelpers):

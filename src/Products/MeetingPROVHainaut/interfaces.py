@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from Products.PloneMeeting.workflows.advice import IMeetingAdviceWorkflowConditions
 from Products.MeetingCommunes.interfaces import IMeetingItemCommunesWorkflowActions
 from Products.MeetingCommunes.interfaces import IMeetingItemCommunesWorkflowConditions
+from Products.PloneMeeting.workflows.advice import IMeetingAdviceWorkflowConditions
 
 
 class IMeetingAdvicePROVHainautWorkflowConditions(IMeetingAdviceWorkflowConditions):

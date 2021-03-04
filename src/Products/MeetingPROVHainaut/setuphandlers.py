@@ -17,6 +17,7 @@ from Products.PloneMeeting.utils import org_id_to_uid
 import logging
 import os
 
+
 logger = logging.getLogger('MeetingPROVHainaut: setuphandlers')
 
 

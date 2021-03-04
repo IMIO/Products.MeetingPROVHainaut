@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from copy import deepcopy
 from collective.contact.plonegroup.utils import select_org_for_function
+from copy import deepcopy
 from plone.memoize.forever import _memos
 from Products.MeetingCommunes.tests.helpers import MeetingCommunesTestingHelpers
 from Products.MeetingPROVHainaut.config import PROJECTNAME

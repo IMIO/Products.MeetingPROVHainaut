@@ -2,9 +2,9 @@
 
 from Products.MeetingPROVHainaut.testing import MPH_FIN_TESTING_PROFILE_FUNCTIONAL
 from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
-from Products.MeetingPROVHainaut.utils import finance_group_uid
 from Products.MeetingPROVHainaut.utils import finance_group_cec_uid
 from Products.MeetingPROVHainaut.utils import finance_group_no_cec_uid
+from Products.MeetingPROVHainaut.utils import finance_group_uid
 
 
 class testCustomWorkflows(MeetingPROVHainautTestCase):
