@@ -48,6 +48,13 @@ def post_handler_zprovhainaut(context):
     logStep("_configureDexterityLocalRolesField", context)
     _configureDexterityLocalRolesField()
     finalizePROVHainautInstance(context)
+    # configure the FINANCE_ADVICES_COLLECTION_ID collection
+    site = context.getSite()
+    cfg = site.portal_plonemeeting.objectValues('MeetingConfig')[0]
+    cfg.adapted()._setUsedFinanceGroupIds(
+        ['delay_row_id__unique_id_002',
+         'delay_row_id__unique_id_003',
+         'delay_row_id__unique_id_004'])
 
 
 def post_handler_testing(context):
