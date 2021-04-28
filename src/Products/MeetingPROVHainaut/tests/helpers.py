@@ -26,8 +26,7 @@ class MeetingPROVHainautTestingHelpers(MeetingCommunesTestingHelpers):
             customAdviser['org'] = finance_group_uid()
         cfg.setCustomAdvisers(customAdvisers)
         # configure usedAdviceTypes
-        cfg.setUsedAdviceTypes(('asked_again',
-                                'positive',
+        cfg.setUsedAdviceTypes(('positive',
                                 'positive_with_remarks',
                                 'negative',
                                 'nil',

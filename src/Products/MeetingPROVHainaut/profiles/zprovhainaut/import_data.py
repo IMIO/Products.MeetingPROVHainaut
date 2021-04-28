@@ -318,7 +318,6 @@ collegeMeeting.transitionsForPresentingAnItem = (
     'proposeToValidationLevel1', 'proposeToValidationLevel2',
     'proposeToValidationLevel3', 'validate', 'present')
 collegeMeeting.transitionsToConfirm = []
-collegeMeeting.usedAdviceTypes = collegeMeeting.usedAdviceTypes + [u'asked_again']
 collegeMeeting.itemBudgetInfosStates = []
 collegeMeeting.orderedContacts = []
 collegeMeeting.orderedAssociatedOrganizations = [
