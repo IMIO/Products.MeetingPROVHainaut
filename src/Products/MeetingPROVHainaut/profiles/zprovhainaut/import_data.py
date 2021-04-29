@@ -37,19 +37,12 @@ categories = [
 # Pod templates ----------------------------------------------------------------
 templates = []
 
-delibTemplate = PodTemplateDescriptor('delib', 'Délibération')
-delibTemplate.is_reusable = True
-delibTemplate.odt_file = 'deliberation.odt'
-delibTemplate.pod_formats = ['docx', 'pdf', ]
-delibTemplate.pod_portal_types = ['MeetingItem']
-templates.append(delibTemplate)
-
-arreteTemplate = PodTemplateDescriptor('arrete', 'Arrêté')
-arreteTemplate.is_reusable = True
-arreteTemplate.odt_file = 'arrete.odt'
-arreteTemplate.pod_formats = ['docx', 'pdf', ]
-arreteTemplate.pod_portal_types = ['MeetingItem']
-templates.append(arreteTemplate)
+reportTemplate = PodTemplateDescriptor('rapport', 'Rapport')
+reportTemplate.is_reusable = True
+reportTemplate.odt_file = 'rapport.odt'
+reportTemplate.pod_formats = ['docx', 'pdf', ]
+reportTemplate.pod_portal_types = ['MeetingItem']
+templates.append(reportTemplate)
 
 roleATemplate = PodTemplateDescriptor('role-a', 'Rôle A')
 roleATemplate.is_reusable = True
@@ -92,15 +85,6 @@ pvTemplate.odt_file = 'pv.odt'
 pvTemplate.pod_formats = ['docx', 'pdf', ]
 pvTemplate.pod_portal_types = ['Meeting']
 templates.append(pvTemplate)
-
-groupedItemsTemplate = PodTemplateDescriptor('grouped-items', 'Tous les bordereaux')
-groupedItemsTemplate.odt_file = 'bordereaux.odt'
-groupedItemsTemplate.pod_formats = ['docx', 'pdf', ]
-groupedItemsTemplate.pod_portal_types = ['Meeting']
-groupedItemsTemplate.merge_templates = [{'pod_context_name': u'delib',
-                                         'do_rendering': False,
-                                         'template': 'arrete'}]
-templates.append(groupedItemsTemplate)
 
 orgs = deepcopy(zones_import_data.data.orgs)
 dirfin = [org for org in orgs if org.id == FINANCE_GROUP_ID][0]
@@ -187,13 +171,13 @@ orgs += [dirfincec, dirfinnocec, ag1, ag2, ag3, ag4, ag5, gic1, gic2, gic3, gic4
 # Meeting configurations -------------------------------------------------------
 # College
 collegeMeeting = deepcopy(zones_import_data.collegeMeeting)
-collegeMeeting.podTemplates = templates
+# ignore templates for now as context_variables is still not managed
+# collegeMeeting.podTemplates = templates
 collegeMeeting.usedItemAttributes = (
     u'budgetInfos', u'groupsInCharge', u'associatedGroups',
     u'motivation', u'toDiscuss', u'inAndOutMoves',
-    u'notes', u'marginalNotes', u'observations',
-    u'manuallyLinkedItems', u'otherMeetingConfigsClonableToPrivacy',
-    u'completeness', u'groupedItemsNum')
+    u'notes', u'marginalNotes', u'observations', u'manuallyLinkedItems',
+    u'otherMeetingConfigsClonableToPrivacy', u'completeness')
 collegeMeeting.usedMeetingAttributes = (
     u'start_date', u'end_date', u'attendees',
     u'excused', u'absents', u'signatories',

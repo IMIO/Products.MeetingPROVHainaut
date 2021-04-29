@@ -34,10 +34,6 @@ msgstr "Numéro d'engagement"
 msgid "MeetingPROVHainaut_label_advice_category"
 msgstr "Catégorie"
 
-#. Default: "Slip number"
-msgid "MeetingPROVHainaut_label_groupedItemsNum"
-msgstr "Numéro de bordereau"
-
 #. Default: "Add a finances advice (CEC)"
 msgid "add_new_meetingadvicefinancescec"
 msgstr "Ajouter avis finances (Engagement uniquement)"

@@ -4,20 +4,5 @@
         i18n:domain="eea">
  <criteria purge="False">
 
-  <!-- advanced widgets -->
-  <criterion name="c50" i18n:attributes="title">
-   <property name="widget">text</property>
-   <property name="title">Bordereau</property>
-   <property name="position">top</property>
-   <property name="section">advanced</property>
-   <property name="hidden">False</property>
-   <property name="count">False</property>
-   <property name="sortcountable">False</property>
-   <property name="hidezerocount">False</property>
-   <property name="index">getGroupedItemsNum</property>
-   <property name="onlyallelements">True</property>
-   <property name="sortreversed">False</property>
-  </criterion>
-
  </criteria>
 </object>

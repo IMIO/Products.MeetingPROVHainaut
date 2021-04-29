@@ -13,6 +13,10 @@ Products.MeetingPROVHainaut Changelog
   [gbastien]
 - Adapted code regardind fact that Meeting was moved from AT to DX.
   [gbastien]
+- Removed `MeetingItem.groupedItemsNum` functionnality.
+  [gbastien]
+- Fixed code and POD templates, use `updatePODTemplatesCode` helper in migration to 4203 to fix POD templates code.
+  [gbastien]
 
 4.2b3 (2020-10-14)
 ------------------

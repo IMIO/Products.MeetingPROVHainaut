@@ -30,10 +30,6 @@ msgstr ""
 msgid "MeetingPROVHainaut_label_advice_category"
 msgstr ""
 
-#. Default: "Slip number"
-msgid "MeetingPROVHainaut_label_groupedItemsNum"
-msgstr ""
-
 #. Default: "Add a finances advice (CEC)"
 msgid "add_new_meetingadvicefinancescec"
 msgstr ""

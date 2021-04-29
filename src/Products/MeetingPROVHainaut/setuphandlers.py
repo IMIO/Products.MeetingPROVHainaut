@@ -4,7 +4,6 @@ from collective.eeafaceted.dashboard.utils import addFacetedCriteria
 from datetime import datetime
 from datetime import timedelta
 from dexterity.localroles.utils import add_fti_configuration
-from imio.helpers.catalog import addOrUpdateIndexes
 from plone import api
 from Products.CMFPlone.utils import _createObjectByType
 from Products.MeetingCommunes.config import SAMPLE_TEXT
@@ -28,7 +27,6 @@ def postInstall(context):
         context = context._getImportContext(profile_id)
     logStep("postInstall", context)
     site = context.getSite()
-    addOrUpdateIndexes(site, {'getGroupedItemsNum': ('FieldIndex', {})})
     _showHomeTab(context, site)
     logStep("_reorderSkinsLayers", context)
     _reorderSkinsLayers(context, site)
@@ -179,6 +177,9 @@ def _reorderCss(context):
 
 def _addFacetedCriteria():
     """Add our own faceted criteria."""
+    # nothing for now (add groupedItemsNum but was removed)
+    return
+
     tool = api.portal.get_tool('portal_plonemeeting')
     for cfg in tool.objectValues('MeetingConfig'):
         # add new faceted filters for searches_items

@@ -11,10 +11,6 @@ msgstr ""
 "Preferred-encodings: utf-8 latin1\n"
 "Domain: PloneMeeting\n"
 
-#. Default: "Slip number"
-msgid "MeetingPROVHainaut_label_groupedItemsNum"
-msgstr ""
-
 #. Default: "Category"
 msgid "MeetingPROVHainaut_label_advice_category"
 msgstr ""
