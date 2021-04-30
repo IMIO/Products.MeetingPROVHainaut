@@ -172,7 +172,7 @@ orgs += [dirfincec, dirfinnocec, ag1, ag2, ag3, ag4, ag5, gic1, gic2, gic3, gic4
 # College
 collegeMeeting = deepcopy(zones_import_data.collegeMeeting)
 # ignore templates for now as context_variables is still not managed
-# collegeMeeting.podTemplates = templates
+collegeMeeting.podTemplates = []
 collegeMeeting.usedItemAttributes = (
     u'budgetInfos', u'groupsInCharge', u'associatedGroups',
     u'motivation', u'toDiscuss', u'inAndOutMoves',
