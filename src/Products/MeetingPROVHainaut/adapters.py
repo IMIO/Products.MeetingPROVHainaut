@@ -60,16 +60,16 @@ class MeetingItemPROVHainautWorkflowActions(MeetingItemCommunesWorkflowActions):
 class MeetingItemPROVHainautWorkflowConditions(MeetingItemCommunesWorkflowConditions):
     """ """
 
-    def _currentUserIsAdviserAbleToSendItemBackExtraCondition(self, org, destinationState):
+    def _currentUserIsAdviserAbleToSendItemBackExtraCondition(self, org_uid, destinationState):
         '''Only financial managers may send item back to validated (aka validate the item)
            when advice is signed.'''
         res = True
         if destinationState == 'validated':
             userGroups = self.tool.get_plone_groups_for_user()
-            org_uid = org.UID()
             advice_obj = self.context.getAdviceObj(org_uid)
             res = '%s_financialmanagers' % org_uid in userGroups and \
-                (advice_obj and advice_obj.query_state() in ['financial_advice_signed', 'advice_given'])
+                (advice_obj and advice_obj.query_state() in
+                 ['financial_advice_signed', 'advice_given'])
         return res
 
     def _get_waiting_advices_icon_advisers(self):
@@ -118,7 +118,7 @@ class CustomMeetingItem(MCCustomMeetingItem):
 
         # bypass for Managers
         tool = api.portal.get_tool('portal_plonemeeting')
-        if tool.isManager(item, realManagers=True):
+        if tool.isManager(realManagers=True):
             return True
 
         # relevant state?

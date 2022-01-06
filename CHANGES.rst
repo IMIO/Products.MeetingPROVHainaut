@@ -4,8 +4,8 @@ Products.MeetingPROVHainaut Changelog
 4.2b5 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Fixed call to `ToolPloneMeeting.isManager`, pass no context when `realManagers=True`.
+  [gbastien]
 
 4.2b4 (2021-07-19)
 ------------------
