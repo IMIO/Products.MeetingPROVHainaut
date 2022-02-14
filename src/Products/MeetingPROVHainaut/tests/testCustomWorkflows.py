@@ -21,6 +21,7 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
         self.changeUser('dgen')
         gic1_uid = cfg.getOrderedGroupsInCharge()[0]
         item = self.create('MeetingItem', groupsInCharge=(gic1_uid, ))
+        item_uid = item.UID()
         self.assertEqual(self.transitions(item), ['proposeToValidationLevel1'])
         # ask finances advice
         fin_group_uid = finance_group_uid()
@@ -62,15 +63,21 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
         self.assertEqual(self.transitions(item), [])
         # financial controller
         self.do(advice, 'proposeToFinancialController')
+        self.assertEqual(self.transitions(item), [])
         self.assertEqual(self.transitions(advice),
                          ['backToAdviceCreated',
                           'proposeToFinancialEditor'])
-        self.assertEqual(self.transitions(item), [])
+        # indexAdvisers is correctly reindexed
+        advice_index_value = "delay__{0}_proposed_to_financial_controller".format(fin_group_uid)
+        self.assertTrue(self.catalog(UID=item_uid, indexAdvisers=[advice_index_value]))
         # financial editor
         self.do(advice, 'proposeToFinancialEditor')
         self.assertEqual(self.transitions(advice),
                          ['backToProposedToFinancialController',
                           'proposeToFinancialReviewer'])
+        # indexAdvisers is correctly reindexed
+        advice_index_value = "delay__{0}_proposed_to_financial_editor".format(fin_group_uid)
+        self.assertTrue(self.catalog(UID=item_uid, indexAdvisers=[advice_index_value]))
         # financial reviewer
         self.do(advice, 'proposeToFinancialReviewer')
         self.assertEqual(self.transitions(item), [])
@@ -78,6 +85,9 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
                          ['backToProposedToFinancialController',
                           'backToProposedToFinancialEditor',
                           'proposeToFinancialManager'])
+        # indexAdvisers is correctly reindexed
+        advice_index_value = "delay__{0}_proposed_to_financial_reviewer".format(fin_group_uid)
+        self.assertTrue(self.catalog(UID=item_uid, indexAdvisers=[advice_index_value]))
         # financial manager
         self.do(advice, 'proposeToFinancialManager')
         self.assertEqual(self.transitions(item), [])
@@ -85,6 +95,9 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
                          ['backToProposedToFinancialController',
                           'backToProposedToFinancialReviewer',
                           'signFinancialAdvice'])
+        # indexAdvisers is correctly reindexed
+        advice_index_value = "delay__{0}_proposed_to_financial_manager".format(fin_group_uid)
+        self.assertTrue(self.catalog(UID=item_uid, indexAdvisers=[advice_index_value]))
         # sign advice
         self.do(advice, 'signFinancialAdvice')
         self.assertEqual(self.transitions(item),
@@ -94,9 +107,15 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
         self.assertEqual(self.transitions(advice),
                          ['backToProposedToFinancialManager'])
         self.assertFalse(advice.advice_hide_during_redaction)
+        # indexAdvisers is correctly reindexed
+        advice_index_value = "delay__{0}_financial_advice_signed".format(fin_group_uid)
+        self.assertTrue(self.catalog(UID=item_uid, indexAdvisers=[advice_index_value]))
         # validate item
         self.do(item, 'backTo_validated_from_waiting_advices')
         self.assertEqual(item.query_state(), 'validated')
+        # indexAdvisers is correctly reindexed
+        advice_index_value = "delay__{0}_advice_given".format(fin_group_uid)
+        self.assertTrue(self.catalog(UID=item_uid, indexAdvisers=[advice_index_value]))
 
     def test_CompletenessEvaluationAskedAgain(self):
         """When item is sent for second+ time to the finances,
