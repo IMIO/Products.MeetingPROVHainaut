@@ -4,8 +4,10 @@ Products.MeetingPROVHainaut Changelog
 4.2b6 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Adapted `events.onAdviceAfterTransition`, do no more call
+  `MeetingItem.update_local_roles` as it is done in PloneMeeting in
+  `events.onAdviceTransition` now, just after call to `AdviceAfterTransitionEvent`.
+  [gbastien]
 
 4.2b5 (2022-01-07)
 ------------------

@@ -36,12 +36,3 @@ def onAdviceAfterTransition(advice, event):
     if newStateId == 'financial_advice_signed':
         # final state of the wf, make sure advice is no more hidden during redaction
         advice.advice_hide_during_redaction = False
-
-    # in some case, we could be here and we are actually already updating advices,
-    # this is the case if we validate an item and it triggers the fact that advice delay is exceeded
-    # this should never be the case as advice delay should have been updated during nightly cron...
-    # but if we are in a '_updateAdvices', do not _updateAdvices again...
-    # may also be the case when advice review_state is changed in _updateAdvices
-    # also bypass if we are creating the advice as onAdviceAdded is called after onAdviceTransition
-    if event.transition and not item.REQUEST.get('currentlyUpdatingAdvice', False):
-        item.update_local_roles()
