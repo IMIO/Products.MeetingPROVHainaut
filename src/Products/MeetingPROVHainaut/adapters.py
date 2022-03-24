@@ -104,7 +104,6 @@ class CustomMeetingItem(MCCustomMeetingItem):
 
     def mayEvaluateCompleteness(self):
         '''Completeness can be evaluated by the finance precontroller.'''
-
         item = self.getSelf()
         if item.isDefinedInTool():
             return False

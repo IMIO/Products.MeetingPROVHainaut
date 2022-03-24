@@ -8,6 +8,8 @@ Products.MeetingPROVHainaut Changelog
   `MeetingItem.update_local_roles` as it is done in PloneMeeting in
   `events.onAdviceTransition` now, just after call to `AdviceAfterTransitionEvent`.
   [gbastien]
+- Fixed `zprovhainaut import_data`, was failing with demo data.
+  [gbastien]
 
 4.2b5 (2022-01-07)
 ------------------

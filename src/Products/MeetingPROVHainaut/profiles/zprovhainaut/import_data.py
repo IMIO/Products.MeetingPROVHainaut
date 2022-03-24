@@ -225,14 +225,14 @@ collegeMeeting.itemActionsInterface = \
 collegeMeeting.itemConditionsInterface = \
     'Products.MeetingPROVHainaut.interfaces.IMeetingItemPROVHainautWorkflowConditions'
 collegeMeeting.itemWFValidationLevels = (
-    {'leading_transition': '',
+    {'leading_transition': '-',
      'state_title': 'itemcreated',
      'suffix': 'creators',
      'enabled': '1',
      'state': 'itemcreated',
      'back_transition_title': 'backToItemCreated',
      'back_transition': 'backToItemCreated',
-     'leading_transition_title': '',
+     'leading_transition_title': '-',
      'extra_suffixes': []},
     {'leading_transition': 'propose',
      'state_title': 'proposed',
@@ -356,8 +356,26 @@ councilMeeting.workflowAdaptations = ('only_creator_may_delete',
 councilMeeting.transitionsToConfirm = []
 councilMeeting.itemBudgetInfosStates = []
 councilMeeting.orderedContacts = []
-
 data = PloneMeetingConfiguration(
     meetingFolderTitle='Mes séances',
     meetingConfigs=[collegeMeeting, councilMeeting],
     orgs=orgs)
+data.directory_position_types = [
+    {'name': u'D\xe9faut', 'token': u'default'},
+    {'name': u'Pr\xe9sident|Pr\xe9sidents|Pr\xe9sidente|Pr\xe9sidentes',
+     'token': u'president'},
+    {'name': u'D\xe9put\xe9 provincial|D\xe9put\xe9s provinciaux|D\xe9put\xe9e provinciale|D\xe9put\xe9es provinciales',
+     'token': u'depute'},
+    {'name': u'Directeur G\xe9n\xe9ral provincial|Directeurs G\xe9n\xe9raux provinciaux|Directrice G\xe9n\xe9rale provinciale|Directrices G\xe9n\xe9rales provinciales',
+     'token': u'dgp'},
+    {'name': u'D\xe9put\xe9 provincial f.f.|D\xe9put\xe9s provinciaux f.f.|D\xe9put\xe9e provinciale f.f.|D\xe9put\xe9es provinciales f.f.',
+     'token': u'deputeff'},
+    {'name': u'Secr\xe9taire|Secr\xe9taires|Secr\xe9taire|Secr\xe9taires',
+     'token': u'secretaire'},
+    {'name': u'Commissaire du Gouvernement wallon|Commissaires du Gouvernement wallon|Commissaire du Gouvernement wallon|Commissaires du Gouvernement wallon',
+     'token': u'comgovw'},
+    {'name': u'Commissaire du Gouvernement wallon f.f.|Commissaires du Gouvernement wallon f.f.|Commissaire du Gouvernement wallon f.f.|Commissaires du Gouvernement wallon f.f.',
+     'token': u'comgovwff'},
+    {'name': u'Pr\xe9sident du Conseil provincial|Pr\xe9sidents du Conseil provincial|Pr\xe9sidente du Conseil provincial|Pr\xe9sidentes du Conseil provincial',
+     'token': u'president-cp'}
+]

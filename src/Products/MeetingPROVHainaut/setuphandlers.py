@@ -10,8 +10,11 @@ from Products.MeetingCommunes.config import SAMPLE_TEXT
 from Products.MeetingCommunes.setuphandlers import _showHomeTab
 from Products.MeetingCommunes.setuphandlers import logStep
 from Products.MeetingPROVHainaut.config import PROJECTNAME
+from Products.MeetingPROVHainaut.utils import finance_group_cec_uid
+from Products.MeetingPROVHainaut.utils import finance_group_no_cec_uid
 from Products.PloneMeeting.exportimport.content import ToolInitializer
 from Products.PloneMeeting.utils import org_id_to_uid
+from Products.PloneMeeting.indexes import REAL_ORG_UID_PATTERN
 
 import logging
 import os
@@ -50,9 +53,9 @@ def post_handler_zprovhainaut(context):
     site = context.getSite()
     cfg = site.portal_plonemeeting.objectValues('MeetingConfig')[0]
     cfg.adapted()._setUsedFinanceGroupIds(
-        ['delay_row_id__unique_id_002',
-         'delay_row_id__unique_id_003',
-         'delay_row_id__unique_id_004'])
+        [u'delay_row_id__unique_id_003',
+         REAL_ORG_UID_PATTERN.format(finance_group_cec_uid()),
+         REAL_ORG_UID_PATTERN.format(finance_group_no_cec_uid())])
 
 
 def post_handler_testing(context):
@@ -298,6 +301,8 @@ def _addDemoData(site,
     userFolder = tool.getPloneMeetingFolder(cfg1_id, userId)
     date = datetime.now() - timedelta(days=1)
     with api.env.adopt_user(userId):
+        # avoid problems with cached methods when using adopt_user
+        tool.invalidateAllCache()
         meeting = api.content.create(container=userFolder,
                                      type='MeetingZCollege',
                                      id=date.strftime('%Y%m%d'),
