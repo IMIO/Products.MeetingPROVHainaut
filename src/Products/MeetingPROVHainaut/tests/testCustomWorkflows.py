@@ -47,6 +47,19 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
                           'proposeToValidationLevel3',
                           'wait_advices_from_proposedToValidationLevel2'])
         self.do(item, 'wait_advices_from_proposedToValidationLevel2')
+        # a MeetingManager is able to send back but not a normal user
+        self.assertEqual(
+            self.transitions(item),
+            ['backTo_proposedToValidationLevel2_from_waiting_advices',
+             'backTo_proposedToValidationLevel3_from_waiting_advices',
+             'backTo_validated_from_waiting_advices'])
+        # but a
+        self._addPrincipalToGroup('bourgmestre', self.dirgen_creators)
+        self._addPrincipalToGroup('bourgmestre', self.dirgen_level1reviewers)
+        self._addPrincipalToGroup('bourgmestre', self.dirgen_level2reviewers)
+        self._addPrincipalToGroup('bourgmestre', self.dirgen_level3reviewers)
+        self.changeUser('bourgmestre')
+        self.assertTrue(self.hasPermission("View", item))
         self.assertEqual(self.transitions(item), [])
 
         # give advice
