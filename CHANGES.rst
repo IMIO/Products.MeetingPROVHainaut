@@ -1,7 +1,7 @@
 Products.MeetingPROVHainaut Changelog
 =====================================
 
-4.2b6 (unreleased)
+4.2b6 (2022-04-28)
 ------------------
 
 - Adapted `events.onAdviceAfterTransition`, do no more call
