@@ -67,6 +67,8 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
         self.assertEqual(self.transitions(item),
                          ['backTo_proposedToValidationLevel2_from_waiting_advices',
                           'backTo_proposedToValidationLevel3_from_waiting_advices'])
+        # advice may be taken over
+        self.assertTrue(item.adapted().mayTakeOver())
         # advice giveable when item complete
         self.assertFalse(item.adviceIndex[fin_group_uid]['advice_addable'])
         self.assertTrue(item.adapted().mayEvaluateCompleteness())

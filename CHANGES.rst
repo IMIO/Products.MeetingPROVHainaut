@@ -4,8 +4,9 @@ Products.MeetingPROVHainaut Changelog
 4.2b7 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Completed `test_FinancesAdvicesWorkflow` to check that finances adviser
+  may take over item.
+  [gbastien]
 
 4.2b6 (2022-04-28)
 ------------------
