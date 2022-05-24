@@ -7,6 +7,8 @@ Products.MeetingPROVHainaut Changelog
 - Completed `test_FinancesAdvicesWorkflow` to check that finances adviser
   may take over item.
   [gbastien]
+- Fixed `test_pm_WFA_availableWFAdaptations`, take into account new WFA `transfered`.
+  [gbastien]
 
 4.2b6 (2022-04-28)
 ------------------
