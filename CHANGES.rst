@@ -9,6 +9,11 @@ Products.MeetingPROVHainaut Changelog
   [gbastien]
 - Fixed `test_pm_WFA_availableWFAdaptations`, take into account new WFA `transfered`.
   [gbastien]
+- Fixed `setuphandlers._addDemoData`.
+  [gbastien]
+- Removed `collegeMeeting.transitionsForPresentingAnItem` from `import_data` as
+  field `MeetingConfig.transitionsForPresentingAnItem` was removed.
+  [gbastien]
 
 4.2b6 (2022-04-28)
 ------------------

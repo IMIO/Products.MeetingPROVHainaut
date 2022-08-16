@@ -324,6 +324,7 @@ def _addDemoData(site,
                                          description=SAMPLE_TEXT,
                                          motivation=SAMPLE_TEXT,
                                          decision=SAMPLE_TEXT)
-            for transition in cfg.getTransitionsForPresentingAnItem():
+            for transition in cfg.getTransitionsForPresentingAnItem(
+                    newItem.getProposingGroup()):
                 wfTool.doActionFor(newItem, transition)
     return meeting

@@ -298,9 +298,6 @@ collegeMeeting.itemWFValidationLevels = (
      'leading_transition_title': 'proposeToValidationLevel5',
      'extra_suffixes': []},
 )
-collegeMeeting.transitionsForPresentingAnItem = (
-    'proposeToValidationLevel1', 'proposeToValidationLevel2',
-    'proposeToValidationLevel3', 'validate', 'present')
 collegeMeeting.transitionsToConfirm = []
 collegeMeeting.itemBudgetInfosStates = []
 collegeMeeting.orderedContacts = []
