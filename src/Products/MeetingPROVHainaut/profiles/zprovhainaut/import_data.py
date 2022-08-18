@@ -14,6 +14,7 @@ from Products.PloneMeeting.profiles import OrgDescriptor
 from Products.PloneMeeting.profiles import PloneMeetingConfiguration
 from Products.PloneMeeting.profiles import PodTemplateDescriptor
 from Products.PloneMeeting.profiles import RecurringItemDescriptor
+from Products.PloneMeeting.profiles import UserDescriptor
 
 
 # File types -------------------------------------------------------------------
@@ -195,6 +196,7 @@ collegeMeeting.workflowAdaptations = (
     'only_creator_may_delete',
     'waiting_advices',
     'waiting_advices_given_advices_required_to_validate',
+    'waiting_advices_given_and_signed_advices_required_to_validate',
     'waiting_advices_from_before_last_val_level',
     'waiting_advices_from_last_val_level',
     'waiting_advices_adviser_send_back',
@@ -357,22 +359,32 @@ data = PloneMeetingConfiguration(
     meetingFolderTitle='Mes séances',
     meetingConfigs=[collegeMeeting, councilMeeting],
     orgs=orgs)
+siteadmin = UserDescriptor(
+    'siteadmin', ['Manager'],
+    email="siteadmin@plonemeeting.org", fullname='Site administrator')
+data.usersOutsideGroups = [siteadmin]
 data.directory_position_types = [
     {'name': u'D\xe9faut', 'token': u'default'},
     {'name': u'Pr\xe9sident|Pr\xe9sidents|Pr\xe9sidente|Pr\xe9sidentes',
      'token': u'president'},
-    {'name': u'D\xe9put\xe9 provincial|D\xe9put\xe9s provinciaux|D\xe9put\xe9e provinciale|D\xe9put\xe9es provinciales',
+    {'name': u'D\xe9put\xe9 provincial|D\xe9put\xe9s provinciaux|'
+             u'D\xe9put\xe9e provinciale|D\xe9put\xe9es provinciales',
      'token': u'depute'},
-    {'name': u'Directeur G\xe9n\xe9ral provincial|Directeurs G\xe9n\xe9raux provinciaux|Directrice G\xe9n\xe9rale provinciale|Directrices G\xe9n\xe9rales provinciales',
+    {'name': u'Directeur G\xe9n\xe9ral provincial|Directeurs G\xe9n\xe9raux provinciaux|'
+             u'Directrice G\xe9n\xe9rale provinciale|Directrices G\xe9n\xe9rales provinciales',
      'token': u'dgp'},
-    {'name': u'D\xe9put\xe9 provincial f.f.|D\xe9put\xe9s provinciaux f.f.|D\xe9put\xe9e provinciale f.f.|D\xe9put\xe9es provinciales f.f.',
+    {'name': u'D\xe9put\xe9 provincial f.f.|D\xe9put\xe9s provinciaux f.f.|'
+             u'D\xe9put\xe9e provinciale f.f.|D\xe9put\xe9es provinciales f.f.',
      'token': u'deputeff'},
     {'name': u'Secr\xe9taire|Secr\xe9taires|Secr\xe9taire|Secr\xe9taires',
      'token': u'secretaire'},
-    {'name': u'Commissaire du Gouvernement wallon|Commissaires du Gouvernement wallon|Commissaire du Gouvernement wallon|Commissaires du Gouvernement wallon',
+    {'name': u'Commissaire du Gouvernement wallon|Commissaires du Gouvernement wallon|'
+             u'Commissaire du Gouvernement wallon|Commissaires du Gouvernement wallon',
      'token': u'comgovw'},
-    {'name': u'Commissaire du Gouvernement wallon f.f.|Commissaires du Gouvernement wallon f.f.|Commissaire du Gouvernement wallon f.f.|Commissaires du Gouvernement wallon f.f.',
+    {'name': u'Commissaire du Gouvernement wallon f.f.|Commissaires du Gouvernement wallon f.f.|'
+             u'Commissaire du Gouvernement wallon f.f.|Commissaires du Gouvernement wallon f.f.',
      'token': u'comgovwff'},
-    {'name': u'Pr\xe9sident du Conseil provincial|Pr\xe9sidents du Conseil provincial|Pr\xe9sidente du Conseil provincial|Pr\xe9sidentes du Conseil provincial',
+    {'name': u'Pr\xe9sident du Conseil provincial|Pr\xe9sidents du Conseil provincial|'
+             u'Pr\xe9sidente du Conseil provincial|Pr\xe9sidentes du Conseil provincial',
      'token': u'president-cp'}
 ]

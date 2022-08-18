@@ -53,7 +53,7 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
             ['backTo_proposedToValidationLevel2_from_waiting_advices',
              'backTo_proposedToValidationLevel3_from_waiting_advices',
              'backTo_validated_from_waiting_advices'])
-        # but a
+        # but another user can not
         self._addPrincipalToGroup('bourgmestre', self.dirgen_creators)
         self._addPrincipalToGroup('bourgmestre', self.dirgen_level1reviewers)
         self._addPrincipalToGroup('bourgmestre', self.dirgen_level2reviewers)
@@ -158,6 +158,63 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
         self.assertTrue(self.catalog(UID=item_uid, indexAdvisers=[advice_index_value]))
         # item modified date was updated
         item_modified, volatile_date = _check_date(item, item_modified, volatile_date)
+
+    def test_ItemNotValidableWhenFinancesAdviceWFIncomplete(self):
+        """
+           Financial advice WF must have reached the "signed" step for the item to be
+           validable, this avoid having a validated item when advice was sent back to
+           proposing group before advice is signed.
+           We need the advice to have been signed.
+        """
+        cfg = self.meetingConfig
+        self._deactivate_wfas('waiting_advices_given_and_signed_advices_required_to_validate')
+        self.changeUser('dgen')
+        gic1_uid = cfg.getOrderedGroupsInCharge()[0]
+        fin_no_cec_group_uid = finance_group_no_cec_uid()
+        item = self.create(
+            'MeetingItem',
+            groupsInCharge=(gic1_uid, ),
+            optionalAdvisers=(fin_no_cec_group_uid + '__rowid__unique_id_002', ))
+        # ask finances advice
+        # advice still not askable, askable as level2 or level3
+        self.do(item, 'proposeToValidationLevel1')
+        self.do(item, 'proposeToValidationLevel2')
+        self.do(item, 'wait_advices_from_proposedToValidationLevel2')
+        # give advice
+        self.changeUser('dfin')
+        advice_portal_type = item._advicePortalTypeForAdviser(fin_no_cec_group_uid)
+        advice = self.addAdvice(item,
+                                advice_group=fin_no_cec_group_uid,
+                                advice_type='positive_finance',
+                                advice_portal_type=advice_portal_type)
+        # financial controller
+        self.do(advice, 'proposeToFinancialReviewer')
+        # advice must no more be hidden during redaction so item may be sent back
+        changeView = advice.restrictedTraverse('@@change-advice-hidden-during-redaction')
+        changeView()
+        self.do(item, 'backTo_proposedToValidationLevel3_from_waiting_advices')
+        # when not using the 'waiting_advices_given_advices_required_to_validate'
+        # WFA, item could be validated
+        self.assertFalse('waiting_advices_given_and_signed_advices_required_to_validate'
+                         in cfg.getWorkflowAdaptations())
+        self.changeUser('dgen')
+        self.assertTrue('validate' in self.transitions(item))
+        self._activate_wfas(
+            'waiting_advices_given_and_signed_advices_required_to_validate',
+            keep_existing=True)
+        self.assertFalse('validate' in self.transitions(item))
+        # if finance advice reached the "signed" state, then item may be validated
+        self.do(item, 'wait_advices_from_proposedToValidationLevel3')
+        self.changeUser('dfin')
+        self.do(advice, 'proposeToFinancialReviewer')
+        self.do(advice, 'proposeToFinancialManager')
+        self.do(advice, 'signFinancialAdvice')
+        self.do(item, 'backTo_proposedToValidationLevel3_from_waiting_advices')
+        # as advice reached "signed", item may be validated
+        self.changeUser('dgen')
+        self.assertTrue('validate' in self.transitions(item))
+        self.do(item, 'validate')
+        self.assertEqual(item.query_state(), 'validated')
 
     def test_CompletenessEvaluationAskedAgain(self):
         """When item is sent for second+ time to the finances,

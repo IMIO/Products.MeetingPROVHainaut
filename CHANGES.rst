@@ -14,6 +14,9 @@ Products.MeetingPROVHainaut Changelog
 - Removed `collegeMeeting.transitionsForPresentingAnItem` from `import_data` as
   field `MeetingConfig.transitionsForPresentingAnItem` was removed.
   [gbastien]
+- Use the `waiting_advices_given_and_signed_advices_required_to_validate` WF adaptation
+  and added `testCustomWorkflows.test_ItemNotValidableWhenFinancesAdviceWFIncomplete`.
+  [gbastien]
 
 4.2b6 (2022-04-28)
 ------------------
