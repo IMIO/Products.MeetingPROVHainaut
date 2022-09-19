@@ -220,13 +220,21 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
         """When item is sent for second+ time to the finances,
            completeness is automatically set to asked again except
            for finance_group_no_cec_uid."""
+        cfg = self.meetingConfig
+        gic1_uid = cfg.getOrderedGroupsInCharge()[0]
         self.changeUser('dgen')
         item_df1 = self.create(
-            'MeetingItem', optionalAdvisers=((finance_group_uid() + '__rowid__unique_id_002', )))
+            'MeetingItem',
+            optionalAdvisers=((finance_group_uid() + '__rowid__unique_id_002', )),
+            groupsInCharge=(gic1_uid, ))
         item_df2 = self.create(
-            'MeetingItem', optionalAdvisers=((finance_group_cec_uid(), )))
+            'MeetingItem',
+            optionalAdvisers=((finance_group_cec_uid(), )),
+            groupsInCharge=(gic1_uid, ))
         item_df3 = self.create(
-            'MeetingItem', optionalAdvisers=((finance_group_no_cec_uid(), )))
+            'MeetingItem',
+            optionalAdvisers=((finance_group_no_cec_uid(), )),
+            groupsInCharge=(gic1_uid, ))
         for tr in ['proposeToValidationLevel1',
                    'proposeToValidationLevel2',
                    'wait_advices_from_proposedToValidationLevel2']:
