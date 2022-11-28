@@ -17,6 +17,9 @@ Products.MeetingPROVHainaut Changelog
 - Use the `waiting_advices_given_and_signed_advices_required_to_validate` WF adaptation
   and added `testCustomWorkflows.test_ItemNotValidableWhenFinancesAdviceWFIncomplete`.
   [gbastien]
+- Advices is no more using Plone versioning, removed `repositorytool.xml`
+  from `default` profile (migration is managed by `Products.PloneMeeting`).
+  [gbastien]
 
 4.2b6 (2022-04-28)
 ------------------
