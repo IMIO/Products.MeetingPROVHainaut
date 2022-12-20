@@ -26,14 +26,6 @@ msgstr "Avis finances (Engagement uniquement)"
 msgid "MeetingAdviceFinancesNoCEC"
 msgstr "Avis finances (Sans engagement)"
 
-#. Default: "Accounting commitment"
-msgid "MeetingPROVHainaut_label_advice_accounting_commitment"
-msgstr "Numéro d'engagement"
-
-#. Default: "Category"
-msgid "MeetingPROVHainaut_label_advice_category"
-msgstr "Catégorie"
-
 #. Default: "Add a finances advice (CEC)"
 msgid "add_new_meetingadvicefinancescec"
 msgstr "Ajouter avis finances (Engagement uniquement)"
@@ -53,3 +45,7 @@ msgstr "Vous pouvez insérer ici un ancien rapport qui serait lié à votre rapp
 #. Default: "If this is a normal item and you want it to be inserted in any availale meeting, just select \"No preference\" value.  Selecting a date is for 2 usecases : this will make the item not presentable to the meetings before selected one, or if the selected meeting is \"frozen\", this will make current item considered as \"late\" item presentable in the selected frozen meeting.  Indeed, the only way to insert an item in a frozen meeting is to select this meeting as preferred meeting."
 msgid "preferred_meeting_descr"
 msgstr "Vous pouvez choisir ici la séance du Collège que vous jugez opportune. Si vous laissez la valeur \"Pas de préférence\", votre rapport pourra être présenté dans n'importe quelle séance \"En création\"."
+
+#. Default: "Accounting commitment"
+msgid "title_advice_accounting_commitment"
+msgstr "Numéro d'engagement"

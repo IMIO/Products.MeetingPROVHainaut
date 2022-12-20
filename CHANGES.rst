@@ -20,6 +20,12 @@ Products.MeetingPROVHainaut Changelog
 - Advices is no more using Plone versioning, removed `repositorytool.xml`
   from `default` profile (migration is managed by `Products.PloneMeeting`).
   [gbastien]
+- Adapted `meetingadvicefinances` and `meetingadvicefinancescec` portal_types
+  to use the `PMRichTextWidget` for extra field `accounting_commitment`.
+  [gbastien]
+- Adapted translation of advice field title that must now start with `title_`
+  so it is displayed correctly when historized.
+  [gbastien]
 
 4.2b6 (2022-04-28)
 ------------------

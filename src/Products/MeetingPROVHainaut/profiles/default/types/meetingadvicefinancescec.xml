@@ -33,7 +33,8 @@
        &lt;schema based-on="Products.PloneMeeting.content.advice.IMeetingAdvice"&gt;
          &lt;field name="advice_accounting_commitment" type="plone.app.textfield.RichText" &gt;
            &lt;description/&gt;
-           &lt;title i18n:translate=""&gt;MeetingPROVHainaut_label_advice_accounting_commitment&lt;/title&gt;
+           &lt;title i18n:translate=""&gt;title_advice_accounting_commitment&lt;/title&gt;
+           &lt;form:widget type="Products.PloneMeeting.widgets.pm_richtext.PMRichTextWidget"/&gt;
            &lt;required&gt;False&lt;/required&gt;
          &lt;/field&gt;
        &lt;/schema&gt;
