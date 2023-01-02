@@ -26,6 +26,9 @@ Products.MeetingPROVHainaut Changelog
 - Adapted translation of advice field title that must now start with `title_`
   so it is displayed correctly when historized.
   [gbastien]
+- Adapted code now that we use `imio.helpers.cache.get_plone_groups_for_user`
+  instead `ToolPloneMeeting.get_plone_groups_for_user`.
+  [gbastien]
 
 4.2b6 (2022-04-28)
 ------------------
