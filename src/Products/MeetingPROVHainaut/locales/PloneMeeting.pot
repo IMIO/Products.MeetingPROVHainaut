@@ -11,12 +11,8 @@ msgstr ""
 "Preferred-encodings: utf-8 latin1\n"
 "Domain: PloneMeeting\n"
 
-#. Default: "Category"
-msgid "MeetingPROVHainaut_label_advice_category"
-msgstr ""
-
 #. Default: "Accounting commitment"
-msgid "MeetingPROVHainaut_label_advice_accounting_commitment"
+msgid "title_advice_accounting_commitment"
 msgstr ""
 
 #. Default: "You can not select several financial advisers, please select only one."

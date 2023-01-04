@@ -3,6 +3,7 @@
 from AccessControl import ClassSecurityInfo
 from collective.contact.plonegroup.utils import get_organization
 from Globals import InitializeClass
+from imio.helpers.cache import get_plone_groups_for_user
 from plone import api
 from Products.MeetingCommunes.adapters import CustomMeetingConfig as MCCustomMeetingConfig
 from Products.MeetingCommunes.adapters import CustomMeetingItem as MCCustomMeetingItem
@@ -65,9 +66,8 @@ class MeetingItemPROVHainautWorkflowConditions(MeetingItemCommunesWorkflowCondit
            when advice is signed.'''
         res = True
         if destinationState == 'validated':
-            userGroups = self.tool.get_plone_groups_for_user()
             advice_obj = self.context.getAdviceObj(org_uid)
-            res = '%s_financialmanagers' % org_uid in userGroups and \
+            res = '%s_financialmanagers' % org_uid in get_plone_groups_for_user() and \
                 (advice_obj and advice_obj.query_state() in
                  ['financial_advice_signed', 'advice_given'])
         return res
@@ -126,7 +126,7 @@ class CustomMeetingItem(MCCustomMeetingItem):
             return False
 
         # current user is pre-controller for asked advice?
-        userGroups = tool.get_plone_groups_for_user()
+        userGroups = get_plone_groups_for_user()
         if '%s_financialprecontrollers' % finance_org_uid not in userGroups and \
            '%s_financialprecontrollers' % finance_org_cec_uid not in userGroups:
             return False
