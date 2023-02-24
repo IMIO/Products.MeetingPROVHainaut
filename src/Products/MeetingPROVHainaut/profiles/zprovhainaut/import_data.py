@@ -175,7 +175,7 @@ collegeMeeting = deepcopy(zones_import_data.collegeMeeting)
 # ignore templates for now as context_variables is still not managed
 collegeMeeting.podTemplates = []
 collegeMeeting.usedItemAttributes = (
-    u'budgetInfos', u'groupsInCharge', u'associatedGroups',
+    u'budgetInfos', u'groupsInCharge', u'associatedGroups', u'category',
     u'motivation', u'toDiscuss', u'inAndOutMoves',
     u'notes', u'marginalNotes', u'observations', u'manuallyLinkedItems',
     u'otherMeetingConfigsClonableToPrivacy', u'completeness')
@@ -316,7 +316,6 @@ collegeMeeting.orderedGroupsInCharge = [
     PLONEGROUP_ORG + '/dp-pascal-lafosse',
     PLONEGROUP_ORG + '/dp-serge-hustache']
 collegeMeeting.categories = categories
-collegeMeeting.useGroupsAsCategories = False
 collegeMeeting.insertingMethodsOnAddItem = (
     {'insertingMethod': 'on_groups_in_charge', 'reverse': '0'},
     {'insertingMethod': 'on_categories', 'reverse': '0'},

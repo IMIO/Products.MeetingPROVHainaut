@@ -29,6 +29,8 @@ Products.MeetingPROVHainaut Changelog
 - Adapted code now that we use `imio.helpers.cache.get_plone_groups_for_user`
   instead `ToolPloneMeeting.get_plone_groups_for_user`.
   [gbastien]
+- Adapted code regarding removal of `MeetingConfig.useGroupsAsCategories`.
+  [gbastien]
 
 4.2b6 (2022-04-28)
 ------------------
