@@ -1,7 +1,7 @@
 Products.MeetingPROVHainaut Changelog
 =====================================
 
-4.2.0 (unreleased)
+4.2.0 (2023-04-11)
 ------------------
 
 - Completed `test_FinancesAdvicesWorkflow` to check that finances adviser
