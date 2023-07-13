@@ -2,6 +2,7 @@
 
 from Products.MeetingCommunes.tests.testWFAdaptations import testWFAdaptations as mctwfa
 from Products.MeetingPROVHainaut.tests.MeetingPROVHainautTestCase import MeetingPROVHainautTestCase
+from Products.PloneMeeting.config import MEETING_REMOVE_MOG_WFA
 
 
 class testWFAdaptations(MeetingPROVHainautTestCase, mctwfa):
@@ -22,7 +23,9 @@ class testWFAdaptations(MeetingPROVHainautTestCase, mctwfa):
              'hide_decisions_when_under_writing_check_returned_to_proposing_group',
              'item_validation_no_validate_shortcuts',
              'item_validation_shortcuts',
+             'itemdecided',
              'mark_not_applicable',
+             MEETING_REMOVE_MOG_WFA,
              'meetingadvicefinances_add_advicecreated_state',
              'meetingadvicefinances_controller_propose_to_manager',
              'meetingmanager_correct_closed_meeting',
