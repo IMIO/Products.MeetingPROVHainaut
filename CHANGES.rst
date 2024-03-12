@@ -4,8 +4,17 @@ Products.MeetingPROVHainaut Changelog
 4.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Adapted code for `ToolPloneMeeting.advisersConfig`, added upgrade step to 4201:
 
+  - Cleanup code, removed `config.COMPTA_GROUP_ID`, `config.ADVICE_CATEGORIES`
+    and `config.ADVICE_STATES_ALIVE`;
+  - Removed `vocabularies.py` as `AdviceCategoriesVocabularyFactory` is not used;
+  - Removed `model` folder as `pm_updates.py` is empty;
+  - Removed `CustomToolPloneMeeting` as method `get_extra_adviser_infos`
+    is now automatically managed by `ToolPloneMeeting.advisersConfig`.
+  - Added upgrade step to 4204.
+
+  [gbastien]
 
 4.2.0 (2023-04-11)
 ------------------

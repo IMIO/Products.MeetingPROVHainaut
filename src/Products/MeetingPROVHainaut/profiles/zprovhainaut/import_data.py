@@ -4,7 +4,6 @@ from collective.contact.plonegroup.config import PLONEGROUP_ORG
 from copy import deepcopy
 from Products.MeetingCommunes.profiles.examples_fr import import_data as examples_fr_import_data
 from Products.MeetingCommunes.profiles.zones import import_data as zones_import_data
-from Products.MeetingPROVHainaut.config import COMPTA_GROUP_ID
 from Products.MeetingPROVHainaut.config import FINANCE_GROUP_ID
 from Products.PloneMeeting.MeetingConfig import defValues
 from Products.PloneMeeting.profiles import AnnexTypeDescriptor
@@ -104,17 +103,6 @@ dirfin.financialeditors.append(dfin)
 dirfin.financialreviewers.append(dfin)
 dirfin.financialmanagers.append(dfin)
 
-compta = [org for org in orgs if org.id == COMPTA_GROUP_ID][0]
-compta.item_advice_states = [
-    u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
-    u'__or__proposedToValidationLevel3__or__proposedToValidationLevel4_waiting_advices']
-compta.item_advice_edit_states = [
-    u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
-    u'__or__proposedToValidationLevel3__or__proposedToValidationLevel4_waiting_advices']
-compta.item_advice_view_states = [
-    u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
-    u'__or__proposedToValidationLevel3__or__proposedToValidationLevel4_waiting_advices']
-
 # extra dirfin groups
 # CEC
 dirfincec = OrgDescriptor('dirfincec', 'Directeur Financier (CEC)', u'DFCEC')
@@ -185,8 +173,6 @@ collegeMeeting.usedMeetingAttributes = (
     u'place', u'extraordinary_session', u'in_and_out_moves',
     u'notes', u'observations')
 collegeMeeting.workflowAdaptations = (
-    'meetingadvicefinances_add_advicecreated_state',
-    'meetingadvicefinances_controller_propose_to_manager',
     'accepted_but_modified',
     'refused',
     'delayed',
@@ -387,3 +373,40 @@ data.directory_position_types = [
              u'Pr\xe9sidente du Conseil provincial|Pr\xe9sidentes du Conseil provincial',
      'token': u'president-cp'}
 ]
+data.advisersConfig = (
+    {'org_uids': [dirfin.id],
+     'portal_type': 'meetingadvicefinances',
+     'base_wf': 'meetingadvicefinances_workflow',
+     'wf_adaptations': ['add_advicecreated_state'],
+     'default_advice_type': 'positive_finance',
+     'advice_types': ['positive_finance',
+                      'positive_with_remarks_finance',
+                      'cautious_finance',
+                      'negative_finance',
+                      'not_given_finance',
+                      'not_required_finance'],
+     'show_advice_on_final_wf_transition': '1'},
+    {'org_uids': [dirfincec.id],
+     'portal_type': 'meetingadvicefinancescec',
+     'base_wf': 'meetingadvicefinancesmanager_workflow',
+     'wf_adaptations': ['add_advicecreated_state'],
+     'default_advice_type': 'positive_finance',
+     'advice_types': ['positive_finance',
+                      'positive_with_remarks_finance',
+                      'cautious_finance',
+                      'negative_finance',
+                      'not_given_finance',
+                      'not_required_finance'],
+     'show_advice_on_final_wf_transition': '1'},
+    {'org_uids': [dirfinnocec.id],
+     'portal_type': 'meetingadvicefinancesnocec',
+     'base_wf': 'meetingadvicefinanceseditor_workflow',
+     'wf_adaptations': [],
+     'default_advice_type': 'positive_finance',
+     'advice_types': ['positive_finance',
+                      'positive_with_remarks_finance',
+                      'cautious_finance',
+                      'negative_finance',
+                      'not_given_finance',
+                      'not_required_finance'],
+     'show_advice_on_final_wf_transition': '1'}, )

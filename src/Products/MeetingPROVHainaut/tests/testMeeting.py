@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 #
-# File: testMeeting.py
-#
 # GNU General Public License (GPL)
 #
 
