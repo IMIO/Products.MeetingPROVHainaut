@@ -24,7 +24,4 @@
            factory="Products.MeetingPROVHainaut.adapters.MeetingItemPROVHainautWorkflowConditions"
            provides="Products.MeetingPROVHainaut.interfaces.IMeetingItemPROVHainautWorkflowConditions" />
 
-  <utility component=".vocabularies.AdviceCategoriesVocabularyFactory"
-           name="Products.MeetingPROVHainaut.vocabularies.advicecategoriesvocabulary" />
-
 </configure>

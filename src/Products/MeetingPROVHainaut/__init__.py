@@ -3,9 +3,8 @@
 from Products.CMFCore import DirectoryView
 from Products.MeetingPROVHainaut.config import product_globals
 
-import adapters
+import adapters  # noqa
 import logging
-import model.pm_updates  # noqa
 
 
 logger = logging.getLogger('MeetingPROVHainaut')

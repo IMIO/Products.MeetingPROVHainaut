@@ -10,8 +10,6 @@ data = deepcopy(mc_testing_import_data.data)
 collegeMeeting = deepcopy(mc_testing_import_data.collegeMeeting)
 collegeMeeting.id = 'meeting-config-zcollege'
 collegeMeeting.shortName = 'ZCollege'
-collegeMeeting.workflowAdaptations += ['meetingadvicefinances_add_advicecreated_state',
-                                       'meetingadvicefinances_controller_propose_to_manager']
 
 # Council
 councilMeeting = deepcopy(mc_testing_import_data.councilMeeting)

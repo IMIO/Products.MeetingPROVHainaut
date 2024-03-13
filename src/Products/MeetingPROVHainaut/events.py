@@ -32,7 +32,3 @@ def onAdviceAfterTransition(advice, event):
             changeCompleteness._changeCompleteness('completeness_evaluation_asked_again',
                                                    bypassSecurityCheck=True,
                                                    comment=comment)
-
-    if newStateId == 'financial_advice_signed':
-        # final state of the wf, make sure advice is no more hidden during redaction
-        advice.advice_hide_during_redaction = False

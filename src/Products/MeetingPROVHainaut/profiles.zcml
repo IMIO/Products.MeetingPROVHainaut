@@ -54,4 +54,12 @@
       handler="Products.MeetingPROVHainaut.migrations.migrate_to_4203.migrate"
       profile="Products.MeetingPROVHainaut:default" />
 
+  <genericsetup:upgradeStep
+      title="Go to MeetingPROVHainaut 4204"
+      description=""
+      source="4203"
+      destination="4204"
+      handler="Products.MeetingPROVHainaut.migrations.migrate_to_4204.migrate"
+      profile="Products.MeetingPROVHainaut:default" />
+
 </configure>

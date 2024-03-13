@@ -7,7 +7,6 @@ from imio.helpers.cache import get_plone_groups_for_user
 from plone import api
 from Products.MeetingCommunes.adapters import CustomMeetingConfig as MCCustomMeetingConfig
 from Products.MeetingCommunes.adapters import CustomMeetingItem as MCCustomMeetingItem
-from Products.MeetingCommunes.adapters import CustomToolPloneMeeting as MCCustomToolPloneMeeting
 from Products.MeetingCommunes.adapters import MeetingAdviceCommunesWorkflowConditions
 from Products.MeetingCommunes.adapters import MeetingItemCommunesWorkflowActions
 from Products.MeetingCommunes.adapters import MeetingItemCommunesWorkflowConditions
@@ -17,17 +16,10 @@ from Products.MeetingPROVHainaut.utils import finance_group_cec_uid
 from Products.MeetingPROVHainaut.utils import finance_group_no_cec_uid
 from Products.MeetingPROVHainaut.utils import finance_group_uid
 from Products.MeetingPROVHainaut.utils import finance_group_uids
-from Products.PloneMeeting.MeetingConfig import MeetingConfig
 from Products.PloneMeeting.model import adaptations
 from zope.i18n import translate
 from zope.interface import implements
 
-
-# add finances advice related wfAdaptations
-wfAdaptations = list(MeetingConfig.wfAdaptations)
-wfAdaptations.append('meetingadvicefinances_add_advicecreated_state')
-wfAdaptations.append('meetingadvicefinances_controller_propose_to_manager')
-MeetingConfig.wfAdaptations = tuple(wfAdaptations)
 
 adaptations.WAITING_ADVICES_USE_CUSTOM_ICON = False
 adaptations.WAITING_ADVICES_USE_CUSTOM_BACK_TR_TITLE_FOR = ('validated', )
@@ -213,25 +205,6 @@ class CustomMeetingItem(MCCustomMeetingItem):
                                  context=item.REQUEST)
 
 
-class CustomToolPloneMeeting(MCCustomToolPloneMeeting):
-    ''' '''
-
-    def get_extra_adviser_infos(self):
-        ''' '''
-        infos = {}
-        infos[finance_group_uid()] = {'portal_type': 'meetingadvicefinances',
-                                      'base_wf': 'meetingadvicefinances_workflow',
-                                      'wf_adaptations': ['add_advicecreated_state']}
-        infos[finance_group_cec_uid()] = {'portal_type': 'meetingadvicefinancescec',
-                                          'base_wf': 'meetingadvicefinancesmanager_workflow',
-                                          'wf_adaptations': ['add_advicecreated_state']}
-        infos[finance_group_no_cec_uid()] = {'portal_type': 'meetingadvicefinancesnocec',
-                                             'base_wf': 'meetingadvicefinanceseditor_workflow',
-                                             'wf_adaptations': []}
-        return infos
-
-
 InitializeClass(CustomMeetingConfig)
 InitializeClass(CustomMeetingItem)
-InitializeClass(CustomToolPloneMeeting)
 InitializeClass(MeetingItemPROVHainautWorkflowActions)
