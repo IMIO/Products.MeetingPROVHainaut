@@ -1,7 +1,7 @@
 Products.MeetingPROVHainaut Changelog
 =====================================
 
-4.2.1 (unreleased)
+4.2.1 (2024-03-14)
 ------------------
 
 - Adapted code for `ToolPloneMeeting.advisersConfig`:
