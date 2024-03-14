@@ -12,6 +12,8 @@ Products.MeetingPROVHainaut Changelog
   - Removed `model` folder as `pm_updates.py` is empty;
   - Removed `CustomToolPloneMeeting` as method `get_extra_adviser_infos`
     is now automatically managed by `ToolPloneMeeting.advisersConfig`.
+  - Enable behavior `Advice accounting commitment` for
+    `meetingadvicefinances.xml` and `meetingadvicefinancescec.xml`.
   - Added upgrade step to 4204.
 
   [gbastien]

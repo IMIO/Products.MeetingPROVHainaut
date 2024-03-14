@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from copy import deepcopy
+from imio.helpers.setup import load_type_from_package
 from Products.PloneMeeting.migrations import Migrator
 from Products.MeetingPROVHainaut.profiles.zprovhainaut import import_data as mph_import_data
 from Products.MeetingPROVHainaut.utils import finance_group_uid
@@ -33,7 +34,10 @@ class Migrate_To_4204(Migrator):
             data[2]['org_uids'] = [finance_group_no_cec_uid()]
             self.tool.setAdvisersConfig(data)
             self.tool.configureAdvices()
-
+        # reload meetingadvicefinances/meetingadvicefinancescec as model_source
+        # was removed and we use IAdviceAccountingCommitmentBehavior behavior
+        load_type_from_package('meetingadvicefinances', 'Products.MeetingPROVHainaut:default')
+        load_type_from_package('meetingadvicefinancescec', 'Products.MeetingPROVHainaut:default')
         logger.info('Done.')
 
     def run(self,
