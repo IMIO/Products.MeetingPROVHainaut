@@ -4,7 +4,7 @@ Products.MeetingPROVHainaut Changelog
 4.2.1 (unreleased)
 ------------------
 
-- Adapted code for `ToolPloneMeeting.advisersConfig`, added upgrade step to 4201:
+- Adapted code for `ToolPloneMeeting.advisersConfig`:
 
   - Cleanup code, removed `config.COMPTA_GROUP_ID`, `config.ADVICE_CATEGORIES`
     and `config.ADVICE_STATES_ALIVE`;
