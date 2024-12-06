@@ -41,7 +41,7 @@ class Migrate_To_4204(Migrator):
         logger.info('Done.')
 
     def run(self,
-            profile_name=u'profile-Products.MeetingLiege:default',
+            profile_name=u'profile-Products.MeetingPROVHainaut:default',
             extra_omitted=[]):
 
         # this will upgrade Products.PloneMeeting and dependencies

@@ -3,7 +3,6 @@
 from collective.contact.plonegroup.config import PLONEGROUP_ORG
 from copy import deepcopy
 from Products.MeetingCommunes.profiles.examples_fr import import_data as examples_fr_import_data
-from Products.MeetingCommunes.profiles.zones import import_data as zones_import_data
 from Products.MeetingPROVHainaut.config import FINANCE_GROUP_ID
 from Products.PloneMeeting.MeetingConfig import defValues
 from Products.PloneMeeting.profiles import AnnexTypeDescriptor
@@ -86,7 +85,7 @@ pvTemplate.pod_formats = ['docx', 'pdf', ]
 pvTemplate.pod_portal_types = ['Meeting']
 templates.append(pvTemplate)
 
-orgs = deepcopy(zones_import_data.data.orgs)
+orgs = deepcopy(examples_fr_import_data.data.orgs)
 dirfin = [org for org in orgs if org.id == FINANCE_GROUP_ID][0]
 dirfin.item_advice_states = [
     u'cfg1__state__itemcreated__or__proposedToValidationLevel1__or__proposedToValidationLevel2'
@@ -159,7 +158,9 @@ orgs += [dirfincec, dirfinnocec, ag1, ag2, ag3, ag4, ag5, gic1, gic2, gic3, gic4
 
 # Meeting configurations -------------------------------------------------------
 # College
-collegeMeeting = deepcopy(zones_import_data.collegeMeeting)
+collegeMeeting = deepcopy(examples_fr_import_data.collegeMeeting)
+collegeMeeting.id = 'meeting-config-zcollege'
+collegeMeeting.shortName = 'ZCollege'
 # ignore templates for now as context_variables is still not managed
 collegeMeeting.podTemplates = []
 collegeMeeting.usedItemAttributes = (
@@ -330,7 +331,9 @@ collegeMeeting.recurringItems = [
 collegeMeeting.recurringItems[0].groupsInCharge = 'dirgen'
 
 # Council
-councilMeeting = deepcopy(zones_import_data.councilMeeting)
+councilMeeting = deepcopy(examples_fr_import_data.councilMeeting)
+councilMeeting.id = 'meeting-config-zcouncil'
+councilMeeting.shortName = 'ZCouncil'
 councilMeeting.podTemplates = []
 councilMeeting.workflowAdaptations = ('only_creator_may_delete',
                                       'no_publication',
