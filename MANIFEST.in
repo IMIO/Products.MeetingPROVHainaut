@@ -1,6 +1,8 @@
 recursive-include Products *
 global-exclude *pyc
+include buildout.cfg
 include *.rst
+include *.txt
 recursive-include docs *.GPL
 recursive-include docs *.txt
 recursive-include src *.csv
