@@ -1,7 +1,7 @@
 Products.MeetingPROVHainaut Changelog
 =====================================
 
-4.2.2 (unreleased)
+4.2.2 (2024-12-06)
 ------------------
 
 - Fixed instance not starting because `Products.MeetingCommunes` `examples_fr`
