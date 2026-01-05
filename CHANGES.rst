@@ -1,7 +1,7 @@
 Products.MeetingPROVHainaut Changelog
 =====================================
 
-4.2.3 (unreleased)
+4.2.3 (2026-01-05)
 ------------------
 
 - MPMHAIP-86/DLIBBDC-2754: new finance stats.
