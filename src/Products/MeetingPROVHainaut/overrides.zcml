@@ -1,7 +1,7 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns:plone="http://namespaces.plone.org/plone">
+        xmlns="http://namespaces.zope.org/zope"
+        xmlns:browser="http://namespaces.zope.org/browser"
+        xmlns:plone="http://namespaces.plone.org/plone">
 
     <adapter for="Products.PloneMeeting.interfaces.IMeetingConfig"
              factory="Products.MeetingPROVHainaut.adapters.CustomMeetingConfig"
@@ -10,5 +10,13 @@
     <adapter for="Products.PloneMeeting.interfaces.IMeetingItem"
              factory="Products.MeetingPROVHainaut.adapters.CustomMeetingItem"
              provides="Products.PloneMeeting.interfaces.IMeetingItemCustom"/>
+
+    <!-- collective.documentgenerator helper view for Folder -->
+    <browser:page
+            for="Products.ATContentTypes.interfaces.folder.IATBTreeFolder"
+            class=".browser.overrides.MPHFolderDocumentGenerationHelperView"
+            permission="zope2.View"
+            layer="Products.MeetingCommunes.interfaces.IMeetingCommunesLayer"
+            name="document_generation_helper_view"/>
 
 </configure>

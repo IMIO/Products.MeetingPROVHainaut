@@ -4,8 +4,8 @@ Products.MeetingPROVHainaut Changelog
 4.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- MPMHAIP-86/DLIBBDC-2754: new finance stats.
+  [aduchene]
 
 4.2.2 (2024-12-06)
 ------------------
