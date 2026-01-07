@@ -4,8 +4,9 @@ Products.MeetingPROVHainaut Changelog
 4.2.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Adapatble method `MeetingIem._advicePortalTypeForAdviser` was moved to
+  `ToolPloneMeeting` (no more adaptable).
+  [gbastien]
 
 4.2.3 (2026-01-05)
 ------------------

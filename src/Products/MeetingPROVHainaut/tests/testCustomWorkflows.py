@@ -79,7 +79,7 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
         item.setCompleteness('completeness_complete')
         item._update_after_edit()
         item_modified, volatile_date = _check_date(item, item_modified, volatile_date)
-        advice_portal_type = item._advicePortalTypeForAdviser(fin_group_uid)
+        advice_portal_type = self.tool._advicePortalTypeForAdviser(fin_group_uid)
         advice = self.addAdvice(item,
                                 advice_group=fin_group_uid,
                                 advice_type='positive_finance',
@@ -182,7 +182,7 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
         self.do(item, 'wait_advices_from_proposedToValidationLevel2')
         # give advice
         self.changeUser('dfin')
-        advice_portal_type = item._advicePortalTypeForAdviser(fin_no_cec_group_uid)
+        advice_portal_type = self.tool._advicePortalTypeForAdviser(fin_no_cec_group_uid)
         advice = self.addAdvice(item,
                                 advice_group=fin_no_cec_group_uid,
                                 advice_type='positive_finance',
