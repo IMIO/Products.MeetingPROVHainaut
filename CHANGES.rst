@@ -7,6 +7,9 @@ Products.MeetingPROVHainaut Changelog
 - Adapatble method `MeetingIem._advicePortalTypeForAdviser` was moved to
   `ToolPloneMeeting` (no more adaptable).
   [gbastien]
+- `PloneMeetingTestCase.addAdvice` was renamed to `PloneMeetingTestCase.add_advice`
+  now that it relies on `utils._add_advice`.
+  [gbastien]
 
 4.2.3 (2026-01-05)
 ------------------

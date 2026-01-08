@@ -80,10 +80,10 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
         item._update_after_edit()
         item_modified, volatile_date = _check_date(item, item_modified, volatile_date)
         advice_portal_type = self.tool._advicePortalTypeForAdviser(fin_group_uid)
-        advice = self.addAdvice(item,
-                                advice_group=fin_group_uid,
-                                advice_type='positive_finance',
-                                advice_portal_type=advice_portal_type)
+        advice = self.add_advice(item,
+                                 advice_group=fin_group_uid,
+                                 advice_type='positive_finance',
+                                 advice_portal_type=advice_portal_type)
         # item modified date was updated
         item_modified, volatile_date = _check_date(item, item_modified, volatile_date)
         self.assertTrue(advice.advice_hide_during_redaction)
@@ -183,10 +183,10 @@ class testCustomWorkflows(MeetingPROVHainautTestCase):
         # give advice
         self.changeUser('dfin')
         advice_portal_type = self.tool._advicePortalTypeForAdviser(fin_no_cec_group_uid)
-        advice = self.addAdvice(item,
-                                advice_group=fin_no_cec_group_uid,
-                                advice_type='positive_finance',
-                                advice_portal_type=advice_portal_type)
+        advice = self.add_advice(item,
+                                 advice_group=fin_no_cec_group_uid,
+                                 advice_type='positive_finance',
+                                 advice_portal_type=advice_portal_type)
         # financial controller
         self.do(advice, 'proposeToFinancialReviewer')
         # advice must no more be hidden during redaction so item may be sent back
